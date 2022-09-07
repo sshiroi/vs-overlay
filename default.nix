@@ -62,6 +62,7 @@ in
     vivtc = prev.callPackage ./plugins/vivtc { };
     wwxd = prev.callPackage ./plugins/wwxd { };
     znedi3 = prev.callPackage ./plugins/znedi3 { };
+    libp2p = prev.callPackage ./plugins/libp2p { };
 
     acsuite = callPythonPackage ./plugins/acsuite { };
     adjust = callPythonPackage ./plugins/adjust { };
@@ -75,6 +76,7 @@ in
     vsgan = callPythonPackage ./plugins/vsgan { };
     vsTAAmbk = callPythonPackage ./plugins/vsTAAmbk { };
     vsutil = callPythonPackage ./plugins/vsutil { };
+    vs-dfft = callPythonPackage ./plugins/vs-dfft { };
 
     awsmfunc = callPythonPackage ./plugins/awsmfunc { };
     fvsfunc = callPythonPackage ./plugins/fvsfunc { };
@@ -87,4 +89,6 @@ in
   };
 
   getnative = callPythonPackage ./tools/getnative { };
+  vspreview-rs = prev.callPackage ./tools/vspreview-rs { };
+  d2vwitch = prev.libsForQt5.callPackage ./tools/d2vwitch { };
 }
