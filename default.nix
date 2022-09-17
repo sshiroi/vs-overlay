@@ -23,6 +23,7 @@ in
     bilateral = prev.callPackage ./plugins/bilateral { };
     bm3d = prev.callPackage ./plugins/bm3d { };
     cas = prev.callPackage ./plugins/cas { };
+    chickendream = prev.callPackage ./plugins/chickendream { };
     cnr2 = prev.callPackage ./plugins/cnr2 { };
     combmask = prev.callPackage ./plugins/combmask { };
     continuityfixer = prev.callPackage ./plugins/continuityfixer { };
