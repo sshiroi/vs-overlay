@@ -6,6 +6,8 @@ let
   callPythonPackage = prev.lib.callPackageWith (final // final.vapoursynth.python3.pkgs // {
     inherit (final) vapoursynth;
   });
+
+  filter_python_plugins = plugins: (builtins.filter (a: !(builtins.hasAttr "isBuildPythonPackage" a.meta)) plugins);
 in
 {
   vapoursynthPlugins = prev.recurseIntoAttrs {
@@ -15,6 +17,7 @@ in
     autocrop = prev.callPackage ./plugins/autocrop { };
     awarpsharp2 = prev.callPackage ./plugins/awarpsharp2 { };
     bestaudiosource = prev.callPackage ./plugins/bestaudiosource { };
+    bestsource = prev.callPackage ./plugins/bestsource { };
     beziercurve = prev.callPackage ./plugins/beziercurve { };
     bifrost = prev.callPackage ./plugins/bifrost { };
     bilateral = prev.callPackage ./plugins/bilateral { };
@@ -43,6 +46,19 @@ in
     imwri = prev.callPackage ./plugins/imwri { };
     knlmeanscl = prev.callPackage ./plugins/knlmeanscl { };
     lsmashsource = prev.callPackage ./plugins/lsmashsource { };
+    lsmashsource_akarin = ((prev.callPackage ./plugins/lsmashsource { }).overrideAttrs ( prev: rec {
+      nativeBuildInputs = prev.nativeBuildInputs ++ [ final.meson final.ninja ];
+      src = final.fetchFromGitHub {
+        owner = "AkarinVS";
+        repo = "L-SMASH-Works";
+        rev = "e6ea8d9dd569e54e215558520c5efd429de14c62";
+        sha256 = "sha256-pO8H2pv8TBAmlIu0bzWy2V6JgjOc2NARyPK6sKi/SLE=";
+      };
+      postPatch = ''
+        substituteInPlace VapourSynth/meson.build \
+            --replace "vapoursynth_dep.get_pkgconfig_variable('libdir')" "get_option('libdir')"
+      '';
+    }));
     libp2p = prev.callPackage ./plugins/libp2p { };
     median = prev.callPackage ./plugins/median { };
     miscfilters-obsolete = prev.callPackage ./plugins/miscfilters-obsolete { };
@@ -78,21 +94,26 @@ in
     nnedi3_rpow2 = callPythonPackage ./plugins/nnedi3_rpow2 { };
     rekt = callPythonPackage ./plugins/rekt { };
     vsgan = callPythonPackage ./plugins/vsgan { };
-    vsTAAmbk = callPythonPackage ./plugins/vsTAAmbk { };
+    vsTAAmbk = callPythonPackage ./plugins/vsTAAmbk { inherit filter_python_plugins; };
     vsutil = callPythonPackage ./plugins/vsutil { };
     vs-dfft = callPythonPackage ./plugins/vs-dfft { };
+    vs-rgtools = callPythonPackage ./plugins/vs-rgtools { };
+    vs-exprtools = callPythonPackage ./plugins/vs-exprtools { };
+    vs-kernels = callPythonPackage ./plugins/vs-kernels { };
 
     awsmfunc = callPythonPackage ./plugins/awsmfunc { };
     fvsfunc = callPythonPackage ./plugins/fvsfunc { };
-    havsfunc = callPythonPackage ./plugins/havsfunc { };
+    havsfunc = callPythonPackage ./plugins/havsfunc { inherit filter_python_plugins; };
     kagefunc = callPythonPackage ./plugins/kagefunc { };
     lvsfunc = callPythonPackage ./plugins/lvsfunc { };
     muvsfunc = callPythonPackage ./plugins/muvsfunc { };
     mvsfunc = callPythonPackage ./plugins/mvsfunc { };
     vardefunc = callPythonPackage ./plugins/vardefunc { };
+    zzfunc = callPythonPackage ./plugins/zzfunc { };
   };
 
   getnative = callPythonPackage ./tools/getnative { };
   vspreview-rs = prev.callPackage ./tools/vspreview-rs { };
   d2vwitch = prev.libsForQt5.callPackage ./tools/d2vwitch { };
+  vspreview = callPythonPackage ./tools/vspreview { python_call = callPythonPackage; };
 }

@@ -1,14 +1,14 @@
-{ lib, buildPythonPackage, fetchFromGitHub, vapoursynthPlugins, python, vapoursynth }:
+{ lib, buildPythonPackage, fetchFromGitHub, vapoursynthPlugins, python, vapoursynth, filter_python_plugins }:
 
 buildPythonPackage rec {
   pname = "havsfunc";
-  version = "33";
+  version = "unstable-2022-09-08";
 
   src = fetchFromGitHub {
     owner = "HomeOfVapourSynthEvolution";
     repo = pname;
-    rev = "r${version}";
-    sha256 = "14132gcy0zw348c40y2i8c7n3i1ygcnv9xrf83jp6m3b9v557z7p";
+    rev = "2c6d3fedc3c4c3f3ed2460f7014d1227fe2fe207";
+    sha256 = "sha256-YJl/X9niJelgovwUK6S50lvQUe/yYAbXEHWBbMqfXz0=";
   };
 
   propagatedBuildInputs = with vapoursynthPlugins; [
@@ -36,6 +36,7 @@ buildPythonPackage rec {
     sangnom
     ttempsmooth
     znedi3
+    vsutil
   ];
 
   format = "other";
@@ -44,7 +45,7 @@ buildPythonPackage rec {
     install -D havsfunc.py $out/${python.sitePackages}/havsfunc.py
   '';
 
-  checkInputs = [ (vapoursynth.withPlugins propagatedBuildInputs) ];
+  checkInputs = [ (vapoursynth.withPlugins (filter_python_plugins propagatedBuildInputs)) ];
   checkPhase = ''
     PYTHONPATH=$out/${python.sitePackages}:$PYTHONPATH
   '';

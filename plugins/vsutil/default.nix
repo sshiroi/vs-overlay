@@ -2,14 +2,14 @@
 
 buildPythonPackage rec {
   pname = "vsutil";
-  version = "unstable-2021-10-23";
+  version = "unstable-2022-09-17";
 
   # there are no tests in the pypi tarball
   src = fetchFromGitHub {
     owner = "Irrational-Encoding-Wizardry";
     repo = pname;
-    rev = "a101f22b7be4f28bc89ed73bfc82cce3067dc549";
-    sha256 = "sha256-IQncZxpd2QNYmjMXxE++yeY4mDffBjOtE69J2lQPQUU=";
+    rev = "ab57bfee61b149ff7824068ac40d5d9544c1c64e";
+    sha256 = "sha256-8CW8CirNRtCuz4BDwW/111pEFsxpLYdeai3j/tp8GtI=";
   };
 
   patches = [

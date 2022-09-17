@@ -1,4 +1,4 @@
-{ lib, buildPythonPackage, fetchFromGitHub, vapoursynthPlugins, python, vapoursynth }:
+{ lib, buildPythonPackage, fetchFromGitHub, vapoursynthPlugins, python, vapoursynth, filter_python_plugins }:
 
 buildPythonPackage rec {
   pname = "vsTAAmbk";
@@ -40,7 +40,7 @@ buildPythonPackage rec {
     install -D vsTAAmbk.py $out/${python.sitePackages}/vsTAAmbk.py
   '';
 
-  checkInputs = [ (vapoursynth.withPlugins propagatedBuildInputs) ];
+  checkInputs = [ (vapoursynth.withPlugins (filter_python_plugins propagatedBuildInputs)) ];
   checkPhase = ''
     PYTHONPATH=$out/${python.sitePackages}:$PYTHONPATH
     python3 test/vsTAAmbkTestCase.py
