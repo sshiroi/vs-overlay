@@ -32,6 +32,18 @@ let
       install -D /build/vapoursynth.pyi $out/${vap.python3.sitePackages}/vapoursynth.pyi
       '';
     };
+
+  old_glslang = prev.glslang.overrideAttrs (old: rec {
+    version = "1.3.216.0";
+    src = prev.fetchFromGitHub {
+      owner = "KhronosGroup";
+      repo = "glslang";
+      rev ="sdk-${version}";
+      hash = "sha256-sjidkiPtRADhyOEKDb2cHCBXnFjLwk2F5Lppv5/fwNQ=";
+    };
+  });
+  #latest nixos-unstable has broken ncnn because some glslang update
+  old_ncnn = prev.ncnn.override { glslang = old_glslang; };
 in
 {
   #example
@@ -50,6 +62,9 @@ in
     };
   });
 
+
+  ncnn = old_ncnn;
+  glslang = old_glslang;
 
   vapoursynthPlugins = prev.recurseIntoAttrs {
     akarin = prev.callPackage ./plugins/akarin { };
@@ -126,6 +141,7 @@ in
     wwxd = prev.callPackage ./plugins/wwxd { };
     znedi3 = prev.callPackage ./plugins/znedi3 { };
     w2xnvk = prev.callPackage ./plugins/w2xnvk { };
+    rife = prev.callPackage ./plugins/rife { };
 
     acsuite = callPythonPackage ./plugins/acsuite { };
     adjust = callPythonPackage ./plugins/adjust { };
