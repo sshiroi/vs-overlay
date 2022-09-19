@@ -102,6 +102,7 @@ in
     vs-rgtools = callPythonPackage ./plugins/vs-rgtools { };
     vs-exprtools = callPythonPackage ./plugins/vs-exprtools { };
     vs-kernels = callPythonPackage ./plugins/vs-kernels { };
+    vs-parsedvd = callPythonPackage ./plugins/vs-parsedvd { };
 
     awsmfunc = callPythonPackage ./plugins/awsmfunc { };
     fvsfunc = callPythonPackage ./plugins/fvsfunc { };

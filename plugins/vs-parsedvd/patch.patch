@@ -1,0 +1,19 @@
+diff --git a/vsparsedvd/DVDIndexers/DVDIndexer.py b/vsparsedvd/DVDIndexers/DVDIndexer.py
+index c431c3a..9f63861 100644
+--- a/vsparsedvd/DVDIndexers/DVDIndexer.py
++++ b/vsparsedvd/DVDIndexers/DVDIndexer.py
+@@ -55,9 +55,12 @@ class DVDIndexer(ABC):
+     def _run_index(self, files: List[SPath], output: SPath, cmd_args: Sequence[str]) -> None:
+         output.mkdirp()
+ 
++        uuuu = list(map(str, self.get_cmd(files, output))) + list(cmd_args)
++        print(uuuu)
++
+         status = subprocess.Popen(
+-            list(map(str, self.get_cmd(files, output))) + list(cmd_args),
+-            text=True, encoding='utf-8', shell=True, cwd=output.get_folder().to_str()
++            uuuu,
++            text=True, encoding='utf-8', shell=False, cwd=output.get_folder().to_str()
+         ).wait()
+ 
+         if status:
