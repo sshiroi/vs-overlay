@@ -40,6 +40,17 @@ in
   #pkgs.mkShell { buildInputs = with pkgs; [ vscodium vap_with_stubs.python3 vap_with_stubs ] }
   generate_vapoursynth_stubs = generate_stubs;
 
+  vapoursynth = prev.vapoursynth.overrideAttrs (old: rec {
+    version = "60";
+    src = prev.fetchFromGitHub {
+      owner  = "vapoursynth";
+      repo   = "vapoursynth";
+      rev    = "R${version}";
+      sha256 = "sha256-E1uHNcGxBrwg00tNnY3qH6BpvXtBEGkX7QFy0aMLSnA=";
+    };
+  });
+
+
   vapoursynthPlugins = prev.recurseIntoAttrs {
     akarin = prev.callPackage ./plugins/akarin { };
     adaptivegrain = prev.callPackage ./plugins/adaptivegrain { };
