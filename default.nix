@@ -8,8 +8,38 @@ let
   });
 
   filter_python_plugins = plugins: (builtins.filter (a: !(builtins.hasAttr "isBuildPythonPackage" a.meta)) plugins);
+
+  generate_stubs = plg: let
+    vap = final.vapoursynth.withPlugins plg;
+  in
+    final.vapoursynth.python3.pkgs.buildPythonPackage {
+      name = "vapoursynth-stubs";
+      phases = [ "buildPhase" "installPhase" ];
+
+      nativeBuildInputs = [
+        vap.python3
+        (callPythonPackage ./tools/vsstubs { })
+        #(callPythonPackage ./tools/vsstubs { vapoursynth = vap; })
+        vap
+      ];
+
+      buildPhase = ''
+      PYTHONPATH=${vap}/${vap.python3.sitePackages}:$PYTHONPATH
+      python -m vsstubs install test
+      '';
+
+      installPhase = ''
+      install -D /build/vapoursynth.pyi $out/${vap.python3.sitePackages}/vapoursynth.pyi
+      '';
+    };
 in
 {
+  #example
+  #plugin_list = with pkgs.vapoursynthPlugins; [ ... ];
+  #vap_with_stubs = (pkgs.vapoursynth.withPlugins (plugin_list ++ [ (pkgs.generate_vapoursynth_stubs plugin_list) ]));
+  #pkgs.mkShell { buildInputs = with pkgs; [ vscodium vap_with_stubs.python3 vap_with_stubs ] }
+  generate_vapoursynth_stubs = generate_stubs;
+
   vapoursynthPlugins = prev.recurseIntoAttrs {
     akarin = prev.callPackage ./plugins/akarin { };
     adaptivegrain = prev.callPackage ./plugins/adaptivegrain { };
