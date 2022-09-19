@@ -1,0 +1,51 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index f26e77f..c12a5c1 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -2,6 +2,9 @@ project(vapoursynth-waifu2x-ncnn-vulkan)
+ cmake_minimum_required(VERSION 3.9)
+ set(CMAKE_BUILD_TYPE Release)
+ 
++INCLUDE(FindPkgConfig)
++
++
+ find_package(Vulkan REQUIRED)
+ 
+ # check glslangValidator
+@@ -36,9 +39,9 @@ else()
+ endif()
+ 
+ # build ncnn library
+-if(NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/deps/ncnn/CMakeLists.txt")
+-    message(FATAL_ERROR "The submodules were not downloaded! Please update submodules with \"git submodule update --init --recursive\" and try again.")
+-endif()
++#if(NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/deps/ncnn/CMakeLists.txt")
++#    message(FATAL_ERROR "The submodules were not downloaded! Please update submodules with \"git submodule update --init --recursive\" and try again.")
++#endif()
+ option(NCNN_INSTALL_SDK "" OFF)
+ option(NCNN_PIXEL_ROTATE "" OFF)
+ option(NCNN_PIXEL_AFFINE "" OFF)
+@@ -145,7 +148,9 @@ option(WITH_LAYER_deconvolution1d "" OFF)
+ option(WITH_LAYER_deconvolutiondepthwise1d "" OFF)
+ option(WITH_LAYER_deconvolution3d "" OFF)
+ option(WITH_LAYER_deconvolutiondepthwise3d "" OFF)
+-add_subdirectory(deps/ncnn)
++#add_subdirectory(deps/ncnn)
++
++#pkg_check_modules(NCNN ncnn REQUIRED)
+ 
+ # generate-spirv target
+ set(SHADER_SPV_HEX_FILES)
+@@ -167,8 +172,11 @@ if(NOT EXISTS "${VAPOURSYNTH_HEADER_DIR}/VSHelper.h")
+     message(FATAL_ERROR "VapourSynth header files NOT FOUND, specify with -DVAPOURSYNTH_HEADER_DIR")
+ endif()
+ 
++message(STATUS "${NCNN_LIBRARIES}")
++message(STATUS "${NCNN_INCLUDE_DIRS}")
+ # libvsw2xnvk
+ add_library(vsw2xnvk SHARED src/vsw2xnvk.cpp src/waifu2x.cpp)
+ target_include_directories(vsw2xnvk PRIVATE ${VAPOURSYNTH_HEADER_DIR})
+-target_link_libraries(vsw2xnvk ncnn ${Vulkan_LIBRARY})
++target_include_directories(vsw2xnvk PRIVATE ${NCNN_INCLUDE_DIRS})
++target_link_libraries(vsw2xnvk ${NCNN_LIBRARIES} ${Vulkan_LIBRARY})
+ add_dependencies(vsw2xnvk generate-spirv)

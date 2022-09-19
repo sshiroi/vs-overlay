@@ -84,6 +84,7 @@ in
     vivtc = prev.callPackage ./plugins/vivtc { };
     wwxd = prev.callPackage ./plugins/wwxd { };
     znedi3 = prev.callPackage ./plugins/znedi3 { };
+    w2xnvk = prev.callPackage ./plugins/w2xnvk { };
 
     acsuite = callPythonPackage ./plugins/acsuite { };
     adjust = callPythonPackage ./plugins/adjust { };
