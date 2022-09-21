@@ -6,13 +6,9 @@ stdenv.mkDerivation rec {
   src = fetchFromGitHub {
     owner = "dubhater";
     repo = name;
-    rev = "11720c946d15fcf3afb83c03b8cc7e76d78b515a";
-    sha256 = "sha256-1uWl4rxF7qumSdaE9Ok7wa39mxbpJErHSmJc3m2bGSs=";
+    rev = "730e15f806817ecd0d5c7bf07d14949a2ba1881c";
+    sha256 = "sha256-JmfNOPUGvmyet8W6rotwxhE9sSvajQWzOE3O4CnZuPI=";
   };
-
-  patches = [
-    ./patch.patch
-  ];
 
   nativeBuildInputs = [ pkg-config wrapQtAppsHook autoreconfHook qttools ];
   buildInputs = [  (vapoursynth.withPlugins (with vapoursynthPlugins; [  d2vsource lsmashsource vivtc scxvid fieldhint tdeintmod ])) ];
