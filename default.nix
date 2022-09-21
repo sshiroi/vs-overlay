@@ -144,6 +144,7 @@ in
     rife = prev.callPackage ./plugins/rife { };
     realsr = prev.callPackage ./plugins/realsr { };
     dhce = prev.callPackage ./plugins/dhce { };
+    fieldhint = prev.callPackage ./plugins/fieldhint { };
 
 
     acsuite = callPythonPackage ./plugins/acsuite { };
@@ -178,5 +179,6 @@ in
   getnative = callPythonPackage ./tools/getnative { };
   vspreview-rs = prev.callPackage ./tools/vspreview-rs { };
   d2vwitch = prev.libsForQt5.callPackage ./tools/d2vwitch { };
+  wobbly = prev.libsForQt5.callPackage ./tools/wobbly { };
   vspreview = callPythonPackage ./tools/vspreview { python_call = callPythonPackage; };
 }

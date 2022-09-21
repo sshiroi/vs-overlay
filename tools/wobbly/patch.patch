@@ -1,0 +1,15 @@
+diff --git a/Makefile.am b/Makefile.am
+index 794cd8a..49e1fc1 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -106,8 +106,8 @@ shared_sources = $(rapidjson_sources) \
+ 				 src/shared/WobblyProject.cpp \
+ 				 src/shared/WobblyProject.h \
+ 				 src/shared/WobblyException.h \
+-				 src/shared/WobblyShared.cpp
+-				 src/shared/WobblyShared.h
++				 src/shared/WobblyShared.cpp \
++				 src/shared/WobblyShared.h \
+ 				 src/shared/WobblyTypes.h
+ 
+ 
