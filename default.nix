@@ -143,6 +143,7 @@ in
     w2xnvk = prev.callPackage ./plugins/w2xnvk { };
     rife = prev.callPackage ./plugins/rife { };
     realsr = prev.callPackage ./plugins/realsr { };
+    dhce = prev.callPackage ./plugins/dhce { };
 
 
     acsuite = callPythonPackage ./plugins/acsuite { };
