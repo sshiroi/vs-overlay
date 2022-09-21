@@ -142,6 +142,8 @@ in
     znedi3 = prev.callPackage ./plugins/znedi3 { };
     w2xnvk = prev.callPackage ./plugins/w2xnvk { };
     rife = prev.callPackage ./plugins/rife { };
+    realsr = prev.callPackage ./plugins/realsr { };
+
 
     acsuite = callPythonPackage ./plugins/acsuite { };
     adjust = callPythonPackage ./plugins/adjust { };

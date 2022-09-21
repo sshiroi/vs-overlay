@@ -1,0 +1,34 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index e0c5bbb..321f1bb 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -36,9 +36,9 @@ else()
+ endif()
+ 
+ # build ncnn library
+-if(NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/deps/ncnn/CMakeLists.txt")
+-    message(FATAL_ERROR "The submodules were not downloaded! Please update submodules with \"git submodule update --init --recursive\" and try again.")
+-endif()
++#if(NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/deps/ncnn/CMakeLists.txt")
++#    message(FATAL_ERROR "The submodules were not downloaded! Please update submodules with \"git submodule update --init --recursive\" and try again.")
++#endif()
+ 
+ option(NCNN_INSTALL_SDK "" OFF)
+ option(NCNN_PIXEL_ROTATE "" OFF)
+@@ -145,7 +145,7 @@ option(WITH_LAYER_deconvolutiondepthwise1d "" OFF)
+ option(WITH_LAYER_deconvolution3d "" OFF)
+ option(WITH_LAYER_deconvolutiondepthwise3d "" OFF)
+ 
+-add_subdirectory(deps/ncnn)
++#add_subdirectory(deps/ncnn)
+ 
+ # generate-spirv target
+ set(SHADER_SPV_HEX_FILES)
+@@ -174,4 +174,7 @@ endif()
+ add_library(realsrnv SHARED src/main.cpp src/realsr.cpp)
+ target_include_directories(realsrnv PRIVATE ${VAPOURSYNTH_INCLUDE_DIR})
+ target_link_libraries(realsrnv ncnn ${Vulkan_LIBRARY})
++target_include_directories(realsrnv PRIVATE ${NCNN_INCLUDE_DIRS})
++target_link_libraries(realsrnv ${NCNN_LIBRARIES} ${Vulkan_LIBRARY})
++
+ add_dependencies(realsrnv generate-spirv)
