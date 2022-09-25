@@ -165,6 +165,7 @@ in
     vs-exprtools = callPythonPackage ./plugins/vs-exprtools { };
     vs-kernels = callPythonPackage ./plugins/vs-kernels { };
     vs-parsedvd = callPythonPackage ./plugins/vs-parsedvd { };
+    hysteria = callPythonPackage ./plugins/hysteria { };
 
     awsmfunc = callPythonPackage ./plugins/awsmfunc { };
     fvsfunc = callPythonPackage ./plugins/fvsfunc { };
