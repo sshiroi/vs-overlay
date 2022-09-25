@@ -145,6 +145,7 @@ in
     realsr = prev.callPackage ./plugins/realsr { };
     dhce = prev.callPackage ./plugins/dhce { };
     fieldhint = prev.callPackage ./plugins/fieldhint { };
+    bdngsp = prev.callPackage ./plugins/bdngsp { };
 
 
     acsuite = callPythonPackage ./plugins/acsuite { };
