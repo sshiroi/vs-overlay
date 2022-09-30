@@ -183,6 +183,7 @@ in
   d2vwitch = prev.libsForQt5.callPackage ./tools/d2vwitch { };
   wobbly = prev.libsForQt5.callPackage ./tools/wobbly { };
   vspreview = callPythonPackage ./tools/vspreview { python_call = callPythonPackage; };
+  concatfs = prev.callPackage ./tools/concatfs { }; #maybe useful for vob files
 
   mpv_vs = vap: (final.mpv-unwrapped.override { vapoursynthSupport = true; vapoursynth = vap; });
   mpv_vs_wrapped = vap:
