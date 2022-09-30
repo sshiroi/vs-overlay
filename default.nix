@@ -183,4 +183,25 @@ in
   d2vwitch = prev.libsForQt5.callPackage ./tools/d2vwitch { };
   wobbly = prev.libsForQt5.callPackage ./tools/wobbly { };
   vspreview = callPythonPackage ./tools/vspreview { python_call = callPythonPackage; };
+
+  mpv_vs = vap: (final.mpv-unwrapped.override { vapoursynthSupport = true; vapoursynth = vap; });
+  mpv_vs_wrapped = vap:
+  let
+    mpv_simple = (final.mpv_vs final.vapoursynth);
+  in
+  prev.runCommand "mpv-vapour-with-plugins" {
+    buildInputs = [ final.makeWrapper mpv_simple ];
+  } ''
+    mkdir -p $out/bin
+    ln -s ${mpv_simple}/etc $out/etc
+    ln -s ${mpv_simple}/lib $out/lib
+    ln -s ${mpv_simple}/share $out/share
+    makeWrapper ${mpv_simple}/bin/mpv $out/bin/mpv \
+        --prefix PYTHONPATH : ${vap}/${vap.python3.sitePackages} \
+        --prefix LD_LIBRARY_PATH : ${vap}/lib
+    makeWrapper ${mpv_simple}/bin/umpv $out/bin/umpv \
+        --prefix PYTHONPATH : ${vap}/${vap.python3.sitePackages} \
+        --prefix LD_LIBRARY_PATH : ${vap}/lib
+  '';
+
 }
