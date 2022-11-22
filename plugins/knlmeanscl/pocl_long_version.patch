@@ -1,0 +1,15 @@
+diff --git a/KNLMeansCL/shared/ocl_utils.cpp b/KNLMeansCL/shared/ocl_utils.cpp
+index a93da53..234b005 100644
+--- a/KNLMeansCL/shared/ocl_utils.cpp
++++ b/KNLMeansCL/shared/ocl_utils.cpp
+@@ -105,8 +105,8 @@ cl_int oclUtilsCheckPlatform(cl_platform_id platofrm, bool *compatible) {
+     }
+ 
+     /* Platform: OpenCL 1.2 */
+-    char plt_version_txt[64];
+-    ret = clGetPlatformInfo(platofrm, CL_PLATFORM_VERSION, sizeof(char) * 64, plt_version_txt, NULL);
++    char plt_version_txt[128];
++    ret = clGetPlatformInfo(platofrm, CL_PLATFORM_VERSION, sizeof(char) * 128, plt_version_txt, NULL);
+     if (ret != CL_SUCCESS || !(10 * (plt_version_txt[7] - '0') + (plt_version_txt[9] - '0') >= OCL_UTILS_OPENCL_1_2)) {
+         *compatible = false;
+         return ret;

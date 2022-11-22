@@ -14,6 +14,7 @@ let
   in
     final.vapoursynth.python3.pkgs.buildPythonPackage {
       name = "vapoursynth-stubs";
+      format = "other";
       phases = [ "buildPhase" "installPhase" ];
 
       nativeBuildInputs = [
@@ -43,7 +44,9 @@ let
     };
   });
   #latest nixos-unstable has broken ncnn because some glslang update
+  #then they fixed it, but now its broken again so this patch stays
   old_ncnn = prev.ncnn.override { glslang = old_glslang; };
+
 in
 {
   #example
@@ -51,20 +54,6 @@ in
   #vap_with_stubs = (pkgs.vapoursynth.withPlugins (plugin_list ++ [ (pkgs.generate_vapoursynth_stubs plugin_list) ]));
   #pkgs.mkShell { buildInputs = with pkgs; [ vscodium vap_with_stubs.python3 vap_with_stubs ] }
   generate_vapoursynth_stubs = generate_stubs;
-
-  vapoursynth = prev.vapoursynth.overrideAttrs (old: rec {
-    version = "60";
-    src = prev.fetchFromGitHub {
-      owner  = "vapoursynth";
-      repo   = "vapoursynth";
-      rev    = "R${version}";
-      sha256 = "sha256-E1uHNcGxBrwg00tNnY3qH6BpvXtBEGkX7QFy0aMLSnA=";
-    };
-  });
-
-
-  ncnn = old_ncnn;
-  glslang = old_glslang;
 
   vapoursynthPlugins = prev.recurseIntoAttrs {
     akarin = prev.callPackage ./plugins/akarin { };
@@ -121,6 +110,7 @@ in
     miscfilters-obsolete = prev.callPackage ./plugins/miscfilters-obsolete { };
     msmoosh = prev.callPackage ./plugins/msmoosh { };
     mvtools = prev.vapoursynth-mvtools;
+    mvtools-sf = prev.callPackage ./plugins/mvtools-sf { };
     nnedi3 = prev.callPackage ./plugins/nnedi3 { };
     nnedi3cl = prev.callPackage ./plugins/nnedi3cl { };
     ocr = prev.callPackage ./plugins/ocr { };
@@ -140,12 +130,14 @@ in
     vivtc = prev.callPackage ./plugins/vivtc { };
     wwxd = prev.callPackage ./plugins/wwxd { };
     znedi3 = prev.callPackage ./plugins/znedi3 { };
-    w2xnvk = prev.callPackage ./plugins/w2xnvk { };
-    rife = prev.callPackage ./plugins/rife { };
-    realsr = prev.callPackage ./plugins/realsr { };
+    w2xnvk = prev.callPackage ./plugins/w2xnvk { ncnn = old_ncnn; glslang = old_glslang; };
+    rife = prev.callPackage ./plugins/rife { ncnn = old_ncnn; };
+    realsr = prev.callPackage ./plugins/realsr { ncnn = old_ncnn; glslang = old_glslang; };
     dhce = prev.callPackage ./plugins/dhce { };
     fieldhint = prev.callPackage ./plugins/fieldhint { };
     bdngsp = prev.callPackage ./plugins/bdngsp { };
+    #not a plugin rather a library
+    vapoursynth-plusplus = prev.callPackage ./plugins/vapoursynth-plusplus { };
 
 
     acsuite = callPythonPackage ./plugins/acsuite { };
@@ -176,6 +168,7 @@ in
     mvsfunc = callPythonPackage ./plugins/mvsfunc { };
     vardefunc = callPythonPackage ./plugins/vardefunc { };
     zzfunc = callPythonPackage ./plugins/zzfunc { };
+    Vine = callPythonPackage ./plugins/Vine { };
   };
 
   getnative = callPythonPackage ./tools/getnative { };

@@ -11,6 +11,10 @@ stdenv.mkDerivation rec {
     sha256 = "035gcd3ppgljinlhh7k1kfr1394isgavwy9h6znshpl9npgi67cd";
   };
 
+  patches = [
+    ./pocl_long_version.patch
+  ];
+
   dontAddPrefix = true;
   configureFlags = [ "--install=$(out)/lib/vapoursynth" ];
 
