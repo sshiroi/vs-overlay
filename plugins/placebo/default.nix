@@ -20,6 +20,9 @@ stdenv.mkDerivation rec {
         --replace "vapoursynth_dep.get_pkgconfig_variable('libdir')" "get_option('libdir')"
   '';
 
+  doInstallCheck = true;
+  installCheckPhase = vapoursynth.installCheckPhasePluginExistanceCheck vapoursynth "placebo";
+
   meta = with lib; {
     description = "A libplacebo-based debanding, scaling and color mapping plugin for VapourSynth";
     homepage = "https://github.com/Lypheo/vs-placebo";

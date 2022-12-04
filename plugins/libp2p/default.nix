@@ -20,6 +20,9 @@ stdenv.mkDerivation rec {
         --replace "vapoursynth_dep.get_pkgconfig_variable('libdir')" "get_option('libdir')"
   '';
 
+  doInstallCheck = true;
+  installCheckPhase = vapoursynth.installCheckPhasePluginExistanceCheck vapoursynth "libp2p";
+
   meta = with lib; {
     description = "VapourSynth plugin for packing/unpacking of RGB clips";
     homepage = "https://github.com/DJATOM/LibP2P-Vapoursynth";

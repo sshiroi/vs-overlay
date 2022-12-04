@@ -17,7 +17,7 @@ in stdenv.mkDerivation rec {
   buildInputs = [ vapoursynth ];
 
   buildPhase = ''
-    gcc -o libwwxd${ext} -fPIC -shared -O2 -Wall -Wextra -Wno-unused-parameter \
+    $CC -o libwwxd${ext} -fPIC -shared -O2 -Wall -Wextra -Wno-unused-parameter \
         $(pkg-config --cflags vapoursynth) \
         src/wwxd.c src/detection.c
   '';
@@ -25,6 +25,9 @@ in stdenv.mkDerivation rec {
   installPhase = ''
     install -D libwwxd${ext} $out/lib/vapoursynth/libwwxd${ext}
   '';
+
+  doInstallCheck = true;
+  installCheckPhase = vapoursynth.installCheckPhasePluginExistanceCheck vapoursynth "wwxd";
 
   meta = with lib; {
     description = "Xvid-like scene change detection for VapourSynth";

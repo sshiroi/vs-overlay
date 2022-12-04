@@ -1,14 +1,14 @@
 { lib, stdenv, fetchFromGitHub, meson, ninja, pkg-config, vapoursynth }:
 
 stdenv.mkDerivation rec {
-  pname = "vapoursynth-retinex";
-  version = "4";
+  pname = "VapourSynth-Retinex";
+  version = "unstable-2022-12-04";
 
   src = fetchFromGitHub {
     owner = "HomeOfVapourSynthEvolution";
-    repo = "VapourSynth-Retinex";
-    rev = "r${version}";
-    sha256 = "108jmawfn87ydabpxkb0srbk2r8vgpfn0kiby4g56msbc0rpvc6g";
+    repo = pname;
+    rev = "6bfbdd429159c85075dc4b08e0ac4e706470916b";
+    sha256 = "sha256-4LnVyW3m91PHE5L1qYT+O23bJpqxggpZ+kp0NLQzvWw=";
   };
 
   nativeBuildInputs = [ meson ninja pkg-config ];
@@ -19,12 +19,8 @@ stdenv.mkDerivation rec {
         --replace "vapoursynth_dep.get_pkgconfig_variable('libdir')" "get_option('libdir')"
   '';
 
-  installPhase =
-    let
-      ext = stdenv.targetPlatform.extensions.sharedLibrary;
-    in ''
-      install -D libretinex${ext} $out/lib/vapoursynth/libretinex${ext}
-    '';
+  doInstallCheck = true;
+  installCheckPhase = vapoursynth.installCheckPhasePluginExistanceCheck vapoursynth "retinex";
 
   meta = with lib; {
     description = "Retinex algorithm for VapourSynth";

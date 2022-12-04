@@ -2,19 +2,22 @@
 
 stdenv.mkDerivation rec {
   pname = "vapoursynth-histogram";
-  version = "2";
+  version = "unstable-2022-11-27";
 
   src = fetchFromGitHub {
     owner = "dubhater";
     repo = pname;
-    rev = "v${version}";
-    sha256 = "1wdjf44cl6sw7cqiv92q20gnn5bqlbln6pqxf41db7arjv93dh9l";
+    rev = "c4861d63d496fa0eb873a6f949937be8c9c1dc13";
+    sha256 = "sha256-0oSIHnzFfnuKMZA6jPSeyV2ekRlbJOnTyxzi2B9DF0k=";
   };
 
   configureFlags = [ "--libdir=$(out)/lib/vapoursynth" ];
 
   nativeBuildInputs = [ pkg-config autoreconfHook ];
   buildInputs = [ vapoursynth ];
+
+  doInstallCheck = true;
+  installCheckPhase = vapoursynth.installCheckPhasePluginExistanceCheck vapoursynth "hist";
 
   meta = with lib; {
     description = "Histogram plugin for VapourSynth";

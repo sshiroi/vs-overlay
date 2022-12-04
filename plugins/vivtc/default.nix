@@ -19,7 +19,10 @@ stdenv.mkDerivation rec {
         --replace "vapoursynth_dep.get_pkgconfig_variable('libdir')" "get_option('libdir')"
   '';
 
-  meta = with lib; {
+  doInstallCheck = true;
+  installCheckPhase = vapoursynth.installCheckPhasePluginExistanceCheck vapoursynth "vivtc";
+
+   meta = with lib; {
     description = "Field matcher and decimation filter for VapourSynth similar to TIVTC";
     homepage = "https://github.com/vapoursynth/vivtc";
     license = licenses.lgpl21Plus;

@@ -10,13 +10,13 @@ let
 in
 buildPythonPackage rec {
   pname = "fvsfunc";
-  version = "unstable-2020-10-12";
+  version = "unstable-2022-11-27";
 
   src = fetchFromGitHub {
     owner = "Irrational-Encoding-Wizardry";
     repo = pname;
-    rev = "96211df1eb46cda49ffbf1c930d627fe3a5d5d5a";
-    sha256 = "0zyb96izws9lb53wlxx9p1ing5z9xy9gj98pblx4p5myim39xywq";
+    rev = "076dbde68227f6cca91304a447b2a02b0e95413e";
+    sha256 = "sha256-i6ONBdPIi3h4NxfVi4ggvuiElKn0S8uao5BVT+F9sMQ=";
   };
 
   propagatedBuildInputs = (with vapoursynthPlugins; [

@@ -1,4 +1,4 @@
-{ lib, fetchgit, rustPlatform }:
+{ lib, fetchgit, rustPlatform, vapoursynth }:
 
 rustPlatform.buildRustPackage rec {
   pname = "adaptivegrain";
@@ -16,6 +16,9 @@ rustPlatform.buildRustPackage rec {
     mkdir $out/lib/vapoursynth
     mv $out/lib/libadaptivegrain_rs.so $out/lib/vapoursynth/libadaptivegrain_rs.so
   '';
+
+  doInstallCheck = true;
+  installCheckPhase = vapoursynth.installCheckPhasePluginExistanceCheck vapoursynth "adg";
 
   meta = with lib; {
     description = "Reimplementation of the adaptive_grain mask as a Vapoursynth plugin";

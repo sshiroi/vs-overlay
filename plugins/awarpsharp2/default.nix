@@ -16,6 +16,9 @@ stdenv.mkDerivation rec {
   nativeBuildInputs = [ meson ninja pkg-config ];
   buildInputs = [ vapoursynth ];
 
+  doInstallCheck = true;
+  installCheckPhase = vapoursynth.installCheckPhasePluginExistanceCheck vapoursynth "warp";
+
   meta = with lib; {
     description = "VapourSynth edge sharpener plugin";
     homepage = "https://github.com/dubhater/vapoursynth-awarpsharp2";

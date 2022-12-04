@@ -15,6 +15,7 @@ in
 buildPythonPackage rec {
   pname = "kagefunc";
   version = "0.1.0";
+  #bump to unstable 96947a1bda5639a4e0b89202e964a15bc337521d maybe ?
 
   src = fetchFromGitHub {
     owner = "Irrational-Encoding-Wizardry";

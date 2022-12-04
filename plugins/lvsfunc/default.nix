@@ -19,20 +19,20 @@ let
 in
 buildPythonPackage rec {
   pname = "lvsfunc";
-  version = "0.4.2";
+  version = "0.5.0";
 
   src = fetchFromGitHub {
     owner = "Irrational-Encoding-Wizardry";
     repo = pname;
     rev = "v${version}";
-    sha256 = "sha256-Yv7WBr9suuYsDI9LfZVcTBuDTPkd/DMCk/lQ58qsLyw=";
+    sha256 = "sha256-fHvG3zqXJvX7PQ7X+ITqUIuYj32qlCSiOXG1T6nHai0=";
   };
 
   postPatch = ''
     # This does not depend on vapoursynth (since this is used from within
     # vapoursynth).
     substituteInPlace requirements.txt \
-        --replace "VapourSynth>=51" "" \
+        --replace "VapourSynth>=59" "" \
   '';
 
   propagatedBuildInputs = [
@@ -46,6 +46,8 @@ buildPythonPackage rec {
     mvsfunc
     vsTAAmbk
     vsutil
+    vs-scale
+    vs-parsedvd
   ]);
 
   checkInputs = [ (vapoursynth.withPlugins propagatedBinaryPlugins) ];

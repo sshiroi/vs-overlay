@@ -2,21 +2,24 @@
 
 buildPythonPackage rec {
   pname = "vsTAAmbk";
-  version = "0.8.1";
+  #version = "0.8.1";
+  version = "unstable-22-11-26";
 
   src = fetchFromGitHub {
     owner = "HomeOfVapourSynthEvolution";
     repo = pname;
-    rev = "v${version}";
-    sha256 = "sha256-KfU2f7tBhw007f4RmVruV3Pkgo1zdA4o43+1lL/ohKo=";
+    rev = "c707f5a8178b80e3ddc4556b69dd36c0d1928166";
+    sha256 = "sha256-GD8/NPE9XMvTqyko5HP778/ymjmFTzj1M/VTtEl4JTg=";
+  #  rev = "v${version}";
+  #  sha256 = "sha256-KfU2f7tBhw007f4RmVruV3Pkgo1zdA4o43+1lL/ohKo=";
   };
 
   patches = [
-    (fetchpatch {
-      name = "Remove-unnecessary-format-registration.patch";
-      url = "https://github.com/HomeOfVapourSynthEvolution/vsTAAmbk/commit/c707f5a8178b80e3ddc4556b69dd36c0d1928166.patch";
-      sha256 = "sha256-zLSr5POLWvAsHqTFbQOsLQnPpPRl/KjiN/tCr+zIMVg=";
-    })
+ #   (fetchpatch {
+ #     name = "Remove-unnecessary-format-registration.patch";
+ #     url = "https://github.com/HomeOfVapourSynthEvolution/vsTAAmbk/commit/c707f5a8178b80e3ddc4556b69dd36c0d1928166.patch";
+ #     sha256 = "sha256-zLSr5POLWvAsHqTFbQOsLQnPpPRl/KjiN/tCr+zIMVg=";
+ #   })
     ./0001-Skip-OpenCL-test.patch
   ];
 

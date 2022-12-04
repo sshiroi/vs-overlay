@@ -22,6 +22,9 @@ stdenv.mkDerivation rec {
   nativeBuildInputs = [ meson cmake pkg-config ninja vulkan-headers ];
   buildInputs = [ vapoursynth vulkan-loader ncnn ];
 
+  doInstallCheck = true;
+  installCheckPhase = vapoursynth.installCheckPhasePluginExistanceCheck vapoursynth "rife";
+
   meta = with lib; {
     description = "Real-Time Intermediate Flow Estimation for Video Frame Interpolation, based on rife-ncnn-vulkan.";
     homepage = "https://github.com/HomeOfVapourSynthEvolution/VapourSynth-RIFE-ncnn-Vulkan";

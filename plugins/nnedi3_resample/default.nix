@@ -1,21 +1,26 @@
 { lib, buildPythonPackage, fetchFromGitHub, vapoursynthPlugins, python, vapoursynth }:
 
+let
+  propagatedBinaryBuildInputs = with vapoursynthPlugins; [
+    fmtconv
+  ];
+in
+
 buildPythonPackage rec {
   pname = "nnedi3_resample";
-  version = "unstable-2017-05-10";
+  version = "unstable-2022-11-25";
 
   src = fetchFromGitHub {
-    owner = "mawen1250";
-    repo = "VapourSynth-script";
-    rev = "0983895c8a0fe65d8b342e1875294d2681c75e84";
-    sha256 = "1c6z1xi2lvjjf7n22l5w1yw2fqh3mh2k600v65bnc50192i8zhnd";
+    owner = "HomeOfVapourSynthEvolution";
+    repo = pname;
+    rev = "eb53450a19f41f8435f36099f083ede0ae836c83";
+    sha256 = "sha256-eoGbzhMu2D2g7Z/Es5Nx4x6K0Lg1a7jbSvR2q8WpowE=";
   };
 
   propagatedBuildInputs = with vapoursynthPlugins; [
-    fmtconv
     mvsfunc
     nnedi3
-  ];
+  ] ++ propagatedBinaryBuildInputs;
 
   format = "other";
 
@@ -23,17 +28,17 @@ buildPythonPackage rec {
     install -D nnedi3_resample.py $out/${python.sitePackages}/nnedi3_resample.py
   '';
 
-  checkInputs = [ (vapoursynth.withPlugins propagatedBuildInputs) ];
+  checkInputs = [ (vapoursynth.withPlugins propagatedBinaryBuildInputs) ];
   checkPhase = ''
     PYTHONPATH=$out/${python.sitePackages}:$PYTHONPATH
   '';
   pythonImportsCheck = [ "nnedi3_resample" ];
 
   meta = with lib; {
-    description = "A vapoursynth plugin for resampling with nnedi3";
-    homepage = "https://github.com/mawen1250/VapourSynth-script";
+    description = "A VapourSynth script for easy resizing using nnedi3/znedi3/nnedi3cl with center alignment and correct chroma placement";
+    homepage = "https://github.com/HomeOfVapourSynthEvolution/nnedi3_resample";
     license = licenses.unfree; # no license
-    maintainers = with maintainers; [ sbruder ];
+    maintainers = with maintainers; [ ];
     platforms = platforms.all;
   };
 }

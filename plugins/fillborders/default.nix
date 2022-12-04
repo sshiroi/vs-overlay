@@ -20,6 +20,9 @@ stdenv.mkDerivation rec {
     mv $out/lib/libfillborders.* $out/lib/vapoursynth/
   '';
 
+  doInstallCheck = true;
+  installCheckPhase = vapoursynth.installCheckPhasePluginExistanceCheck vapoursynth "fb";
+
   meta = with lib; {
     description = "VapourSynth plugin to fill the borders of a clip";
     homepage = "https://github.com/dubhater/vapoursynth-fillborders";

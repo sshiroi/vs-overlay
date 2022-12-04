@@ -19,6 +19,9 @@ stdenv.mkDerivation rec {
         --replace "vs.get_pkgconfig_variable('libdir')" "get_option('libdir')"
   '';
 
+  doInstallCheck = true;
+  installCheckPhase = vapoursynth.installCheckPhasePluginExistanceCheck vapoursynth "mvsf";
+
   meta = with lib; {
     description = "Single Precision MVTools";
     homepage = "https://github.com/IFeelBloated/vapoursynth-mvtools-sf";

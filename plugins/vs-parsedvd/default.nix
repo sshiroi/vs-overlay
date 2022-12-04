@@ -14,13 +14,13 @@ pyparsedvd = buildPythonPackage rec {
 in
 buildPythonPackage rec {
   pname = "vs-parsedvd";
-  version = "unstable-2022-09-19";
+  version = "unstable-2022-11-26";
 
   src = fetchFromGitHub {
     owner = "Irrational-Encoding-Wizardry";
     repo = pname;
-    rev = "09adf02d202d4507ed35de95ea15d436f2888e2b";
-    sha256 = "sha256-vvwCyHZU0oBwKpTAI9H92qtklxq0Kxr3yJFJ4pDbE0A=";
+    rev = "b78721abe54614e24e0a111ae033c0585d687340";
+    sha256 = "sha256-qlPtiJeZL/PjnzK0rnZ4cmif1kxDRHieYUKYb1/CH+M=";
   };
 
   propagatedBuildInputs = [ pyparsedvd vapoursynth vapoursynthPlugins.d2vsource  ];

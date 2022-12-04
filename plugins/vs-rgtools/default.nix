@@ -1,25 +1,30 @@
 { lib, vapoursynthPlugins, buildPythonPackage, fetchFromGitHub, python3, vapoursynth, numpy, pyfftw }:
 buildPythonPackage rec {
   pname = "vs-rgtools";
-  version = "0.1.0";
+  #version = "1.2.0";
+  version = "1.3.2";
 
   src = fetchFromGitHub {
     owner = "Irrational-Encoding-Wizardry";
     repo = pname;
-    rev = "fde8efcbb470199d598eecfe13ab4b8033829330";
-    sha256 = "sha256-E4tPgRf2UMUW6ijkWm0G0r+POKfieeylPfYo88FwB8U=";
+    rev = "7bc9eaf5f1699c69db27ad11757a5be3b60c053a";
+    sha256 = "sha256-NENE7+Eh9jU9y3Ql2S6/YE+Y956xC7px6loU5x3wiV4=";
+  #  rev = "v${version}";
+  #  sha256 = "sha256-tKOEKCg2/h4lgBVgb062IAapzzI40UwHOAJvTjxW2CM=";
   };
 
-  propagatedBuildInputs = [ numpy pyfftw vapoursynthPlugins.vs-exprtools ];
+  propagatedBuildInputs = [ numpy pyfftw vapoursynthPlugins.vs-exprtools vapoursynthPlugins.vs-tools ];
 
   postPatch = ''
     substituteInPlace requirements.txt \
-        --replace "VapourSynth>=59" ""
+        --replace "VapourSynth>=60" ""
   '';
 
   checkPhase = ''
     PYTHONPATH=$out/${python3.sitePackages}:$PYTHONPATH
   '';
+  checkInputs = [ (vapoursynth.withPlugins [  ]) ];
+  pythonImportsCheck = [ "vsrgtools" ];
 
   meta = with lib; {
     description = "Wrapper for RGVS, RGSF, and various other functions";

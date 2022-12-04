@@ -24,6 +24,9 @@ in stdenv.mkDerivation rec {
     install -D libautocrop${ext} $out/lib/vapoursynth/libautocrop${ext}
   '';
 
+  doInstallCheck = true;
+  installCheckPhase = vapoursynth.installCheckPhasePluginExistanceCheck vapoursynth "acrop";
+
   meta = with lib; {
     description = "Autocrop for VapourSynth";
     homepage = "https://github.com/Irrational-Encoding-Wizardry/vapoursynth-autocrop";

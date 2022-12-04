@@ -20,13 +20,13 @@
 let
   unwrapped = buildPythonPackage rec {
     pname = "vs-preview";
-    version = "unstable-2022-09-08";
+    version = "0.2.9";
 
     src = fetchFromGitHub {
       owner = "Irrational-Encoding-Wizardry";
       repo = "vs-preview";
-      rev = "496efd68901a03b0d81e51947728a2f995c27ee8";
-      sha256 = "sha256-59Altix2s8u8Hvu2y9LUkq0Elu4b4Y5hUs/6QhaTdQw=";
+      rev = "v${version}";
+      sha256 = "sha256-jBZ3h6F4gfkXYDZUSjRbP5l2fgZBM7HYjumql2YUsIs=";
     };
 
     postPatch = ''

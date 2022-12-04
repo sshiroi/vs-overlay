@@ -14,6 +14,9 @@ stdenv.mkDerivation rec {
   nativeBuildInputs = [ meson ninja pkg-config ];
   buildInputs = [ vapoursynth ];
 
+  doInstallCheck = true;
+  installCheckPhase = vapoursynth.installCheckPhasePluginExistanceCheck vapoursynth "remap";
+
   meta = with lib; {
     description = "Vapoursynth port of RemapFrames";
     homepage = "https://github.com/Irrational-Encoding-Wizardry/Vapoursynth-RemapFrames";

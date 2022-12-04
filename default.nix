@@ -55,41 +55,50 @@ in
   #pkgs.mkShell { buildInputs = with pkgs; [ vscodium vap_with_stubs.python3 vap_with_stubs ] }
   generate_vapoursynth_stubs = generate_stubs;
 
+  vapoursynthInstallCheckPhase = vap: namespace: ''
+#or loop manually and std.LoadPlugin
+echo "UserPluginDir=$out/lib/vapoursynth" > test.conf
+VAPOURSYNTH_CONF_PATH=test.conf PYTHONPATH=${vap}/${vap.python3.sitePackages}:$PYTHONPATH ${vap.python3}/bin/python -c '
+import vapoursynth
+import sys
+to_srch = "${namespace}"
+fnd= False
+for a in vapoursynth.core.plugins():
+  print("Got module: {} {}".format(a.namespace,a.name))
+  if a.namespace == to_srch:
+    print("GOT module break;")
+    fnd = True
+    break
+if fnd == False:
+  print("Could not find {}".format(to_srch))
+  sys.exit(1)
+'
+'';
+
+  vapoursynth = prev.vapoursynth.overrideAttrs (old: rec {
+    passthru = (old.passthru) // (rec {  installCheckPhasePluginExistanceCheck = final.vapoursynthInstallCheckPhase; } );
+  });
+
   vapoursynthPlugins = prev.recurseIntoAttrs {
-    akarin = prev.callPackage ./plugins/akarin { };
     adaptivegrain = prev.callPackage ./plugins/adaptivegrain { };
-    addgrain = prev.callPackage ./plugins/addgrain { };
     autocrop = prev.callPackage ./plugins/autocrop { };
     awarpsharp2 = prev.callPackage ./plugins/awarpsharp2 { };
-    bestaudiosource = prev.callPackage ./plugins/bestaudiosource { };
-    bestsource = prev.callPackage ./plugins/bestsource { };
+
     beziercurve = prev.callPackage ./plugins/beziercurve { };
     bifrost = prev.callPackage ./plugins/bifrost { };
     bilateral = prev.callPackage ./plugins/bilateral { };
-    bm3d = prev.callPackage ./plugins/bm3d { };
-    cas = prev.callPackage ./plugins/cas { };
     chickendream = prev.callPackage ./plugins/chickendream { };
-    cnr2 = prev.callPackage ./plugins/cnr2 { };
     combmask = prev.callPackage ./plugins/combmask { };
     continuityfixer = prev.callPackage ./plugins/continuityfixer { };
-    ctmf = prev.callPackage ./plugins/ctmf { };
     d2vsource = prev.callPackage ./plugins/d2vsource { };
-    dctfilter = prev.callPackage ./plugins/dctfilter { };
-    deblock = prev.callPackage ./plugins/deblock { };
     descale = prev.callPackage ./plugins/descale { };
-    dfttest = prev.callPackage ./plugins/dfttest { };
     dotkill = prev.callPackage ./plugins/dotkill { };
-    eedi2 = prev.callPackage ./plugins/eedi2 { };
-    eedi3m = prev.callPackage ./plugins/eedi3m { };
     f3kdb = prev.callPackage ./plugins/f3kdb { };
     ffms2 = prev.ffms;
-    fft3dfilter = prev.callPackage ./plugins/fft3dfilter { };
     fillborders = prev.callPackage ./plugins/fillborders { };
     fluxsmooth = prev.callPackage ./plugins/fluxsmooth { };
     fmtconv = prev.callPackage ./plugins/fmtconv { };
-    histogram = prev.callPackage ./plugins/histogram { };
     hqdn3d = prev.callPackage ./plugins/hqdn3d { };
-    imwri = prev.callPackage ./plugins/imwri { };
     knlmeanscl = prev.callPackage ./plugins/knlmeanscl { };
     lsmashsource = prev.callPackage ./plugins/lsmashsource { };
     lsmashsource_akarin = ((prev.callPackage ./plugins/lsmashsource { }).overrideAttrs ( prev: rec {
@@ -105,37 +114,88 @@ in
             --replace "vapoursynth_dep.get_pkgconfig_variable('libdir')" "get_option('libdir')"
       '';
     }));
-    libp2p = prev.callPackage ./plugins/libp2p { };
     median = prev.callPackage ./plugins/median { };
     miscfilters-obsolete = prev.callPackage ./plugins/miscfilters-obsolete { };
     msmoosh = prev.callPackage ./plugins/msmoosh { };
     mvtools = prev.vapoursynth-mvtools;
     mvtools-sf = prev.callPackage ./plugins/mvtools-sf { };
     nnedi3 = prev.callPackage ./plugins/nnedi3 { };
-    nnedi3cl = prev.callPackage ./plugins/nnedi3cl { };
-    ocr = prev.callPackage ./plugins/ocr { };
-    placebo = prev.callPackage ./plugins/placebo { };
-    readmpls = prev.callPackage ./plugins/readmpls { };
     remap = prev.callPackage ./plugins/remap { };
-    removegrain = prev.callPackage ./plugins/removegrain { };
-    retinex = prev.callPackage ./plugins/retinex { };
     sangnom = prev.callPackage ./plugins/sangnom { };
     scxvid = prev.callPackage ./plugins/scxvid { };
-    subtext = prev.callPackage ./plugins/subtext { };
-    tcanny = prev.callPackage ./plugins/tcanny { };
     tivtc = prev.callPackage ./plugins/tivtc { };
-    tdeintmod = prev.callPackage ./plugins/tdeintmod { };
     tnlmeans = prev.callPackage ./plugins/tnlmeans { };
-    ttempsmooth = prev.callPackage ./plugins/ttempsmooth { };
-    vivtc = prev.callPackage ./plugins/vivtc { };
-    wwxd = prev.callPackage ./plugins/wwxd { };
     znedi3 = prev.callPackage ./plugins/znedi3 { };
     w2xnvk = prev.callPackage ./plugins/w2xnvk { ncnn = old_ncnn; glslang = old_glslang; };
     rife = prev.callPackage ./plugins/rife { ncnn = old_ncnn; };
     realsr = prev.callPackage ./plugins/realsr { ncnn = old_ncnn; glslang = old_glslang; };
-    dhce = prev.callPackage ./plugins/dhce { };
     fieldhint = prev.callPackage ./plugins/fieldhint { };
     bdngsp = prev.callPackage ./plugins/bdngsp { };
+
+
+    #meson lto
+    tcanny = prev.callPackage ./plugins/tcanny { };
+    bwdif = prev.callPackage ./plugins/bwdif { };
+    addgrain = prev.callPackage ./plugins/addgrain { };
+
+
+    #meson subsinplace other
+    imwri = prev.callPackage ./plugins/imwri { };
+    vmaf = prev.callPackage ./plugins/vmaf { };
+
+
+    # meson vapoursynth_dep.get_pkgconfig_variable('libdir')
+    deblock = prev.callPackage ./plugins/deblock { };
+    bm3d = prev.callPackage ./plugins/bm3d { };
+    lghost = prev.callPackage ./plugins/lghost { };
+    bestsource = prev.callPackage ./plugins/bestsource { };
+    akarin = prev.callPackage ./plugins/akarin { };
+    #bestaudiosource = prev.callPackage ./plugins/bestaudiosource { };
+    cas = prev.callPackage ./plugins/cas { };
+    ctmf = prev.callPackage ./plugins/ctmf { };
+    dctfilter = prev.callPackage ./plugins/dctfilter { };
+    dfttest = prev.callPackage ./plugins/dfttest { };
+    eedi2 = prev.callPackage ./plugins/eedi2 { };
+    eedi3m = prev.callPackage ./plugins/eedi3m { };
+    fft3dfilter = prev.callPackage ./plugins/fft3dfilter { };
+    libp2p = prev.callPackage ./plugins/libp2p { };
+    nnedi3cl = prev.callPackage ./plugins/nnedi3cl { };
+    ocr = prev.callPackage ./plugins/ocr { };
+    placebo = prev.callPackage ./plugins/placebo { };
+    readmpls = prev.callPackage ./plugins/readmpls { };
+    removegrain = prev.callPackage ./plugins/removegrain { };
+    retinex = prev.callPackage ./plugins/retinex { };
+    subtext = prev.callPackage ./plugins/subtext { };
+    tdeintmod = prev.callPackage ./plugins/tdeintmod { };
+    ttempsmooth = prev.callPackage ./plugins/ttempsmooth { };
+    vivtc = prev.callPackage ./plugins/vivtc { };
+    vsrawsource = prev.callPackage ./plugins/vsrawsource { };
+
+
+
+    #meson mesonFlags
+    tedgemask = prev.callPackage ./plugins/tedgemask { };
+    temporalmedian = prev.callPackage ./plugins/temporalmedian { };
+    tbilateral = prev.callPackage ./plugins/tbilateral { };
+    vfrtocfr = prev.callPackage ./plugins/vfrtocfr { };
+    fix-telecined-fades = prev.callPackage ./plugins/fix-telecined-fades { };
+
+    #cmake
+    dhce = prev.callPackage ./plugins/dhce { };
+    delogohd = prev.callPackage ./plugins/delogohd { };
+
+    #automake
+    cnr2 = prev.callPackage ./plugins/cnr2 { };
+    colorbars = prev.callPackage ./plugins/colorbars { };
+    IT = prev.callPackage ./plugins/IT { };
+    ssiq = prev.callPackage ./plugins/ssiq { };
+    histogram = prev.callPackage ./plugins/histogram { };
+
+
+    #manual compile
+    wwxd = prev.callPackage ./plugins/wwxd { };
+    edgefixer = prev.callPackage ./plugins/edgefixer { };
+
     #not a plugin rather a library
     vapoursynth-plusplus = prev.callPackage ./plugins/vapoursynth-plusplus { };
 
@@ -152,11 +212,18 @@ in
     vsgan = callPythonPackage ./plugins/vsgan { };
     vsTAAmbk = callPythonPackage ./plugins/vsTAAmbk { inherit filter_python_plugins; };
     vsutil = callPythonPackage ./plugins/vsutil { };
+
     vs-dfft = callPythonPackage ./plugins/vs-dfft { };
+    #Irrational-Encoding-Wizardry
     vs-rgtools = callPythonPackage ./plugins/vs-rgtools { };
     vs-exprtools = callPythonPackage ./plugins/vs-exprtools { };
     vs-kernels = callPythonPackage ./plugins/vs-kernels { };
     vs-parsedvd = callPythonPackage ./plugins/vs-parsedvd { };
+    vs-tools = callPythonPackage ./plugins/vs-tools { };
+    vsmask = callPythonPackage ./plugins/vsmask { };
+    vs-aa = callPythonPackage ./plugins/vs-aa { inherit filter_python_plugins;  };
+    vs-scale = callPythonPackage ./plugins/vs-scale { };
+
     hysteria = callPythonPackage ./plugins/hysteria { };
 
     awsmfunc = callPythonPackage ./plugins/awsmfunc { };
@@ -168,7 +235,10 @@ in
     mvsfunc = callPythonPackage ./plugins/mvsfunc { };
     vardefunc = callPythonPackage ./plugins/vardefunc { };
     zzfunc = callPythonPackage ./plugins/zzfunc { };
+
+    #single file python stuff
     Vine = callPythonPackage ./plugins/Vine { };
+    Oyster = callPythonPackage ./plugins/Oyster { };
   };
 
   getnative = callPythonPackage ./tools/getnative { };

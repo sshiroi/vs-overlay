@@ -1,4 +1,4 @@
-{ lib, stdenv, fetchFromGitHub, rustPlatform, pkg-config, llvmPackages,  ffmpeg_4 }:
+{ lib, stdenv, fetchFromGitHub, rustPlatform, pkg-config, llvmPackages,  ffmpeg_4, vapoursynth }:
 rustPlatform.buildRustPackage rec {
   pname = "bdngsp";
   version = "unstable-2022-09-22";
@@ -21,6 +21,9 @@ rustPlatform.buildRustPackage rec {
   mkdir $out/lib/vapoursynth
   mv $out/lib/*.so $out/lib/vapoursynth
   '';
+
+  doInstallCheck = true;
+  installCheckPhase = vapoursynth.installCheckPhasePluginExistanceCheck vapoursynth "bdngsp";
 
   meta = with lib; {
     description = "vapoursynth BD source thats Not Good but should Suffice for Preview";

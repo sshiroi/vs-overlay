@@ -21,6 +21,9 @@ stdenv.mkDerivation rec {
   nativeBuildInputs = [ which pkg-config ];
   buildInputs = [ vapoursynth boost opencl-headers ocl-icd ];
 
+  doInstallCheck = true;
+  installCheckPhase = vapoursynth.installCheckPhasePluginExistanceCheck vapoursynth "knlm";
+
   meta = with lib; {
     description = "An optimized OpenCL implementation of the Non-local means de-noising algorithm";
     homepage = "https://github.com/Khanattila/KNLMeansCL";

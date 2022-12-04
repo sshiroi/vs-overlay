@@ -19,6 +19,9 @@ stdenv.mkDerivation rec {
         --replace "vapoursynth_dep.get_pkgconfig_variable('libdir')" "get_option('libdir')"
   '';
 
+  doInstallCheck = true;
+  installCheckPhase = vapoursynth.installCheckPhasePluginExistanceCheck vapoursynth "fft3dfilter";
+
   meta = with lib; {
     description = "A VapourSynth port of FFT3DFilter";
     homepage = "https://github.com/myrsloik/VapourSynth-FFT3DFilter";

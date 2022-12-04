@@ -16,6 +16,9 @@ stdenv.mkDerivation rec {
   nativeBuildInputs = [ autoreconfHook pkg-config ];
   buildInputs = [ vapoursynth ];
 
+  doInstallCheck = true;
+  installCheckPhase = vapoursynth.installCheckPhasePluginExistanceCheck vapoursynth "hqdn3d";
+
   meta = with lib; {
     description = "Vapoursynth port of hqdn3d from avisynth/mplayer";
     homepage = "https://github.com/Hinterwaeldlers/vapoursynth-hqdn3d";

@@ -16,6 +16,9 @@ stdenv.mkDerivation rec {
   nativeBuildInputs = [ pkg-config autoreconfHook ];
   buildInputs = [ vapoursynth ];
 
+  doInstallCheck = true;
+  installCheckPhase = vapoursynth.installCheckPhasePluginExistanceCheck vapoursynth "bifrost";
+
   meta = with lib; {
     description = "Bifrost (temporal derainbowing) plugin for Vapoursynth";
     homepage = "https://github.com/dubhater/vapoursynth-bifrost";

@@ -19,6 +19,9 @@ stdenv.mkDerivation rec {
         --replace "vapoursynth_dep.get_pkgconfig_variable('libdir')" "get_option('libdir')"
   '';
 
+  doInstallCheck = true;
+  installCheckPhase = vapoursynth.installCheckPhasePluginExistanceCheck vapoursynth "tdm";
+
   meta = with lib; {
     description = "A vapoursynth filter combining of TDeint and TMM";
     homepage = "https://github.com/HomeOfVapourSynthEvolution/VapourSynth-TDeintMod";

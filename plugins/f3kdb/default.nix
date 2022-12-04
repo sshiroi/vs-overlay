@@ -16,6 +16,9 @@ stdenv.mkDerivation rec {
   nativeBuildInputs = [ wafHook python3 ];
   buildInputs = [ vapoursynth ];
 
+  doInstallCheck = true;
+  installCheckPhase = vapoursynth.installCheckPhasePluginExistanceCheck vapoursynth "f3kdb";
+
   meta = with lib; {
     description = "A deband library and filter for AviSynth/VapourSynth";
     homepage = "https://github.com/SAPikachu/flash3kyuu_deband";

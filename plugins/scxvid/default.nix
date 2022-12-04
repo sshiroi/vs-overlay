@@ -16,6 +16,9 @@ stdenv.mkDerivation rec {
   nativeBuildInputs = [ pkg-config autoreconfHook ];
   buildInputs = [ vapoursynth xvidcore ];
 
+  doInstallCheck = true;
+  installCheckPhase = vapoursynth.installCheckPhasePluginExistanceCheck vapoursynth "scxvid";
+
   meta = with lib; {
     description = "Scene change detection plugin for VapourSynth using xvid";
     homepage = "https://github.com/dubhater/vapoursynth-scxvid";

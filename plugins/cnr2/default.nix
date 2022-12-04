@@ -16,6 +16,9 @@ stdenv.mkDerivation rec {
   nativeBuildInputs = [ pkg-config autoreconfHook ];
   buildInputs = [ vapoursynth ];
 
+  doInstallCheck = true;
+  installCheckPhase = vapoursynth.installCheckPhasePluginExistanceCheck vapoursynth "cnr2";
+
   meta = with lib; {
     description = "Temporal chroma denoiser for VapourSynth";
     homepage = "https://github.com/dubhater/vapoursynth-cnr2";

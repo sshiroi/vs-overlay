@@ -3,14 +3,14 @@
 let
   ext = stdenv.targetPlatform.extensions.sharedLibrary;
 in stdenv.mkDerivation rec {
-  pname = "vs-continuityfixer";
-  version = "6.1";
+  pname = "VS-ContinuityFixer";
+  version = "7";
 
   src = fetchFromGitHub {
     owner = "MonoS";
-    repo = "VS-ContinuityFixer";
-    rev = "V6";
-    sha256 = "1hkbmfvs4zkr9177qsai012ba4iqj0vb7gw2ngvgcn0px92vclgw";
+    repo = pname;
+    rev = "V${version}";
+    sha256 = "sha256-goqq+312d8/a7lA2qyOqN/2RxAH+U2bmXu8oLjggejI=";
   };
 
   buildInputs = [ vapoursynth ];
@@ -23,6 +23,9 @@ in stdenv.mkDerivation rec {
   installPhase = ''
     install -D continuity${ext} $out/lib/vapoursynth/continuity${ext}
   '';
+
+  doInstallCheck = true;
+  installCheckPhase = vapoursynth.installCheckPhasePluginExistanceCheck vapoursynth "cf";
 
   meta = with lib; {
     description = "Continuity Fixer port for Vapoursynth";

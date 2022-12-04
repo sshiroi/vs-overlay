@@ -27,6 +27,9 @@ stdenv.mkDerivation rec {
         --replace "vapoursynth_dep.get_pkgconfig_variable('libdir')" "get_option('libdir')"
   '';
 
+  doInstallCheck = true;
+  installCheckPhase = vapoursynth.installCheckPhasePluginExistanceCheck vapoursynth "dfttest";
+
   meta = with lib; {
     description = "A DFTTest filter plugin for VapourSynth";
     homepage = "https://github.com/HomeOfVapourSynthEvolution/VapourSynth-DFTTest";

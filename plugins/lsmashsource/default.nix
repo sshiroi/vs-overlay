@@ -19,6 +19,9 @@ stdenv.mkDerivation {
   nativeBuildInputs = [ pkg-config which ];
   buildInputs = [ vapoursynth ffmpeg l-smash ];
 
+  doInstallCheck = true;
+  installCheckPhase = vapoursynth.installCheckPhasePluginExistanceCheck vapoursynth "lsmas";
+
   meta = with lib; {
     description = "L-SMASH source plugin for VapourSynth";
     homepage = "https://github.com/VFR-maniac/L-SMASH-Works";

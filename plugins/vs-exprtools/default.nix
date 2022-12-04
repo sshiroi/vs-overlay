@@ -1,16 +1,16 @@
 { lib, vapoursynthPlugins, buildPythonPackage, fetchFromGitHub, python3, vapoursynth }:
 buildPythonPackage rec {
   pname = "vs-exprtools";
-  version = "unstable-2022-09-17";
+  version = "unstable-2022-11-26";
 
   src = fetchFromGitHub {
     owner = "Irrational-Encoding-Wizardry";
     repo = pname;
-    rev = "c9f595ef6ebdbb38bfc692dd3a47cdbda163d4df";
-    sha256 = "sha256-5XZ9gm+Z5gCV2CloGwVh2TbTGQMjsRfCXU4i7CgaHSM=";
+    rev = "45301e4001d968652e01167513b9f6cac8bfb617";
+    sha256 = "sha256-p2BEZRuTeHQU9RcGNk+KocjH+67XbmfalRM1BWJSeJI=";
   };
 
-  propagatedBuildInputs = [ vapoursynthPlugins.vsutil ];
+  propagatedBuildInputs = [ vapoursynthPlugins.vs-tools ];
 
   postPatch = ''
     substituteInPlace requirements.txt \

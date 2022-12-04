@@ -14,10 +14,7 @@ stdenv.mkDerivation rec {
   nativeBuildInputs = [ meson pkg-config ninja ];
   buildInputs = [ vapoursynth ];
 
-  postInstall = ''
-  mkdir $out/lib/vapoursynth
-  mv $out/lib/libtivtc.so $out/lib/vapoursynth/libtivtc.so
-  '';
+  mesonFlags = [ "--libdir=${placeholder "out"}/lib/vapoursynth" ];
 
   meta = with lib; {
     description = "A vapoursynth filter for field matching and decimation. Avisynth port.";

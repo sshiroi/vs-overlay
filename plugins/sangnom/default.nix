@@ -16,6 +16,9 @@ stdenv.mkDerivation rec {
   nativeBuildInputs = [ meson ninja pkg-config ];
   buildInputs = [ vapoursynth ];
 
+  doInstallCheck = true;
+  installCheckPhase = vapoursynth.installCheckPhasePluginExistanceCheck vapoursynth "sangnom";
+
   meta = with lib; {
     description = "VapourSynth Single Field Deinterlacer";
     homepage = "https://github.com/dubhater/vapoursynth-sangnom";

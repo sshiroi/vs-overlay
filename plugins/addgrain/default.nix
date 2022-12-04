@@ -1,23 +1,28 @@
 { lib, stdenv, fetchFromGitHub, meson, ninja, pkg-config, vapoursynth }:
 
 stdenv.mkDerivation rec {
-  pname = "vapoursynth-addgrain";
-  version = "8";
+  pname = "VapourSynth-AddGrain";
+  version = "10";
 
   src = fetchFromGitHub {
     owner = "HomeOfVapourSynthEvolution";
-    repo = "VapourSynth-AddGrain";
+    repo = pname;
     rev = "r${version}";
-    sha256 = "0qfazdifs1nq5ll6nvfvy3w9m28s2llm5i203ak6qf0bf98jnh4j";
+    sha256 = "sha256-HNdYDpoyhWkpZZhcji2tWxWTojXKTKBbvm+iHp6Zdeo=";
   };
 
   nativeBuildInputs = [ meson ninja pkg-config ];
   buildInputs = [ vapoursynth ];
 
   postPatch = ''
-    substituteInPlace meson.build \
-        --replace "vapoursynth_dep.get_pkgconfig_variable('libdir')" "get_option('libdir')"
+      substituteInPlace meson.build \
+        --replace "vapoursynth_dep.get_variable(pkgconfig: 'libdir')" "get_option('libdir')"
+      substituteInPlace meson.build \
+          --replace "b_lto=true" "b_lto=false"
   '';
+
+  doInstallCheck = true;
+  installCheckPhase = vapoursynth.installCheckPhasePluginExistanceCheck vapoursynth "grain";
 
   meta = with lib; {
     description = "AddGrain filter for VapourSynth";

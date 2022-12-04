@@ -19,6 +19,9 @@ stdenv.mkDerivation rec {
         --replace "vapoursynth_dep.get_pkgconfig_variable('libdir')" "get_option('libdir')"
   '';
 
+  doInstallCheck = true;
+  installCheckPhase = vapoursynth.installCheckPhasePluginExistanceCheck vapoursynth "dctf";
+
   meta = with lib; {
     description = "Renewed DCTFilter filter plugin for VapourSynth";
     homepage = "https://github.com/HomeOfVapourSynthEvolution/VapourSynth-DCTFilter";

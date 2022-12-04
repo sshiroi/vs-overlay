@@ -43,6 +43,9 @@ stdenv.mkDerivation rec {
   mv $NIX_BUILD_TOP/mmm/* $out/lib/vapoursynth
   '';
 
+  doInstallCheck = true;
+  installCheckPhase = vapoursynth.installCheckPhasePluginExistanceCheck vapoursynth "w2xnvk";
+
   meta = with lib; {
     description = "Waifu2x filter for VapourSynth, based on waifu2x-ncnn-vulkan.";
     homepage = "https://github.com/Nlzy/vapoursynth-waifu2x-ncnn-vulkan";

@@ -1,14 +1,14 @@
-{ lib, stdenv, fetchFromGitHub, meson, ninja, pkg-config, vapoursynth, boost, opencl-headers, ocl-icd }:
+{ lib, clangStdenv,stdenv, fetchFromGitHub, meson, ninja, pkg-config, vapoursynth, boost, opencl-headers, ocl-icd }:
 
-stdenv.mkDerivation rec {
-  pname = "vapoursynth-tcanny";
-  version = "12";
+clangStdenv.mkDerivation rec {
+  pname = "VapourSynth-TCanny";
+  version = "14";
 
   src = fetchFromGitHub {
     owner = "HomeOfVapourSynthEvolution";
-    repo = "VapourSynth-TCanny";
+    repo = pname;
     rev = "r${version}";
-    sha256 = "1jsvgxb94klqwh40820zfw8radrnlr3w3lf2kkzjp6r97kgr5i37";
+    sha256 = "sha256-UUYb9UFZ3oB05hAW/FvvM0a8nyJlQnynZSSajF2l/U0=";
   };
 
   nativeBuildInputs = [ meson ninja pkg-config ];
@@ -19,9 +19,15 @@ stdenv.mkDerivation rec {
   BOOST_LIBRARYDIR = "${lib.getLib boost}/lib";
 
   postPatch = ''
-    substituteInPlace meson.build \
-        --replace "vapoursynth_dep.get_pkgconfig_variable('libdir')" "get_option('libdir')"
+      substituteInPlace meson.build \
+        --replace "vapoursynth_dep.get_variable(pkgconfig: 'libdir')" "get_option('libdir')"
+
+      substituteInPlace meson.build \
+          --replace "b_lto=true" "b_lto=false"
   '';
+
+  doInstallCheck = true;
+  installCheckPhase = vapoursynth.installCheckPhasePluginExistanceCheck vapoursynth "tcanny";
 
   meta = with lib; {
     description = "TCanny filter for VapourSynth";

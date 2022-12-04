@@ -2,13 +2,13 @@
 
 stdenv.mkDerivation rec {
   pname = "vs-imwri";
-  version = "1";
+  version = "2";
 
   src = fetchFromGitHub {
     owner = "vapoursynth";
     repo = pname;
     rev = "R${version}";
-    sha256 = "sha256-3nNX7OxAwHPJ6JwaTZJTH13eWktPI/XBmEC/OETCun4=";
+    sha256 = "sha256-1YDmpFZ3S75OjpNoSXOZOtsi1BrI+sFCrtcWdqNrMCA=";
   };
 
   nativeBuildInputs = [ meson ninja pkg-config ];
@@ -18,6 +18,9 @@ stdenv.mkDerivation rec {
     substituteInPlace meson.build \
         --replace "vapoursynth_dep.get_variable(pkgconfig: 'libdir')" "get_option('libdir')"
   '';
+
+  doInstallCheck = true;
+  installCheckPhase = vapoursynth.installCheckPhasePluginExistanceCheck vapoursynth "imwri";
 
   meta = with lib; {
     description = "Image reader and writer for VapourSynth using the ImageMagick library";

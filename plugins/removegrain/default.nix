@@ -2,13 +2,13 @@
 
 stdenv.mkDerivation rec {
   pname = "vs-removegrain";
-  version = "unstable-2021-09-27";
+  version = "unstable-2022-11-27";
 
   src = fetchFromGitHub {
     owner = "vapoursynth";
     repo = pname;
-    rev = "ea3d1566b7d82e1efb2f30612d6951dc61ebba65";
-    sha256 = "sha256-yg6VSZzkxFLzW/bTNMx0EollzzJtMKxRuwwXBH326aI=";
+    rev = "89ca38a6971e371bdce2778291393258daa5f03b";
+    sha256 = "sha256-UcS8EjZGCX00Pt5pAxBTzCiveTKS5yeFT+bQgXKnJ+k=";
   };
 
   nativeBuildInputs = [ meson ninja pkg-config ];
@@ -18,6 +18,9 @@ stdenv.mkDerivation rec {
     substituteInPlace meson.build \
         --replace "vapoursynth_dep.get_pkgconfig_variable('libdir')" "get_option('libdir')"
   '';
+
+  doInstallCheck = true;
+  installCheckPhase = vapoursynth.installCheckPhasePluginExistanceCheck vapoursynth "rgvs";
 
   meta = with lib; {
     description = "VapourSynth port of RemoveGrain and Repair plugins from Avisynth";

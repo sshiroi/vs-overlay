@@ -7,29 +7,29 @@ let
 in
 buildPythonPackage rec {
   pname = "vs-kernels";
-  #version = "1.1.3";
-  version = "1.2.0";
+  version = "2.2.1";
 
   src = fetchFromGitHub {
     owner = "Irrational-Encoding-Wizardry";
     repo = pname;
-    rev = "c57f0ee7abd9045fdabdc2242bf7dbf4776f0547";
-    sha256 = "sha256-Xm0jUsXdEdICdUWUjz1Iovkno6XuvcTsGgpOT5YNvK8=";
     #rev = "v${version}";
-    #sha256 = "sha256-rodgc2Ulm4QG/4yidrA5FVW4inAM6Ticuye5xUYjqlo=";
+    rev = "dffe27bf37f84cec1d71737405d167e2186bc85e";
+    sha256 = "sha256-5nPr9qd4ZODP0zyAGWpy+UvYrU0/vsc+PcKIDk8Pvqk=";
   };
 
-  propagatedBuildInputs = [ vapoursynth propagatedBinaryPlugins ];
+  propagatedBuildInputs = [ vapoursynth vapoursynthPlugins.vs-tools ] ++ propagatedBinaryPlugins;
 
   postPatch = ''
     # This does not depend on vapoursynth (since this is used from within
     # vapoursynth).
     substituteInPlace requirements.txt \
-        --replace "VapourSynth>=51" "" \
+        --replace "VapourSynth>=59" "" \
   '';
 
   checkInputs = [ (vapoursynth.withPlugins propagatedBinaryPlugins) ];
   pythonImportsCheck = [ "vskernels" ];
+
+  inherit propagatedBinaryPlugins;
 
   meta = with lib; {
     description = "A collection of wrappers pertaining to (de)scaling";

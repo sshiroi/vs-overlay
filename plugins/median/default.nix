@@ -16,6 +16,9 @@ stdenv.mkDerivation rec {
 
   mesonFlags = [ "--libdir=${placeholder "out"}/lib/vapoursynth" ];
 
+  doInstallCheck = true;
+  installCheckPhase = vapoursynth.installCheckPhasePluginExistanceCheck vapoursynth "median";
+
   meta = with lib; {
     description = "VapourSynth plugin to generate a pixel-by-pixel median of several clips";
     homepage = "https://github.com/dubhater/vapoursynth-median/";

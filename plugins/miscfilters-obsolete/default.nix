@@ -19,6 +19,9 @@ stdenv.mkDerivation rec {
         --replace "dep.get_pkgconfig_variable('libdir')" "get_option('libdir')"
   '';
 
+  doInstallCheck = true;
+  installCheckPhase = vapoursynth.installCheckPhasePluginExistanceCheck vapoursynth "misc";
+
   meta = with lib; {
     description = "A collection of VapourSynth filters that mostly are useful for Avisynth compatibility";
     homepage = "https://github.com/vapoursynth/vs-miscfilters-obsolete";

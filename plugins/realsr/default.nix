@@ -43,6 +43,9 @@ stdenv.mkDerivation rec {
   mv $NIX_BUILD_TOP/mmm/* $out/lib/vapoursynth/models
   '';
 
+  doInstallCheck = true;
+  installCheckPhase = vapoursynth.installCheckPhasePluginExistanceCheck vapoursynth "rsnv";
+
   meta = with lib; {
     description = "RealSR super resolution for VapourSynth";
     homepage = "https://github.com/Kiyamou/VapourSynth-RealSR-ncnn-Vulkan";

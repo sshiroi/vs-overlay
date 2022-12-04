@@ -21,6 +21,9 @@ stdenv.mkDerivation rec {
   cp libDehazingCE.so $out/lib/vapoursynth
   '';
 
+  doInstallCheck = true;
+  installCheckPhase = vapoursynth.installCheckPhasePluginExistanceCheck vapoursynth "dhce";
+
   meta = with lib; {
     description = "Dehazing plugin for VapourSynth, based on contrast enhancement.";
     homepage = "https://github.com/Kiyamou/VapourSynth-DehazingCE";

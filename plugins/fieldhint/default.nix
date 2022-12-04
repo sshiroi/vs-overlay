@@ -16,10 +16,13 @@ stdenv.mkDerivation rec {
     sha256 = "sha256-c0/59NQDINM1WnkcUMB6ItxgRA+OV5dEn6BxFG7UQmg=";
   };
 
+  doInstallCheck = true;
+  installCheckPhase = vapoursynth.installCheckPhasePluginExistanceCheck vapoursynth "fh";
+
   meta = with lib; {
     description = "FieldHint creates new frames by copying the top and bottom fields from arbitrary frames chosen by the user.";
     homepage = "https://github.com/dubhater/vapoursynth-fieldhint";
-    license = licenses.unfree;#no license
+    license = licenses.gpl2;
     maintainers = with maintainers; [ ];
     platforms = platforms.all;
   };

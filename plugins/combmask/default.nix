@@ -34,6 +34,9 @@ stdenv.mkDerivation rec {
   nativeBuildInputs = [ pkg-config which ];
   buildInputs = [ vapoursynth ];
 
+  doInstallCheck = true;
+  installCheckPhase = vapoursynth.installCheckPhasePluginExistanceCheck vapoursynth "comb";
+
   meta = with lib; {
     description = "A comb mask create filter for VapourSynth";
     homepage = "https://github.com/chikuzen/CombMask";

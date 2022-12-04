@@ -19,6 +19,9 @@ stdenv.mkDerivation rec {
         --replace "vapoursynth_dep.get_pkgconfig_variable('libdir')" "get_option('libdir')"
   '';
 
+  doInstallCheck = true;
+  installCheckPhase = vapoursynth.installCheckPhasePluginExistanceCheck vapoursynth "sub";
+
   meta = with lib; {
     description = "Subtitle plugin for VapourSynth based on libass";
     homepage = "https://github.com/vapoursynth/subtext";

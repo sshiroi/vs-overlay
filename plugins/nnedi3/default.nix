@@ -16,6 +16,9 @@ stdenv.mkDerivation rec {
   nativeBuildInputs = [ pkg-config autoreconfHook ];
   buildInputs = [ vapoursynth yasm ];
 
+  doInstallCheck = true;
+  installCheckPhase = vapoursynth.installCheckPhasePluginExistanceCheck vapoursynth "nnedi3";
+
   meta = with lib; {
     description = "nnedi3 filter for VapourSynth";
     homepage = "https://github.com/dubhater/vapoursynth-nnedi3";

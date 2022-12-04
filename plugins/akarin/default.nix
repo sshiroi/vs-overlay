@@ -2,13 +2,13 @@
 
 stdenv.mkDerivation rec {
   pname = "akarin";
-  version = "0.94";
+  version = "0.96";
 
   src = fetchFromGitHub {
     owner = "AkarinVS";
     repo = "vapoursynth-plugin";
     rev = "v${version}";
-    sha256 = "sha256-oExdp3L4Jf13NUxV/sfX7Ff4gWzy1SMOKBxKDyFnAss=";
+     sha256 = "sha256-bpm67iA2rHVPcIZNEcsPpfHxxAvmPPhr1iMcMAvbLjU=";
   };
 
   nativeBuildInputs = [ meson pkg-config ninja ];
@@ -18,6 +18,9 @@ stdenv.mkDerivation rec {
     substituteInPlace meson.build \
         --replace "vapoursynth_dep.get_pkgconfig_variable('libdir')" "get_option('libdir')"
   '';
+
+  doInstallCheck = true;
+  installCheckPhase = vapoursynth.installCheckPhasePluginExistanceCheck vapoursynth "akarin";
 
   meta = with lib; {
     description = "AkarinVS's vapoursynth-plugin";

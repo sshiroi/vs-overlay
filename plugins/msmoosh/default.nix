@@ -16,6 +16,9 @@ stdenv.mkDerivation rec {
   nativeBuildInputs = [ pkg-config autoreconfHook ];
   buildInputs = [ vapoursynth ];
 
+  doInstallCheck = true;
+  installCheckPhase = vapoursynth.installCheckPhasePluginExistanceCheck vapoursynth "msmoosh";
+
   meta = with lib; {
     description = "A VapourSynth plugin providing MSharpen and MSmooth";
     homepage = "https://github.com/dubhater/vapoursynth-msmoosh";

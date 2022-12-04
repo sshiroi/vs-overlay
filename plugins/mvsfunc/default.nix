@@ -2,13 +2,13 @@
 
 buildPythonPackage rec {
   pname = "mvsfunc";
-  version = "10";
+  version = "unstable-2022-11-27";
 
   src = fetchFromGitHub {
     owner = "HomeOfVapourSynthEvolution";
     repo = pname;
-    rev = "r${version}";
-    sha256 = "sha256-J68NMBE3MdAd9P0UJH32o0YwQx+7I5+13j8Jc5rbQtc=";
+    rev = "f3167b8a2789ea1527e5249b02906420c95f2c7b";
+    sha256 = "sha256-ftfL0/SsCxfSS/IDvg45XTWbJAhlSwCu5Po/pEVqQJc=";
   };
 
   propagatedBuildInputs = with vapoursynthPlugins; [
@@ -16,10 +16,9 @@ buildPythonPackage rec {
     fmtconv
   ];
 
-  format = "other";
-
-  installPhase = ''
-    install -D mvsfunc.py $out/${python.sitePackages}/mvsfunc.py
+  postPatch = ''
+    substituteInPlace requirements.txt \
+        --replace "VapourSynth>=45" "" \
   '';
 
   checkInputs = [ (vapoursynth.withPlugins propagatedBuildInputs) ];

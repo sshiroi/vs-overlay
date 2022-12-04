@@ -19,6 +19,9 @@ stdenv.mkDerivation rec {
         --replace "vapoursynth_dep.get_pkgconfig_variable('libdir')" "get_option('libdir')"
   '';
 
+  doInstallCheck = true;
+  installCheckPhase = vapoursynth.installCheckPhasePluginExistanceCheck vapoursynth "ocr";
+
   meta = with lib; {
     description = "OCR plugin for VapourSynth";
     homepage = "https://github.com/vapoursynth/vs-ocr";

@@ -17,6 +17,9 @@ stdenv.mkDerivation {
   nativeBuildInputs = [ pkg-config which autoreconfHook ];
   buildInputs = [ vapoursynth ];
 
+  doInstallCheck = true;
+  installCheckPhase = vapoursynth.installCheckPhasePluginExistanceCheck vapoursynth "chkdr";
+
   meta = with lib; {
     description = "realistic film grain";
     homepage = "https://github.com/EleonoreMizo/chickendream";

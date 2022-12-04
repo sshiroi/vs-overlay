@@ -18,6 +18,9 @@ stdenv.mkDerivation rec {
   nativeBuildInputs = [ autoreconfHook ];
   buildInputs = [ vapoursynth ];
 
+  doInstallCheck = true;
+  installCheckPhase = vapoursynth.installCheckPhasePluginExistanceCheck vapoursynth "fmtc";
+
   meta = with lib; {
     description = "Format conversion tools for VapourSynth";
     homepage = "https://github.com/EleonoreMizo/fmtconv";

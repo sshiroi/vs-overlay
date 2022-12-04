@@ -14,6 +14,9 @@ stdenv.mkDerivation rec {
   nativeBuildInputs = [ meson ninja pkg-config ];
   buildInputs = [ vapoursynth ];
 
+  doInstallCheck = true;
+  installCheckPhase = vapoursynth.installCheckPhasePluginExistanceCheck vapoursynth "bezier";
+
   meta = with lib; {
     description = "A bézier curve plugin for VapourSynth";
     homepage = "https://github.com/kewenyu/VapourSynth-BezierCurve";

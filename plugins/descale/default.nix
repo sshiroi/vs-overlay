@@ -3,13 +3,13 @@
 # required to make python.buildEnv use descale’s python module
 python.pkgs.toPythonModule (stdenv.mkDerivation rec {
   pname = "vapoursynth-descale";
-  version = "6";
+  version = "8";
 
   src = fetchFromGitHub {
     owner = "Irrational-Encoding-Wizardry";
     repo = pname;
     rev = "r${version}";
-    sha256 = "093dk125y4gacvhrh10x1i5g2qbsjl4spz74gjjm7xbvrvi1sc72";
+    sha256 = "sha256-dobooNxoDH1MBQtycfiZTE3xy7j5fCGhD9cnPGGZocc=";
   };
 
   nativeBuildInputs = [ meson ninja pkg-config ];
@@ -23,6 +23,9 @@ python.pkgs.toPythonModule (stdenv.mkDerivation rec {
   postInstall = ''
     install -D ../descale.py $out/${python.sitePackages}/descale.py
   '';
+
+  doInstallCheck = true;
+  installCheckPhase = vapoursynth.installCheckPhasePluginExistanceCheck vapoursynth "descale";
 
   meta = with lib; {
     description = "VapourSynth plugin to undo upscaling";

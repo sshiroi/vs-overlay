@@ -16,6 +16,9 @@ stdenv.mkDerivation rec {
   nativeBuildInputs = [ pkg-config autoreconfHook ];
   buildInputs = [ vapoursynth ];
 
+  doInstallCheck = true;
+  installCheckPhase = vapoursynth.installCheckPhasePluginExistanceCheck vapoursynth "flux";
+
   meta = with lib; {
     description = "A vapoursynth filter plugin for smoothing of fluctuations";
     homepage = "https://github.com/dubhater/vapoursynth-fluxsmooth";

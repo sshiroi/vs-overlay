@@ -19,6 +19,9 @@ stdenv.mkDerivation rec {
   cp libdotkill.so $out/lib/vapoursynth/libdotkill.so
   '';
 
+  doInstallCheck = true;
+  installCheckPhase = vapoursynth.installCheckPhasePluginExistanceCheck vapoursynth "dotkill";
+
   meta = with lib; {
     description = "Spatio-temporal dotcrawl and rainbow remover for VapourSynth";
     homepage = "https://github.com/myrsloik/DotKill";

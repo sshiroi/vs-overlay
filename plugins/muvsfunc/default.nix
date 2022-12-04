@@ -9,13 +9,13 @@ let
 in
 buildPythonPackage rec {
   pname = "muvsfunc";
-  version = "unstable-2020-09-09";
+  version = "unstable-2022-11-28";
 
   src = fetchFromGitHub {
     owner = "WolframRhodium";
     repo = pname;
-    rev = "5b5f245f090b6a4de7910ae6168b3ef0e28d2c70";
-    sha256 = "1yyqdmlsvz5p07bvfkf48mggz6cdk199ai2pr2apvgcr2pchxc90";
+    rev = "428c42f2137c2b51a20ceb2438b61d7b011cc9ba";
+    sha256 = "sha256-MOKyNzUBrwuRkcKtW5KxphmpXJgdWBpMRiFUtqsFOMI=";
   };
 
   propagatedBuildInputs = [

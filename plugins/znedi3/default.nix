@@ -40,6 +40,9 @@ stdenv.mkDerivation rec {
     install -D nnedi3_weights.bin $out/share/znedi3/nnedi3_weights.bin
   '';
 
+  doInstallCheck = true;
+  installCheckPhase = vapoursynth.installCheckPhasePluginExistanceCheck vapoursynth "znedi3";
+
   meta = with lib; {
     description = "A CPU optimised nnedi3 filter for VapourSynth";
     homepage = "https://github.com/sekrit-twc/znedi3";

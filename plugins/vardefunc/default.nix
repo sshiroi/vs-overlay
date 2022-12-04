@@ -9,17 +9,29 @@ let
     nnedi3cl
     scxvid
     wwxd
+    d2vsource
   ];
-in
-buildPythonPackage rec {
-  pname = "vardefunc";
-  version = "1.1.4";
+pytimeconv = buildPythonPackage rec {
+  pname = "pytimeconv";
+  version = "0.0.2";
 
   src = fetchFromGitHub {
     owner = "Ichunjo";
     repo = pname;
-    rev = "v${version}";
-    sha256 = "0bkchcshxmfcfbqapw367y3cfj1rdz78a55fkcvznvy61fhqvzl7";
+    rev = "${version}";
+    sha256 = "sha256-qb3EvstohPBBZYkJDVh+TpK2lNVpjK+wGQTMuZoxl9w=";
+  };
+};
+in
+buildPythonPackage rec {
+  pname = "vardefunc";
+  version = "0.7.2";
+
+  src = fetchFromGitHub {
+    owner = "Ichunjo";
+    repo = pname;
+    rev = "${version}";
+    sha256 = "sha256-8bWdC9JD4WufcbvBnw0o8Lws9qZKOV3PYOT3lTSJsvA=";
   };
 
   propagatedBuildInputs = (with vapoursynthPlugins; [
@@ -27,14 +39,16 @@ buildPythonPackage rec {
     havsfunc
     lvsfunc
     vsutil
+    pytimeconv
   ]) ++ propagatedBinaryPlugins;
 
   postPatch = ''
     substituteInPlace requirements.txt \
-        --replace "VapourSynth>=51" ""
+        --replace "VapourSynth>=59" ""
   '';
 
-  checkInputs = [ (vapoursynth.withPlugins propagatedBinaryPlugins) ];
+## todo prope
+  checkInputs = [ (vapoursynth.withPlugins (propagatedBinaryPlugins ++ [vapoursynthPlugins.fmtconv vapoursynthPlugins.descale])) ];
   pythonImportsCheck = [ "vardefunc" ];
 
   meta = with lib; {

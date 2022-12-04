@@ -18,6 +18,9 @@ stdenv.mkDerivation rec {
   nativeBuildInputs = [ which ];
   buildInputs = [ vapoursynth ];
 
+  doInstallCheck = true;
+  installCheckPhase = vapoursynth.installCheckPhasePluginExistanceCheck vapoursynth "tnlm";
+
   meta = with lib; {
     description = "An implementation of the NL-means denoising algorithm";
     homepage = "https://github.com/VFR-maniac/VapourSynth-TNLMeans";
