@@ -16,6 +16,9 @@ stdenv.mkDerivation rec {
   nativeBuildInputs = [ meson cmake ninja pkg-config ];
   buildInputs = [ vapoursynth ];
 
+  doInstallCheck = true;
+  installCheckPhase = vapoursynth.installCheckPhasePluginExistanceCheck vapoursynth "vfrtocfr";
+
   meta = with lib; {
     description = "Converts Variable Frame Rate (VFR) video to a Constant Frame Rate (CFR) video through the use of Matroska Version 2 Timecodes.";
     homepage = "https://github.com/Irrational-Encoding-Wizardry/Vapoursynth-VFRToCFR";

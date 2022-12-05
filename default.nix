@@ -150,9 +150,9 @@ if fnd == False:
     lghost = prev.callPackage ./plugins/lghost { };
     bestsource = prev.callPackage ./plugins/bestsource { };
     akarin = prev.callPackage ./plugins/akarin { };
-    #bestaudiosource = prev.callPackage ./plugins/bestaudiosource { };
     cas = prev.callPackage ./plugins/cas { };
     ctmf = prev.callPackage ./plugins/ctmf { };
+    tcolormask = prev.callPackage ./plugins/tcolormask { };
     dctfilter = prev.callPackage ./plugins/dctfilter { };
     dfttest = prev.callPackage ./plugins/dfttest { };
     eedi2 = prev.callPackage ./plugins/eedi2 { };
@@ -238,6 +238,8 @@ if fnd == False:
 
     #single file python stuff
     Vine = callPythonPackage ./plugins/Vine { };
+    atomchtools = callPythonPackage ./plugins/atomchtools { };
+    cooldegrain = callPythonPackage ./plugins/atomchtools/cooldegrain.nix { };
     Oyster = callPythonPackage ./plugins/Oyster { };
   };
 

@@ -1,5 +1,7 @@
-{ lib, stdenv, fetchFromGitHub, meson, ninja, pkg-config, vapoursynth, python }:
-
+{ lib, stdenv, fetchFromGitHub, meson, ninja, pkg-config, vapoursynth }:
+let
+  python = vapoursynth.python3;
+in
 # required to make python.buildEnv use descale’s python module
 python.pkgs.toPythonModule (stdenv.mkDerivation rec {
   pname = "vapoursynth-descale";
