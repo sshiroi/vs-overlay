@@ -3,6 +3,7 @@
 stdenv.mkDerivation rec {
   pname = "vapoursynth-beziercurve";
   version = "3";
+  #meson still says 2
 
   src = fetchFromGitHub {
     owner = "kewenyu";

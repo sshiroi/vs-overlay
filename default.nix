@@ -94,7 +94,6 @@ if fnd == False:
     combmask = prev.callPackage ./plugins/combmask { };
     continuityfixer = prev.callPackage ./plugins/continuityfixer { };
     d2vsource = prev.callPackage ./plugins/d2vsource { };
-    descale = prev.callPackage ./plugins/descale { };
     dotkill = prev.callPackage ./plugins/dotkill { };
     f3kdb = prev.callPackage ./plugins/f3kdb { };
     ffms2 = prev.ffms;
@@ -134,6 +133,12 @@ if fnd == False:
     realsr = prev.callPackage ./plugins/realsr { ncnn = old_ncnn; glslang = old_glslang; };
     fieldhint = prev.callPackage ./plugins/fieldhint { };
     bdngsp = prev.callPackage ./plugins/bdngsp { };
+    vstrt = prev.callPackage ./plugins/vstrt { };
+
+
+    #multi python binary stuff
+    descale = prev.callPackage ./plugins/descale { };
+    ccd = prev.callPackage ./plugins/ccd { };
 
 
     #meson lto
@@ -173,7 +178,9 @@ if fnd == False:
     tdeintmod = prev.callPackage ./plugins/tdeintmod { };
     vivtc = prev.callPackage ./plugins/vivtc { };
     vsrawsource = prev.callPackage ./plugins/vsrawsource { };
-    vstrt = prev.callPackage ./plugins/vstrt { };
+    dpid = prev.callPackage ./plugins/dpid { };
+    fftspectrum = prev.callPackage ./plugins/fftspectrum { };
+    deblockpp7 = prev.callPackage ./plugins/deblockpp7 { };
 
 
 
@@ -189,6 +196,12 @@ if fnd == False:
     temporalsoften2 = prev.callPackage ./plugins/temporalsoften2 { };
     motionmask = prev.callPackage ./plugins/motionmask { };
     minideen = prev.callPackage ./plugins/minideen { };
+    cmedian = prev.callPackage ./plugins/cmedian { };
+    tcomb = prev.callPackage ./plugins/tcomb { };
+    dedot = prev.callPackage ./plugins/dedot { };
+    matchhistogram = prev.callPackage ./plugins/matchhistogram { };
+    smoothuv = prev.callPackage ./plugins/smoothuv { };
+    frfun7 = prev.callPackage ./plugins/frfun7 { };
 
     #cmake
     dhce = prev.callPackage ./plugins/dhce { };
@@ -196,18 +209,26 @@ if fnd == False:
 
     #automake
     cnr2 = prev.callPackage ./plugins/cnr2 { };
+    degrainmedian = prev.callPackage ./plugins/degrainmedian { };
     colorbars = prev.callPackage ./plugins/colorbars { };
     ssiq = prev.callPackage ./plugins/ssiq { };
     histogram = prev.callPackage ./plugins/histogram { };
+    tonemap = prev.callPackage ./plugins/tonemap { };
+
+    #Gnumakefile + diy ./configure
+    vaguedenoiser = prev.callPackage ./plugins/vaguedenoiser { };
+    IT = prev.callPackage ./plugins/IT { };
 
     #weird configure
-    IT = prev.callPackage ./plugins/IT { };
     ReduceFlicker = prev.callPackage ./plugins/ReduceFlicker { };
 
 
     #manual compile
     wwxd = prev.callPackage ./plugins/wwxd { };
     edgefixer = prev.callPackage ./plugins/edgefixer { };
+    surfaceblur = prev.callPackage ./plugins/surfaceblur { };
+    arearesize = prev.callPackage ./plugins/arearesize { };
+
 
     #not a plugin rather a library
     vapoursynth-plusplus = prev.callPackage ./plugins/vapoursynth-plusplus { };
@@ -238,9 +259,9 @@ if fnd == False:
     vs-denoise = callPythonPackage ./plugins/vs-denoise { };
     vs-aa = callPythonPackage ./plugins/vs-aa { inherit filter_python_plugins;  };
     vs-scale = callPythonPackage ./plugins/vs-scale { };
-
     hysteria = callPythonPackage ./plugins/hysteria { };
 
+    #*func
     awsmfunc = callPythonPackage ./plugins/awsmfunc { };
     fvsfunc = callPythonPackage ./plugins/fvsfunc { };
     havsfunc = callPythonPackage ./plugins/havsfunc { inherit filter_python_plugins; };
@@ -259,6 +280,9 @@ if fnd == False:
     Oyster = callPythonPackage ./plugins/Oyster { };
     astdr = callPythonPackage ./plugins/astdr { };
     dfmderainbow = callPythonPackage ./plugins/dfmderainbow { };
+    maskdetail = callPythonPackage ./plugins/maskdetail { };
+    xaa = callPythonPackage ./plugins/xaa { };
+    wss = callPythonPackage ./plugins/wss { };
 
     #single file python gist
     finedehalo = callPythonPackage ./plugins/finedehalo { };

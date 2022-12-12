@@ -2,13 +2,14 @@
 
 stdenv.mkDerivation rec {
   pname = "vapoursynth-fillborders";
-  version = "2";
+  #version = ">2";
+  version = "unstable-2022-12-12";
 
   src = fetchFromGitHub {
     owner = "dubhater";
     repo = pname;
-    rev = "v${version}";
-    sha256 = "0c3y24796km382i6bn2ixqc6yfb87ipclvgp20b7h9rhg8sfhf9i";
+    rev = "78fe68044fe3414ce8061bf811a235e29c8f7d9d";
+    sha256 = "sha256-mAeFVG9Mi7AIubRdakhJJIdRtXmT0b5YXpEWp4me6uI=";
   };
 
   nativeBuildInputs = [ meson ninja pkg-config ];

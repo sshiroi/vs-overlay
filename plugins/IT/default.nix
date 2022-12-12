@@ -11,8 +11,6 @@ stdenv.mkDerivation rec {
     sha256 = "sha256-bzJyy0bssw4FV1TTPPDikxwDZ9ycTx5o6JuN3KP3Jws=";
   };
 
-  configureFlags = [ "--libdir=$(out)/lib/vapoursynth" ];
-
   nativeBuildInputs = [ pkg-config which ];
   buildInputs = [ vapoursynth ];
 

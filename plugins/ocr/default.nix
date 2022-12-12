@@ -2,7 +2,7 @@
 
 stdenv.mkDerivation rec {
   pname = "vs-ocr";
-  version = "unstable-2021-09-26";
+  version = "unstable-2022-12-12";
 
   src = fetchFromGitHub {
     owner = "vapoursynth";
