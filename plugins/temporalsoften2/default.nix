@@ -11,7 +11,7 @@ stdenv.mkDerivation rec {
   };
 
   patches = [
-    # handle fftw3f_threads dependency
+    # security
     (fetchpatch {
       url = "https://github.com/dubhater/vapoursynth-temporalsoften2/commit/a133670676a311dde31b0eb1a771bbd94ffb1235.diff";
       sha256 = "sha256-xyAl4aWfLYKdcC/Z5zJUaC6HNewOFDqV6j8J8fSlrkY=";

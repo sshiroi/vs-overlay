@@ -21,7 +21,7 @@ stdenv.mkDerivation rec {
   meta = with lib; {
     description = "temporal denoising filter";
     homepage = "https://github.com/dubhater/vapoursynth-temporalmedian";
-    license = licenses.unfree; # no license
+    license = licenses.isc;
     maintainers = with maintainers; [ ];
     platforms = platforms.all;
   };

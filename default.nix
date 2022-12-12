@@ -173,6 +173,7 @@ if fnd == False:
     tdeintmod = prev.callPackage ./plugins/tdeintmod { };
     vivtc = prev.callPackage ./plugins/vivtc { };
     vsrawsource = prev.callPackage ./plugins/vsrawsource { };
+    vstrt = prev.callPackage ./plugins/vstrt { };
 
 
 
@@ -186,6 +187,8 @@ if fnd == False:
     vcm = prev.callPackage ./plugins/vcm { };
     fix-telecined-fades = prev.callPackage ./plugins/fix-telecined-fades { };
     temporalsoften2 = prev.callPackage ./plugins/temporalsoften2 { };
+    motionmask = prev.callPackage ./plugins/motionmask { };
+    minideen = prev.callPackage ./plugins/minideen { };
 
     #cmake
     dhce = prev.callPackage ./plugins/dhce { };
@@ -254,10 +257,11 @@ if fnd == False:
     atomchtools = callPythonPackage ./plugins/atomchtools { };
     cooldegrain = callPythonPackage ./plugins/atomchtools/cooldegrain.nix { };
     Oyster = callPythonPackage ./plugins/Oyster { };
+    astdr = callPythonPackage ./plugins/astdr { };
+    dfmderainbow = callPythonPackage ./plugins/dfmderainbow { };
 
     #single file python gist
     finedehalo = callPythonPackage ./plugins/finedehalo { };
-
   };
 
   getnative = callPythonPackage ./tools/getnative { };
@@ -286,5 +290,11 @@ if fnd == False:
         --prefix PYTHONPATH : ${vap}/${vap.python3.sitePackages} \
         --prefix LD_LIBRARY_PATH : ${vap}/lib
   '';
+
+  pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [
+    (python-final: python-prev: {
+      styler00dollar-vsgan-trt = callPythonPackage ./tools/styler00dollar-vsgan-trt { };
+    })
+  ];
 
 }
