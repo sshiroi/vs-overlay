@@ -79,6 +79,9 @@ if fnd == False:
     passthru = (old.passthru) // (rec {  installCheckPhasePluginExistanceCheck = final.vapoursynthInstallCheckPhase; } );
   });
 
+
+  #todo: look for "getPluginById" in source and  find dependecyies of binary plugins to binary plugins
+
   vapoursynthPlugins = prev.recurseIntoAttrs {
     adaptivegrain = prev.callPackage ./plugins/adaptivegrain { };
     autocrop = prev.callPackage ./plugins/autocrop { };
@@ -136,7 +139,9 @@ if fnd == False:
     #meson lto
     tcanny = prev.callPackage ./plugins/tcanny { };
     bwdif = prev.callPackage ./plugins/bwdif { };
+    ttempsmooth = prev.callPackage ./plugins/ttempsmooth { };
     addgrain = prev.callPackage ./plugins/addgrain { };
+    readmpls = prev.callPackage ./plugins/readmpls { };
 
 
     #meson subsinplace other
@@ -162,12 +167,10 @@ if fnd == False:
     nnedi3cl = prev.callPackage ./plugins/nnedi3cl { };
     ocr = prev.callPackage ./plugins/ocr { };
     placebo = prev.callPackage ./plugins/placebo { };
-    readmpls = prev.callPackage ./plugins/readmpls { };
     removegrain = prev.callPackage ./plugins/removegrain { };
     retinex = prev.callPackage ./plugins/retinex { };
     subtext = prev.callPackage ./plugins/subtext { };
     tdeintmod = prev.callPackage ./plugins/tdeintmod { };
-    ttempsmooth = prev.callPackage ./plugins/ttempsmooth { };
     vivtc = prev.callPackage ./plugins/vivtc { };
     vsrawsource = prev.callPackage ./plugins/vsrawsource { };
 
@@ -175,10 +178,14 @@ if fnd == False:
 
     #meson mesonFlags
     tedgemask = prev.callPackage ./plugins/tedgemask { };
+    decross = prev.callPackage ./plugins/decross { };
+    asharp = prev.callPackage ./plugins/asharp { };
     temporalmedian = prev.callPackage ./plugins/temporalmedian { };
     tbilateral = prev.callPackage ./plugins/tbilateral { };
     vfrtocfr = prev.callPackage ./plugins/vfrtocfr { };
+    vcm = prev.callPackage ./plugins/vcm { };
     fix-telecined-fades = prev.callPackage ./plugins/fix-telecined-fades { };
+    temporalsoften2 = prev.callPackage ./plugins/temporalsoften2 { };
 
     #cmake
     dhce = prev.callPackage ./plugins/dhce { };
@@ -187,9 +194,12 @@ if fnd == False:
     #automake
     cnr2 = prev.callPackage ./plugins/cnr2 { };
     colorbars = prev.callPackage ./plugins/colorbars { };
-    IT = prev.callPackage ./plugins/IT { };
     ssiq = prev.callPackage ./plugins/ssiq { };
     histogram = prev.callPackage ./plugins/histogram { };
+
+    #weird configure
+    IT = prev.callPackage ./plugins/IT { };
+    ReduceFlicker = prev.callPackage ./plugins/ReduceFlicker { };
 
 
     #manual compile
@@ -204,7 +214,6 @@ if fnd == False:
     adjust = callPythonPackage ./plugins/adjust { };
     debandshit = callPythonPackage ./plugins/debandshit { };
     edi_rpow2 = callPythonPackage ./plugins/edi_rpow2 { };
-    finedehalo = callPythonPackage ./plugins/finedehalo { };
     mt_lutspa = callPythonPackage ./plugins/mt_lutspa { };
     nnedi3_resample = callPythonPackage ./plugins/nnedi3_resample { };
     nnedi3_rpow2 = callPythonPackage ./plugins/nnedi3_rpow2 { };
@@ -214,6 +223,7 @@ if fnd == False:
     vsutil = callPythonPackage ./plugins/vsutil { };
 
     vs-dfft = callPythonPackage ./plugins/vs-dfft { };
+
     #Irrational-Encoding-Wizardry
     vs-rgtools = callPythonPackage ./plugins/vs-rgtools { };
     vs-exprtools = callPythonPackage ./plugins/vs-exprtools { };
@@ -221,6 +231,8 @@ if fnd == False:
     vs-parsedvd = callPythonPackage ./plugins/vs-parsedvd { };
     vs-tools = callPythonPackage ./plugins/vs-tools { };
     vsmask = callPythonPackage ./plugins/vsmask { };
+    vs-dehalo = callPythonPackage ./plugins/vs-dehalo { };
+    vs-denoise = callPythonPackage ./plugins/vs-denoise { };
     vs-aa = callPythonPackage ./plugins/vs-aa { inherit filter_python_plugins;  };
     vs-scale = callPythonPackage ./plugins/vs-scale { };
 
@@ -238,9 +250,14 @@ if fnd == False:
 
     #single file python stuff
     Vine = callPythonPackage ./plugins/Vine { };
+    Plum = callPythonPackage ./plugins/Plum { };
     atomchtools = callPythonPackage ./plugins/atomchtools { };
     cooldegrain = callPythonPackage ./plugins/atomchtools/cooldegrain.nix { };
     Oyster = callPythonPackage ./plugins/Oyster { };
+
+    #single file python gist
+    finedehalo = callPythonPackage ./plugins/finedehalo { };
+
   };
 
   getnative = callPythonPackage ./tools/getnative { };

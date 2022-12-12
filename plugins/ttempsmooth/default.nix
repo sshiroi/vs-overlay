@@ -2,21 +2,23 @@
 
 stdenv.mkDerivation rec {
   pname = "VapourSynth-TTempSmooth";
-  version = "3.1";
+  version = "4.1";
 
   src = fetchFromGitHub {
     owner = "HomeOfVapourSynthEvolution";
     repo = pname;
     rev = "r${version}";
-    sha256 = "0h7wxqr3kpq92pr2kbzjljlkg57l1a40w662p322l4r7587x4zdz";
+    sha256 = "sha256-T+QudM6FUKLkEEwPiHVkDXTkS1SKB/QnWf3cMx85dUA=";
   };
 
   nativeBuildInputs = [ meson ninja pkg-config ];
   buildInputs = [ vapoursynth ];
 
   postPatch = ''
-    substituteInPlace meson.build \
-        --replace "vapoursynth_dep.get_pkgconfig_variable('libdir')" "get_option('libdir')"
+      substituteInPlace meson.build \
+        --replace "vapoursynth_dep.get_variable(pkgconfig: 'libdir')" "get_option('libdir')"
+      substituteInPlace meson.build \
+          --replace "b_lto=true" "b_lto=false"
   '';
 
   doInstallCheck = true;

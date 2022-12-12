@@ -2,8 +2,8 @@
 
 buildPythonPackage rec {
   pname = "vsTAAmbk";
-  #version = "0.8.1";
-  version = "unstable-22-11-26";
+  #version = ">0.8.1";
+  version = "unstable-22-12-11";
 
   src = fetchFromGitHub {
     owner = "HomeOfVapourSynthEvolution";
@@ -15,11 +15,6 @@ buildPythonPackage rec {
   };
 
   patches = [
- #   (fetchpatch {
- #     name = "Remove-unnecessary-format-registration.patch";
- #     url = "https://github.com/HomeOfVapourSynthEvolution/vsTAAmbk/commit/c707f5a8178b80e3ddc4556b69dd36c0d1928166.patch";
- #     sha256 = "sha256-zLSr5POLWvAsHqTFbQOsLQnPpPRl/KjiN/tCr+zIMVg=";
- #   })
     ./0001-Skip-OpenCL-test.patch
   ];
 

@@ -2,13 +2,18 @@
 
 stdenv.mkDerivation rec {
   pname = "znedi3";
+  ##version = ">2.1";
+  #version = "unstable-2022-12-11";
   version = "2";
+  #more changes needed in buildscipt to update
 
   src = fetchFromGitHub {
     owner = "sekrit-twc";
     repo = pname;
     rev = "r${version}";
     sha256 = "1p6563s1b52qisvvwid047jd376sz737lggwfhanci0sqxxphhrb";
+    #rev = "4e88a5d0c805b066ae84b29e55b648fb336cb2a4";
+    #sha256 = "sha256-OSfliEuVka/tU+KobqTFmL6UTHzPRIm0E7cmp++boVc=";
     fetchSubmodules = true;
   };
 

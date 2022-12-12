@@ -7,15 +7,15 @@ let
 in
 buildPythonApplication rec {
   pname = "getnative";
-  version = "3.0.2";
+  version = "3.2.1";
 
   src = fetchFromGitHub {
     owner = "Infiziert90";
     repo = pname;
     # The version in setup.py is 3.0.2, but there is no tag for it
     # (the tag that GitHub shows as 3.0.2 actually is 3.0.0)
-    rev = "2ae9037adca5ac1f5d747bb32f4dbea30631dc33";
-    sha256 = "sha256-h3M/eRDwJKaPRedISxW6lzBw5UT20hTLhqmRa4HzQuw=";
+    rev = version;
+    sha256 = "sha256-q9Idu7cj19c4kJ5dHj1stBj7OMsI/LVNol6cT1Dj00o=";
   };
 
   # vapoursynth is not recognised during installation

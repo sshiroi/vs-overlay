@@ -1,0 +1,13 @@
+diff --git a/meson.build b/meson.build
+index bcb1ff2..568e25c 100644
+--- a/meson.build
++++ b/meson.build
+@@ -23,7 +23,7 @@ endif
+ 
+ shared_module('vcmod', sources,
+   dependencies: deps,
+-  #install: true,
++  install: true,
+   #install_dir: install_dir,
+   gnu_symbol_visibility: 'hidden'
+ )
