@@ -1,8 +1,10 @@
-{ lib, vapoursynthPlugins, buildPythonPackage, fetchFromGitHub, python3, vapoursynth }:
-buildPythonPackage rec {
+{ lib, vapoursynthPlugins, mkVapoursynthPythonSetuptools, fetchFromGitHub }:
+
+mkVapoursynthPythonSetuptools rec {
   pname = "vs-denoise";
   #version = "1.2.0";
   version = "unstable-2022-12-10";
+  importname = "vsdenoise";
 
   src = fetchFromGitHub {
     owner = "Irrational-Encoding-Wizardry";
@@ -12,7 +14,7 @@ buildPythonPackage rec {
     sha256 = "sha256-1nBaE5P56dAHpJT849HyZZH8i5BGrXI2uvmf/alZB0c=";
   };
 
-  propagatedBuildInputs = with vapoursynthPlugins; [
+  vs_pythondeps = with vapoursynthPlugins; [
     vs-tools
     vs-kernels
     vs-exprtools
@@ -21,18 +23,9 @@ buildPythonPackage rec {
     vs-scale
   ];
 
-  postPatch = ''
-    substituteInPlace requirements.txt \
-        --replace "VapourSynth>=59" ""
-  '';
+  vs_binarydeps = [];
 
-  propagatedBinaryPlugins = [ ] ++ vapoursynthPlugins.vs-kernels.propagatedBinaryPlugins;
-
-  checkPhase = ''
-    PYTHONPATH=$out/${python3.sitePackages}:$PYTHONPATH
-  '';
-  checkInputs = [ (vapoursynth.withPlugins propagatedBinaryPlugins )  ];
-  pythonImportsCheck = [ "vsdenoise" ];
+  remove_vapoursynth_dep_reqtxt = 59;
 
   meta = with lib; {
     description = "VapourSynth denoising, regression, and motion-compensation functions";

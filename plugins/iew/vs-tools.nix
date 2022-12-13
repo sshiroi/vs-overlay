@@ -1,8 +1,10 @@
-{ lib, vapoursynthPlugins, buildPythonPackage, fetchFromGitHub, python3, vapoursynth, rich }:
-buildPythonPackage rec {
+{ lib, vapoursynthPlugins, mkVapoursynthPythonSetuptools, fetchFromGitHub, rich }:
+
+mkVapoursynthPythonSetuptools rec {
   pname = "vs-tools";
   #version = "1.6.7";
   version = "unstable-2022-12-10";
+  importname = "vstools";
 
   src = fetchFromGitHub {
     owner = "Irrational-Encoding-Wizardry";
@@ -12,20 +14,17 @@ buildPythonPackage rec {
     sha256 = "sha256-tuEX7yFrk4qNnXjIPSn3JQv+FYNA0eg+6he8vVFb748=";
   };
 
-  propagatedBuildInputs = [ vapoursynthPlugins.vsutil rich ];
+  vs_pythondeps =  with vapoursynthPlugins; [ vsutil ];
+  vs_binarydeps = [];
+
+  propagatedBuildInputs = [ rich ];
+
+  remove_vapoursynth_dep_reqtxt = 59;
 
   postPatch = ''
     substituteInPlace requirements.txt \
-        --replace "VapourSynth>=59" ""
-    substituteInPlace requirements.txt \
         --replace "rich>=12.6.0" "rich>=12.4.1"
   '';
-
-  checkPhase = ''
-    PYTHONPATH=$out/${python3.sitePackages}:$PYTHONPATH
-  '';
-  checkInputs = [ (vapoursynth.withPlugins [  ]) ];
-  pythonImportsCheck = [ "vstools" ];
 
 
   meta = with lib; {

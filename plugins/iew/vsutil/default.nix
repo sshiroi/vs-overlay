@@ -1,15 +1,15 @@
-{ lib, buildPythonPackage, fetchFromGitHub, fetchpatch, vapoursynth }:
+{ lib, mkVapoursynthPythonSetuptools, fetchFromGitHub, fetchpatch, vapoursynth }:
 
-buildPythonPackage rec {
+mkVapoursynthPythonSetuptools rec {
   pname = "vsutil";
-  version = "unstable-2022-09-17";
+  version = "unstable-2022-12-13";
+  importname = "vsutil";
 
-  # there are no tests in the pypi tarball
   src = fetchFromGitHub {
     owner = "Irrational-Encoding-Wizardry";
     repo = pname;
-    rev = "ab57bfee61b149ff7824068ac40d5d9544c1c64e";
-    sha256 = "sha256-8CW8CirNRtCuz4BDwW/111pEFsxpLYdeai3j/tp8GtI=";
+    rev = "fc0629e8b3fe691d7493e2a9fbc070890e7e9918";
+    sha256 = "sha256-PrX6BXW6PSzMS3viMEPUTiTUEKmhu44zE/huRzPwIlA=";
   };
 
   patches = [
@@ -19,6 +19,9 @@ buildPythonPackage rec {
     # By default, test failure does not fail the build.
     ./fail-tests.diff
   ];
+
+  vs_binarydeps = [];
+  vs_pythondeps = [];
 
   checkInputs = [ vapoursynth ];
 

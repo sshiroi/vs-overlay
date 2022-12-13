@@ -43,7 +43,6 @@ in rec {
     delogohd = prev.callPackage ./plugins/delogohd { };
     w2xnvk = prev.callPackage ./plugins/w2xnvk { ncnn = common.old_ncnn; glslang = common.old_glslang; };
 
-
     #Gnumakefile + diy ./configure
     vaguedenoiser = prev.callPackage ./plugins/vaguedenoiser { };
     IT = prev.callPackage ./plugins/IT { };
@@ -56,7 +55,6 @@ in rec {
     znedi3 = prev.callPackage ./plugins/znedi3 { };
     realsr = prev.callPackage ./plugins/realsr { ncnn = common.old_ncnn; glslang = common.old_glslang; };
     bilateral = prev.callPackage ./plugins/bilateral { }; # few oddities
-  
 
     #manual compile
     wwxd = prev.callPackage ./plugins/wwxd { };
@@ -66,32 +64,10 @@ in rec {
     autocrop = prev.callPackage ./plugins/autocrop { };
     continuityfixer = prev.callPackage ./plugins/continuityfixer { };
     dotkill = prev.callPackage ./plugins/dotkill { }; # fixx
-
+    planestatsmod = prev.callPackage ./other/planestatsmod.nix { }; # fixx
 
     #not a plugin rather a library
     vapoursynth-plusplus = prev.callPackage ./plugins/vapoursynth-plusplus { };
-
-
-    acsuite = callPythonPackage ./plugins/acsuite { };
-    rekt = callPythonPackage ./plugins/rekt { };
-    vsgan = callPythonPackage ./plugins/vsgan { };
-    vsutil = callPythonPackage ./plugins/vsutil { };
-
-    vs-dfft = callPythonPackage ./plugins/vs-dfft { };
-
-    #Irrational-Encoding-Wizardry
-    vs-rgtools = callPythonPackage ./plugins/vs-rgtools { };
-    vs-exprtools = callPythonPackage ./plugins/vs-exprtools { };
-    vs-kernels = callPythonPackage ./plugins/vs-kernels { };
-    vs-parsedvd = callPythonPackage ./plugins/vs-parsedvd { };
-    vs-tools = callPythonPackage ./plugins/vs-tools { };
-    vsmask = callPythonPackage ./plugins/vsmask { };
-    vs-dehalo = callPythonPackage ./plugins/vs-dehalo { };
-    vs-denoise = callPythonPackage ./plugins/vs-denoise { };
-    vs-aa = callPythonPackage ./plugins/vs-aa { inherit filter_python_plugins;  };
-    vs-scale = callPythonPackage ./plugins/vs-scale { };
-    #TODO: add vs-deband
-
 
     #single file python gist
     finedehalo = callPythonPackage ./plugins/finedehalo { };

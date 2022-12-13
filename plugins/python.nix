@@ -4,6 +4,23 @@ let
   callPythonPackage = common.callPythonPackage;
   filter_python_plugins = common.filter_python_plugins;
 in rec {
+
+    #Irrational-Encoding-Wizardry
+    vs-deband       = callPythonPackage ./iew/vs-deband.nix { };
+    vs-rgtools      = callPythonPackage ./iew/vs-rgtools.nix { };
+    vs-exprtools    = callPythonPackage ./iew/vs-exprtools.nix { };
+    vs-kernels      = callPythonPackage ./iew/vs-kernels.nix { };
+    vs-parsedvd     = callPythonPackage ./iew/vs-parsedvd.nix { };
+    vs-tools        = callPythonPackage ./iew/vs-tools.nix { };
+    vsmask          = callPythonPackage ./iew/vsmask.nix { };
+    vs-dehalo       = callPythonPackage ./iew/vs-dehalo.nix { };
+    vs-denoise      = callPythonPackage ./iew/vs-denoise.nix { };
+    vs-aa           = callPythonPackage ./iew/vs-aa.nix {  };
+    vs-scale        = callPythonPackage ./iew/vs-scale.nix { };
+    vsutil          = callPythonPackage ./iew/vsutil { };
+    vs-dfft         = callPythonPackage ./iew/vs-dfft.nix { };
+    vs-deinterlace  = callPythonPackage ./iew/vs-deinterlace.nix { };
+
     #type other
     fvsfunc         = callPythonPackage ./funcs/fvsfunc.nix { };
     havsfunc        = callPythonPackage ./funcs/havsfunc.nix { };
@@ -26,6 +43,12 @@ in rec {
     nnedi3_resample = callPythonPackage ./funcs/nnedi3_resample.nix { };
     nnedi3_rpow2    = callPythonPackage ./funcs/nnedi3_rpow2.nix { };
     vsTAAmbk        = callPythonPackage ./funcs/vsTAAmbk {  };
+
+    #packages
+    rekt = callPythonPackage ./pypackages/rekt.nix { };
+    acsuite = callPythonPackage ./plugins/acsuite { };
+    vsgan = callPythonPackage ./plugins/vsgan { };
+
 
     #TODO: type normal
     awsmfunc = callPythonPackage ./plugins/awsmfunc { };

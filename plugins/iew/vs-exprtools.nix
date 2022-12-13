@@ -1,7 +1,9 @@
-{ lib, vapoursynthPlugins, buildPythonPackage, fetchFromGitHub, python3, vapoursynth }:
-buildPythonPackage rec {
+{ lib, vapoursynthPlugins, mkVapoursynthPythonSetuptools, fetchFromGitHub }:
+
+mkVapoursynthPythonSetuptools rec {
   pname = "vs-exprtools";
   version = "unstable-2022-11-26";
+  importname = "vsexprtools";
 
   src = fetchFromGitHub {
     owner = "Irrational-Encoding-Wizardry";
@@ -10,16 +12,12 @@ buildPythonPackage rec {
     sha256 = "sha256-p2BEZRuTeHQU9RcGNk+KocjH+67XbmfalRM1BWJSeJI=";
   };
 
-  propagatedBuildInputs = with vapoursynthPlugins; [ vs-tools ];
+  vs_pythondeps = with vapoursynthPlugins; [
+    vs-tools
+  ];
+  vs_binarydeps = [ ];
 
-  postPatch = ''
-    substituteInPlace requirements.txt \
-        --replace "VapourSynth>=59" ""
-  '';
-
-  checkPhase = ''
-    PYTHONPATH=$out/${python3.sitePackages}:$PYTHONPATH
-  '';
+  remove_vapoursynth_dep_reqtxt = 59;
 
   meta = with lib; {
     description = "VapourSynth functions and helpers for writing RPN expressions.";

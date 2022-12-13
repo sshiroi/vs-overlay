@@ -20,7 +20,11 @@ in
   });
 
   mkVapoursynthAutomake = prev.callPackage ./plugins/build-support/automake.nix {};
-  mkVapoursynthPythonSinglefileFunc = common.callPythonPackage ./plugins/build-support/pythonfunc_singlefile.nix { inherit filter_python_plugins; };
+  mkVapoursynthPython = common.callPythonPackage ./plugins/build-support/pythonfunc_singlefile.nix { inherit filter_python_plugins; };
+  mkVapoursynthPythonSinglefileFunc = attrs: final.mkVapoursynthPython ( attrs // { format = "other"; });
+  mkVapoursynthPythonSetuptools = attrs: (final.mkVapoursynthPython) ( attrs // { format = "setuptools"; });
+  mkVapoursynthPythonPyproject  = attrs: (final.mkVapoursynthPython) ( attrs // { format = "pyproject"; });
+
 
 
 
@@ -51,7 +55,7 @@ if fnd == False:
 
   #todo: look for "getPluginById" in source and  find dependecyies of binary plugins to binary plugins
 
-  vapoursynthPlugins = prev.recurseIntoAttrs ((import ./plugins/automake.nix final prev) //(import ./plugins/meson.nix final prev)//(import ./plugins/funcs.nix final prev) // (import ./plugins/other.nix final prev));
+  vapoursynthPlugins = prev.recurseIntoAttrs ((import ./plugins/automake.nix final prev) //(import ./plugins/meson.nix final prev)//(import ./plugins/python.nix final prev) // (import ./plugins/other.nix final prev));
 
   #tools
   getnative = common.callPythonPackage ./tools/getnative { };

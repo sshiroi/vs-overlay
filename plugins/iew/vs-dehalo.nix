@@ -1,7 +1,9 @@
-{ lib, vapoursynthPlugins, buildPythonPackage, fetchFromGitHub, python3, vapoursynth }:
-buildPythonPackage rec {
+{ lib, vapoursynthPlugins, mkVapoursynthPythonSetuptools, fetchFromGitHub }:
+
+mkVapoursynthPythonSetuptools rec {
   pname = "vs-dehalo";
   version = "1.2.0";
+  importname = "vsdehalo";
 
   src = fetchFromGitHub {
     owner = "Irrational-Encoding-Wizardry";
@@ -11,7 +13,7 @@ buildPythonPackage rec {
     sha256 = "sha256-7eRneoY2+jIjzB7mo4bYpIyKlwhjA+ztjVWW8GgJhRg=";
   };
 
-  propagatedBuildInputs = with vapoursynthPlugins; [
+  vs_pythondeps = with vapoursynthPlugins; [
     vsutil
     vs-tools
     vs-kernels
@@ -23,17 +25,9 @@ buildPythonPackage rec {
     vs-denoise
   ];
 
-  postPatch = ''
-    substituteInPlace requirements.txt \
-        --replace "VapourSynth>=60" ""
-  '';
+  vs_binarydeps = [ ];
 
-  checkPhase = ''
-    PYTHONPATH=$out/${python3.sitePackages}:$PYTHONPATH
-  '';
-  checkInputs = [ (vapoursynth.withPlugins [  ]) ];
-  pythonImportsCheck = [ "vsdehalo" ];
-
+  remove_vapoursynth_dep_reqtxt = 60;
 
   meta = with lib; {
     description = "Collection of dehaloing VapourSynth functions";

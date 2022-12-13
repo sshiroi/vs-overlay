@@ -6,9 +6,12 @@
 
   propagatedBuildInputs ? [],
   postPatch ? "",
+  doCheck ? true,
 
   checkPhase ? "",
   checkInputs ? [],
+
+  installPhase ? "",
 
   #custom stuff
   vs_pythondeps,
@@ -19,18 +22,34 @@
   remove_vapoursynth_dep_reqtxt ? 0,
   remove_vapoursynth_dep_setupy ? 0,
 
+  format,
+
   ...
 }@args:
+let
+
+  #https://github.com/NixOS/nixpkgs/blob/nixos-unstable/pkgs/development/libraries/vapoursynth/plugin-interface.nix
+  getRecursivePropagatedBuildInputs = pkgs: lib.flatten
+    (map
+      (pkg: let cleanPropagatedBuildInputs = lib.filter lib.isDerivation pkg.propagatedBuildInputs;
+        in cleanPropagatedBuildInputs ++ (getRecursivePropagatedBuildInputs cleanPropagatedBuildInputs))
+      pkgs);
+
+  deepPlugins = plugins: filter_python_plugins (lib.unique (plugins ++ (getRecursivePropagatedBuildInputs plugins)));
+
+  all_prop = vs_pythondeps ++ vs_binarydeps ++ propagatedBuildInputs;
+
+in
 buildPythonPackage (args // {
-  propagatedBuildInputs = vs_pythondeps ++ vs_binarydeps ++ propagatedBuildInputs;
+  propagatedBuildInputs = all_prop;
 
-  format = "other";
+  format = format;
 
-  installPhase = ''
+  installPhase = if format == "other" then ''
     runHook preInstall
     install -D ${importname}.py $out/${python.sitePackages}/${importname}.py
     runHook postInstall
-  '';
+  '' else installPhase;
 
   postPatch =
   (if remove_vapoursynth_dep_reqtxt != 0 then ''
@@ -39,13 +58,13 @@ buildPythonPackage (args // {
   '' else "") +
   (if remove_vapoursynth_dep_setupy != 0 then ''
     substituteInPlace setup.py \
-        --replace "VapourSynth>=${toString remove_vapoursynth_dep_setupy}" ""
+        --replace 'VapourSynth>=${toString remove_vapoursynth_dep_setupy}' ""
   '' else "") + postPatch;
 
   #TODO: recursion
-  checkInputs = [ (vapoursynth.withPlugins (filter_python_plugins (vs_pythondeps ++ vs_binarydeps ++ propagatedBuildInputs))) ] ++ checkInputs;
-  checkPhase = ''
+  checkInputs = [ (vapoursynth.withPlugins (deepPlugins (all_prop))) ] ++ checkInputs;
+  checkPhase = if !doCheck then "" else ''
     PYTHONPATH=$out/${python.sitePackages}:$PYTHONPATH
   '' + checkPhase;
-  pythonImportsCheck = [ importname ];
+  pythonImportsCheck = if !doCheck then [] else [ importname ];
 })

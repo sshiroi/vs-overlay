@@ -1,7 +1,9 @@
-{ lib, vapoursynthPlugins, buildPythonPackage, fetchFromGitHub, python3, vapoursynth, rich,  filter_python_plugins }:
-buildPythonPackage rec {
+{ lib, vapoursynthPlugins, mkVapoursynthPythonSetuptools, fetchFromGitHub }:
+
+mkVapoursynthPythonSetuptools rec {
   pname = "vs-aa";
   version = "unstable-2022-11-26";
+  importname = "vsaa";
 
   src = fetchFromGitHub {
     owner = "Irrational-Encoding-Wizardry";
@@ -10,7 +12,7 @@ buildPythonPackage rec {
     sha256 = "sha256-YGNvwZcXnLM+5e34RIz092TQsM7Ch1Jr9HQekqb9eGM=";
   };
 
-  propagatedBuildInputs = with vapoursynthPlugins; [
+  vs_pythondeps = with vapoursynthPlugins; [
     vsutil
     vsmask
     vs-kernels
@@ -18,18 +20,9 @@ buildPythonPackage rec {
     vs-rgtools
   ];
 
-  postPatch = ''
-    substituteInPlace requirements.txt \
-        --replace "VapourSynth>=59" ""
-  '';
+  vs_binarydeps = [];
 
-  checkPhase = ''
-    PYTHONPATH=$out/${python3.sitePackages}:$PYTHONPATH
-  '';
-  checkInputs = [ (vapoursynth.withPlugins propagatedBinaryPlugins )  ];
-  pythonImportsCheck = [ "vsaa" ];
-
-  propagatedBinaryPlugins = [] ++ vapoursynthPlugins.vs-kernels.propagatedBinaryPlugins;
+  remove_vapoursynth_dep_reqtxt = 59;
 
   meta = with lib; {
     description = "anti aliasing and scaling functions";

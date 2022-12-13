@@ -1,8 +1,10 @@
-{ lib, vapoursynthPlugins, buildPythonPackage, fetchFromGitHub, python3, vapoursynth }:
-buildPythonPackage rec {
+{ lib, vapoursynthPlugins, mkVapoursynthPythonSetuptools, fetchFromGitHub }:
+
+mkVapoursynthPythonSetuptools rec {
   pname = "vs-scale";
   #version = "1.2.0";
   version = "unstable-2022-11-26";
+  importname = "vsscale";
 
   src = fetchFromGitHub {
     owner = "Irrational-Encoding-Wizardry";
@@ -13,7 +15,7 @@ buildPythonPackage rec {
     sha256 = "sha256-Q4IueAlNcQPKCi97btAHpd8z1ZopaDkoNy1tHKhDhtk=";
   };
 
-  propagatedBuildInputs = with vapoursynthPlugins; [
+  vs_pythondeps = with vapoursynthPlugins; [
     vsutil
     vs-tools
     vs-kernels
@@ -22,20 +24,9 @@ buildPythonPackage rec {
     vs-aa
     vsmask
   ];
+  vs_binarydeps = [];
 
-  postPatch = ''
-    substituteInPlace requirements.txt \
-        --replace "VapourSynth>=59" ""
-  '';
-
-  propagatedBinaryPlugins = [ ] ++ vapoursynthPlugins.vs-kernels.propagatedBinaryPlugins;
-
-  checkPhase = ''
-    PYTHONPATH=$out/${python3.sitePackages}:$PYTHONPATH
-  '';
-  checkInputs = [ (vapoursynth.withPlugins propagatedBinaryPlugins )  ];
-  pythonImportsCheck = [ "vsscale" ];
-
+  remove_vapoursynth_dep_reqtxt = 59;
 
   meta = with lib; {
     description = "Wrappers for scaling and descaling functions.";

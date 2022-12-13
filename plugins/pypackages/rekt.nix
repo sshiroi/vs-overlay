@@ -1,8 +1,9 @@
-{ lib, buildPythonPackage, fetchFromGitHub, vapoursynthPlugins, vapoursynth }:
+{ lib, mkVapoursynthPythonSetuptools, fetchFromGitHub, vapoursynthPlugins }:
 
-buildPythonPackage rec {
+mkVapoursynthPythonSetuptools rec {
   pname = "rekt";
   version = "unstable-2022-12-04";
+  importname = "rekt";
 
   src = fetchFromGitHub {
     owner = "OpusGang";
@@ -11,26 +12,14 @@ buildPythonPackage rec {
     sha256 = "sha256-C9rawTInpeJtIREVDyInQmgm8OZfAq1lA/SyAu/M5bY=";
   };
 
-  # This does not depend on vapoursynth (since this is used from within
-  # vapoursynth).
-  postPatch = ''
-    substituteInPlace setup.py \
-        --replace "'VapourSynth>=57'," ""
-  '';
+  vs_pythondeps = [];
+  vs_binarydeps = [];
+
+  remove_vapoursynth_dep_setupy = 57;
 
   propagatedBuildInputs = with vapoursynthPlugins; [
     vsutil
   ];
-
-  checkInputs = [ vapoursynth ];
-  checkPhase = ''
-    runHook preCheck
-    # This overrides the default setuptools checkPhase that detects tests (that
-    # don’t work) even though this package doesn’t have tests.
-    runHook postCheck
-  '';
-
-  pythonImportsCheck = [ "rekt" ];
 
   meta = with lib; {
     description = "VapourSynth wrapper for Cropping and Stacking clips";
