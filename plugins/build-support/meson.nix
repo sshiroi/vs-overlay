@@ -13,6 +13,9 @@
 
   install_dir_vapoursynth_added_in_meson ? false,#mode a
 
+
+  hovr_disable_lto ? false,
+
   modeb_replace ?  "vapoursynth_dep.get_pkgconfig_variable('libdir')",
   ...
 }@args:
@@ -37,6 +40,15 @@ stdenv.mkDerivation (args // {
 
     substituteInPlace meson.build --replace "${modeb_replace}" "get_option('libdir')"
 
-  '' + postPatch) else postPatch;
+  ''
+  +
+
+  (if hovr_disable_lto then
+    ''
+    substituteInPlace meson.build --replace "b_lto=true" "b_lto=false"
+    ''
+  else "")
+
+  + postPatch) else postPatch;
 
 })

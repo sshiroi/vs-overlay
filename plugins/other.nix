@@ -23,16 +23,6 @@ in rec {
     descale = prev.callPackage ./plugins/descale { };
     ccd = prev.callPackage ./plugins/ccd { };
 
-    #meson lto
-    tcanny = prev.callPackage ./plugins/tcanny { };
-    bwdif = prev.callPackage ./plugins/bwdif { };
-    ttempsmooth = prev.callPackage ./plugins/ttempsmooth { };
-    addgrain = prev.callPackage ./plugins/addgrain { };
-    readmpls = prev.callPackage ./plugins/readmpls { };
-    imwri = prev.callPackage ./plugins/imwri { };
-    vmaf = prev.callPackage ./plugins/vmaf { };
-    rife = prev.callPackage ./plugins/rife { ncnn = common.old_ncnn; };
-
     #meson normal install is correct folder
     beziercurve = prev.callPackage ./plugins/beziercurve { };
     remap = prev.callPackage ./plugins/remap { };
@@ -55,16 +45,6 @@ in rec {
     znedi3 = prev.callPackage ./plugins/znedi3 { };
     realsr = prev.callPackage ./plugins/realsr { ncnn = common.old_ncnn; glslang = common.old_glslang; };
     bilateral = prev.callPackage ./plugins/bilateral { }; # few oddities
-
-    #manual compile
-    wwxd = prev.callPackage ./plugins/wwxd { };
-    edgefixer = prev.callPackage ./plugins/edgefixer { };
-    surfaceblur = prev.callPackage ./plugins/surfaceblur { };
-    arearesize = prev.callPackage ./plugins/arearesize { };
-    autocrop = prev.callPackage ./plugins/autocrop { };
-    continuityfixer = prev.callPackage ./plugins/continuityfixer { };
-    dotkill = prev.callPackage ./plugins/dotkill { }; # fixx
-    planestatsmod = prev.callPackage ./other/planestatsmod.nix { }; # fixx
 
     #not a plugin rather a library
     vapoursynth-plusplus = prev.callPackage ./plugins/vapoursynth-plusplus { };

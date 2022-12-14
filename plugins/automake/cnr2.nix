@@ -4,7 +4,7 @@ mkVapoursynthAutomake rec {
   pname = "vapoursynth-cnr2";
   version = "1";
   namespace = "cnr2";
-  
+
   src = fetchFromGitHub {
     owner = "dubhater";
     repo = pname;

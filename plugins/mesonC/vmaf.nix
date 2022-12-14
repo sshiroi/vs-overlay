@@ -1,8 +1,9 @@
-{ lib, stdenv, fetchFromGitHub, meson, ninja, cmake, pkg-config, libvmaf , vapoursynth }:
+{ lib, stdenv,mkVapoursynthMesonB, fetchFromGitHub, cmake, libvmaf }:
 
-stdenv.mkDerivation rec {
+mkVapoursynthMesonB rec {
   pname = "VapourSynth-VMAF";
   version = "10";
+  namespace = "vmaf";
 
   src = fetchFromGitHub {
     owner = "HomeOfVapourSynthEvolution";
@@ -11,16 +12,11 @@ stdenv.mkDerivation rec {
     sha256 = "sha256-p7tLNgTdaFNDfKZjaY8ha38yq+45nQYvYS00QD9ox1Y=";
   };
 
-  nativeBuildInputs = [ meson cmake ninja pkg-config vapoursynth ];
+  nativeBuildInputs = [ cmake ];
   buildInputs = [ libvmaf ];
 
-  postPatch = ''
-    substituteInPlace meson.build \
-        --replace "vapoursynth_dep.get_variable(pkgconfig: 'libdir')" "get_option('libdir')"
-  '';
-
-  doInstallCheck = true;
-  installCheckPhase = vapoursynth.installCheckPhasePluginExistanceCheck vapoursynth "vmaf";
+  modeb_replace = "vapoursynth_dep.get_variable(pkgconfig: 'libdir')";
+  hovr_disable_lto = true;
 
   meta = with lib; {
     description = "Video Multi-Method Assessment Fusion";

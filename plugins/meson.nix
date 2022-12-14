@@ -58,4 +58,19 @@ in rec {
     deblockpp7           = prev.callPackage ./mesonB/deblockpp7.nix { };
     mvtools-sf           = prev.callPackage ./mesonB/mvtools-sf.nix { };# but vs.get_pkgconfig....
 
+
+
+    #meson C (lto)
+    bwdif        = prev.callPackage ./mesonC/bwdif.nix { };
+    ttempsmooth  = prev.callPackage ./mesonC/ttempsmooth.nix { };
+    addgrain     = prev.callPackage ./mesonC/addgrain.nix { };
+    readmpls     = prev.callPackage ./mesonC/readmpls.nix { };
+    imwri        = prev.callPackage ./mesonC/imwri.nix { };
+    vmaf         = prev.callPackage ./mesonC/vmaf.nix { };
+    rife         = prev.callPackage ./mesonC/rife.nix { ncnn = common.old_ncnn; };
+
+    #tcanny is weird because it needs clangstdenv ???
+    tcanny       = prev.callPackage ./other/tcanny.nix { };
+
+
 }

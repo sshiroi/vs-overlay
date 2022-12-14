@@ -48,14 +48,22 @@ if fnd == False:
 '
 '';
 
-  vapoursynth = prev.vapoursynth.overrideAttrs (old: rec {
-    passthru = (old.passthru) // (rec {  installCheckPhasePluginExistanceCheck = final.vapoursynthInstallCheckPhase; } );
-  });
 
 
   #todo: look for "getPluginById" in source and  find dependecyies of binary plugins to binary plugins
+    vapoursynth = (prev.callPackage ./vapoursynth {
+       ApplicationServices = prev.ApplicationServices;
+    }).overrideAttrs (old: rec {
+    passthru = (old.passthru) // (rec {  installCheckPhasePluginExistanceCheck = final.vapoursynthInstallCheckPhase; } );
+  });
 
-  vapoursynthPlugins = prev.recurseIntoAttrs ((import ./plugins/automake.nix final prev) //(import ./plugins/meson.nix final prev)//(import ./plugins/python.nix final prev) // (import ./plugins/other.nix final prev));
+  vapoursynthPlugins = prev.recurseIntoAttrs (
+       (import ./plugins/automake.nix final prev)
+    // (import ./plugins/meson.nix final prev)
+    // (import ./plugins/python.nix final prev)
+    // (import ./plugins/manual.nix final prev)
+    // (import ./plugins/other.nix final prev)
+    );
 
   #tools
   getnative = common.callPythonPackage ./tools/getnative { };

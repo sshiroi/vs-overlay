@@ -19,7 +19,7 @@ mkVapoursynthMesonA rec {
       sha256 = "sha256-xyAl4aWfLYKdcC/Z5zJUaC6HNewOFDqV6j8J8fSlrkY=";
     })
   ];
-  
+
   meta = with lib; {
     description = "TemporalSoften filter for VapourSynth";
     homepage = "https://github.com/dubhater/vapoursynth-temporalsoften2";
