@@ -12,6 +12,7 @@
   checkInputs ? [],
 
   installPhase ? "",
+  pythonImportsCheck ? [],
 
   #custom stuff
   vs_pythondeps,
@@ -66,5 +67,5 @@ buildPythonPackage (args // {
   checkPhase = if !doCheck then "" else ''
     PYTHONPATH=$out/${python.sitePackages}:$PYTHONPATH
   '' + checkPhase;
-  pythonImportsCheck = if !doCheck then [] else [ importname ];
+  pythonImportsCheck = (if !doCheck then [] else [ importname ]) ++ pythonImportsCheck;
 })

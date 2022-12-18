@@ -1,6 +1,6 @@
 final: prev:
 let
-  common = import ./common.nix final prev;
+  common = import ../common.nix final prev;
   callPythonPackage = common.callPythonPackage;
   filter_python_plugins = common.filter_python_plugins;
 in rec {
@@ -43,6 +43,7 @@ in rec {
     nnedi3_resample = callPythonPackage ./funcs/nnedi3_resample.nix { };
     nnedi3_rpow2    = callPythonPackage ./funcs/nnedi3_rpow2.nix { };
     vsTAAmbk        = callPythonPackage ./funcs/vsTAAmbk {  };
+    xvs             = callPythonPackage ./funcs/xvs.nix {  };
 
     #packages
     rekt = callPythonPackage ./pypackages/rekt.nix { };

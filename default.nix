@@ -1,6 +1,6 @@
 final: prev:
 let
-  common = import ./plugins/common.nix final prev;
+  common = import ./common.nix final prev;
   filter_python_plugins = common.filter_python_plugins;
 in
 {
@@ -25,9 +25,9 @@ in
   mkVapoursynthPythonSetuptools = attrs: (final.mkVapoursynthPython) ( attrs // { format = "setuptools"; });
   mkVapoursynthPythonPyproject  = attrs: (final.mkVapoursynthPython) ( attrs // { format = "pyproject"; });
 
+  buildVapoursynthConfigFile = (prev.callPackage ./make_vap_config_file.nix {});
 
-
-
+  #todo: use new mk_config file thing
   vapoursynthInstallCheckPhase = vap: namespace: ''
 #or loop manually and std.LoadPlugin
 echo "UserPluginDir=$out/lib/vapoursynth" > test.conf
@@ -73,11 +73,23 @@ if fnd == False:
   vspreview = common.callPythonPackage ./tools/vspreview { python_call = common.callPythonPackage; };
   concatfs = prev.callPackage ./tools/concatfs { }; #maybe useful for vob files
 
+
+
   #wrappers
-  mpv_vs = vap: (final.mpv-unwrapped.override { vapoursynthSupport = true; vapoursynth = vap; });
-  mpv_vs_wrapped = vap:
+  mpv_vs = vap: (final.mpv-unwrapped.override {
+    ffmpeg = (prev.ffmpeg.overrideAttrs (old: rec {
+        configureFlags = old.configureFlags ++ [ "--enable-vapoursynth" ];
+
+        buildInputs = old.buildInputs ++ [ final.vapoursynth ];
+      }));
+    vapoursynthSupport = true;
+    vapoursynth = vap;
+    });
+  mpv_vs_wrapped = plugins:
   let
     mpv_simple = (final.mpv_vs final.vapoursynth);
+    vap = final.vapoursynth.withPlugins plugins;
+    vap_plugins_cfg = final.buildVapoursynthConfigFile plugins;
   in
   prev.runCommand "mpv-vapour-with-plugins" {
     buildInputs = [ final.makeWrapper mpv_simple ];
@@ -88,10 +100,12 @@ if fnd == False:
     ln -s ${mpv_simple}/share $out/share
     makeWrapper ${mpv_simple}/bin/mpv $out/bin/mpv \
         --prefix PYTHONPATH : ${vap}/${vap.python3.sitePackages} \
-        --prefix LD_LIBRARY_PATH : ${vap}/lib
+        --prefix LD_LIBRARY_PATH : ${vap}/lib \
+        --prefix VAPOURSYNTH_CONF_PATH : ${vap_plugins_cfg}
     makeWrapper ${mpv_simple}/bin/umpv $out/bin/umpv \
         --prefix PYTHONPATH : ${vap}/${vap.python3.sitePackages} \
-        --prefix LD_LIBRARY_PATH : ${vap}/lib
+        --prefix LD_LIBRARY_PATH : ${vap}/lib \
+        --prefix VAPOURSYNTH_CONF_PATH : ${vap_plugins_cfg}
   '';
 
 

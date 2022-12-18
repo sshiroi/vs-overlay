@@ -1,6 +1,6 @@
 final: prev:
 let
-  common = import ./common.nix final prev;
+  common = import ../common.nix final prev;
 in rec {
     #meson A
     tedgemask           = prev.callPackage ./mesonA/tedgemask.nix { };

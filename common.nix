@@ -19,7 +19,7 @@
 
       nativeBuildInputs = [
         vap.python3
-        (callPythonPackage ../tools/vsstubs { })
+        (callPythonPackage ./tools/vsstubs { })
         #(callPythonPackage ./tools/vsstubs { vapoursynth = vap; })
         vap
       ];

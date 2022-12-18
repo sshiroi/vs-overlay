@@ -1,6 +1,6 @@
 final: prev:
 let
-  common = import ./common.nix final prev;
+  common = import ../common.nix final prev;
   callPythonPackage = common.callPythonPackage;
   filter_python_plugins = common.filter_python_plugins;
 in rec {
