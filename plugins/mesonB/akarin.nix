@@ -12,6 +12,8 @@ mkVapoursynthMesonB rec {
     sha256 = "sha256-bpm67iA2rHVPcIZNEcsPpfHxxAvmPPhr1iMcMAvbLjU=";
   };
 
+  mesonFlags = [ "-Dstatic-llvm=false" ];
+
   buildInputs = [ llvmPackages_13.llvm libxml2 ];
 
   meta = with lib; {

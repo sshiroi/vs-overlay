@@ -7,4 +7,8 @@ let
     paths = plugins;
   };
 in
-  writeText "vapoursynth.conf" "UserPluginDir=${collected_plugins}/lib/vapoursynth"
+  #for use with VAPOURSYNTH_CONF_PATH
+  writeText "vapoursynth.conf" ''
+  UserPluginDir=${collected_plugins}/lib/vapoursynth
+  AutoloadUserPluginDir=true
+  ''
