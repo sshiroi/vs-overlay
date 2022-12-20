@@ -1,20 +1,23 @@
-{ lib, fetchgit, rustPlatform, vapoursynth }:
-
+{ lib, stdenv, fetchFromGitHub, rustPlatform, vapoursynth }:
+let
+  ext = stdenv.targetPlatform.extensions.sharedLibrary;
+in
 rustPlatform.buildRustPackage rec {
   pname = "adaptivegrain";
   version = "0.3.1";
 
-  src = fetchgit {
-    url = "https://git.kageru.moe/kageru/${pname}";
+  src = fetchFromGitHub {
+    owner = "Irrational-Encoding-Wizardry";
+    repo = pname;
     rev = version;
-    sha256 = "1sds08r7as23x7kgfa0w7sqkmzpc4xbccirxjwynybcm25ixpzb4";
+    sha256 = "sha256-ZP3bYxGVLW89lz1HxlYn7P46sT4cKPfm6UNodTICuuk=";
   };
 
   cargoSha256 = "1fy2n6afn7hxkwxf8l6jdakqpq97rn5dqav1bagzm2n40m37ldfk";
 
   postInstall = ''
     mkdir $out/lib/vapoursynth
-    mv $out/lib/libadaptivegrain_rs.so $out/lib/vapoursynth/libadaptivegrain_rs.so
+    mv $out/lib/libadaptivegrain_rs${ext} $out/lib/vapoursynth/libadaptivegrain_rs${ext}
   '';
 
   doInstallCheck = true;

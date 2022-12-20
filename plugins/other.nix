@@ -9,7 +9,7 @@ in rec {
     mvtools = prev.vapoursynth-mvtools;
 
     #rust
-    adaptivegrain = prev.callPackage ./plugins/adaptivegrain { };
+    adaptivegrain = prev.callPackage ./iew/adaptivegrain.nix { };
     bdngsp = prev.callPackage ./plugins/bdngsp { };
 
     #waf

@@ -20,24 +20,25 @@
 let
   unwrapped = buildPythonPackage rec {
     pname = "vs-preview";
-    version = "0.2.9";
+    version = "0.3.9";
 
     src = fetchFromGitHub {
       owner = "Irrational-Encoding-Wizardry";
       repo = "vs-preview";
       rev = "v${version}";
-      sha256 = "sha256-jBZ3h6F4gfkXYDZUSjRbP5l2fgZBM7HYjumql2YUsIs=";
+      sha256 = "sha256-fRqsvs9nzksHllietZfmgIXoTAMzJFzoPFQ8p0EdVXQ=";
     };
 
     postPatch = ''
       substituteInPlace requirements.txt \
-          --replace "VapourSynth>=59" ""
+          --replace "VapourSynth>=60" ""
       substituteInPlace requirements.txt \
-          --replace "PyQt5-Qt5>=5.15.2" ""
+          --replace "PyQt5-Qt5>=5.15.7" ""
     '';
 
     propagatedBuildInputs = [
       vapoursynth
+      vapoursynthPlugins.vs-tools
       (python_call ./cueparse.nix {})
       (python_call ./pysubs2.nix {})
       (python_call ./qt5_stubs.nix {})

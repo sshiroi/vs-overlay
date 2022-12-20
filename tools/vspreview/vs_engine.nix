@@ -13,8 +13,8 @@ buildPythonPackage rec {
   src = fetchFromGitHub {
     owner = "Irrational-Encoding-Wizardry";
     repo = "vs-engine";
-    rev = "65f960692b480e10cd75c252cc4bff92854ab2fe";
-    sha256 = "sha256-y061iLdDHwCwxM8V7H8fYoWPCydhGj7XuOkFLj16hLE=";
+    rev = "ddbb6284d4556c623c144f4a402e2665dccb0338";
+    sha256 = "sha256-XFI7htJQAPqUmZHx1fRYDhXuby/OmoYqlPO1zvPS9R8=";
   };
 
   format = "pyproject";

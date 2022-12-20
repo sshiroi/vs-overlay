@@ -45,16 +45,15 @@ in rec {
     vsTAAmbk        = callPythonPackage ./funcs/vsTAAmbk {  };
     xvs             = callPythonPackage ./funcs/xvs.nix {  };
 
+    #type setuptools
+    awsmfunc        = callPythonPackage ./funcs/awsmfunc.nix { };
+    mvsfunc         = callPythonPackage ./funcs/mvsfunc.nix { };
+    lvsfunc         = callPythonPackage ./funcs/lvsfunc.nix { };
+    vardefunc       = callPythonPackage ./funcs/vardefunc.nix { };
+    zzfunc          = callPythonPackage ./funcs/zzfunc.nix { };
+
     #packages
     rekt = callPythonPackage ./pypackages/rekt.nix { };
     acsuite = callPythonPackage ./plugins/acsuite { };
     vsgan = callPythonPackage ./plugins/vsgan { };
-
-
-    #TODO: type normal
-    awsmfunc = callPythonPackage ./plugins/awsmfunc { };
-    mvsfunc = callPythonPackage ./plugins/mvsfunc { };
-    lvsfunc = callPythonPackage ./plugins/lvsfunc { };
-    vardefunc = callPythonPackage ./plugins/vardefunc { };
-    zzfunc = callPythonPackage ./plugins/zzfunc { };
 }

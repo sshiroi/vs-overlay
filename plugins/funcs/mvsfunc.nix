@@ -1,8 +1,9 @@
-{ lib, buildPythonPackage, fetchFromGitHub, vapoursynthPlugins, python, vapoursynth }:
+{ lib, mkVapoursynthPythonSetuptools, fetchFromGitHub, vapoursynthPlugins, python, vapoursynth }:
 
-buildPythonPackage rec {
+mkVapoursynthPythonSetuptools rec {
   pname = "mvsfunc";
   version = "unstable-2022-11-27";
+  importname = "mvsfunc";
 
   src = fetchFromGitHub {
     owner = "HomeOfVapourSynthEvolution";
@@ -11,21 +12,14 @@ buildPythonPackage rec {
     sha256 = "sha256-ftfL0/SsCxfSS/IDvg45XTWbJAhlSwCu5Po/pEVqQJc=";
   };
 
-  propagatedBuildInputs = with vapoursynthPlugins; [
+  remove_vapoursynth_dep_reqtxt = 45;
+
+  vs_binarydeps = with vapoursynthPlugins; [
     bm3d
     fmtconv
   ];
+  vs_pythondeps = [ ];
 
-  postPatch = ''
-    substituteInPlace requirements.txt \
-        --replace "VapourSynth>=45" "" \
-  '';
-
-  checkInputs = [ (vapoursynth.withPlugins propagatedBuildInputs) ];
-  checkPhase = ''
-    PYTHONPATH=$out/${python.sitePackages}:$PYTHONPATH
-  '';
-  pythonImportsCheck = [ "mvsfunc" ];
 
   meta = with lib; {
     description = "mawen1250’s VapourSynth functions";
