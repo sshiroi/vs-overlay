@@ -12,6 +12,7 @@ in rec {
     autocrop        = prev.callPackage ./manual/autocrop.nix { };
     continuityfixer = prev.callPackage ./manual/continuityfixer.nix { };
     morpho          = prev.callPackage ./manual/morpho.nix { };
+    rgsf            = prev.callPackage ./manual/rgsf.nix { };
     dotkill         = prev.callPackage ./manual/dotkill.nix { }; # fixx
     planestatsmod   = prev.callPackage ./manual/planestatsmod.nix { }; # fixx
 
@@ -144,6 +145,7 @@ in rec {
     vsTAAmbk        = callPythonPackage ./funcs/vsTAAmbk {  };
     xvs             = callPythonPackage ./funcs/xvs.nix {  };
     notvlc          = callPythonPackage ./funcs/notvlc.nix { };
+    insaneAA        = callPythonPackage ./funcs/insaneAA.nix { };
 
     #type setuptools
     awsmfunc        = callPythonPackage ./funcs/awsmfunc.nix { };
@@ -154,6 +156,7 @@ in rec {
 
     #packages
     rekt    = callPythonPackage ./pypackages/rekt.nix { };
+    dnfunc  = callPythonPackage ./pypackages/dnfunc.nix { };
     acsuite = callPythonPackage ./plugins/acsuite { };
 
     vsgan   = callPythonPackage ./plugins/vsgan { };

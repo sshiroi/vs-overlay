@@ -44,7 +44,8 @@ mkVapoursynthPythonSetuptools rec {
     nnedi3
     readmpls
     retinex
-    #rgsf
+    rgsf
+    removegrain
     tcanny
     znedi3
   ];

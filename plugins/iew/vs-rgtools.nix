@@ -18,12 +18,16 @@ mkVapoursynthPythonSetuptools rec {
   propagatedBuildInputs = [ numpy pyfftw ];
 
   vs_pythondeps = with vapoursynthPlugins; [
-     vs-exprtools
-     vs-tools
+    vs-exprtools
+    vs-tools
   ];
 
-  vs_binarydeps = [];
-
+  vs_binarydeps = with vapoursynthPlugins; [
+    removegrain
+    rgsf
+    akarin
+    ctmf
+  ];
   remove_vapoursynth_dep_reqtxt = 60;
 
   meta = with lib; {
