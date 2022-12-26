@@ -34,18 +34,6 @@
       '';
     };
 
-  old_glslang = prev.glslang.overrideAttrs (old: rec {
-    version = "1.3.216.0";
-    src = prev.fetchFromGitHub {
-      owner = "KhronosGroup";
-      repo = "glslang";
-      rev ="sdk-${version}";
-      hash = "sha256-sjidkiPtRADhyOEKDb2cHCBXnFjLwk2F5Lppv5/fwNQ=";
-    };
-  });
-  #latest nixos-unstable has broken ncnn because some glslang update
-  #then they fixed it, but now its broken again so this patch stays
-  old_ncnn = prev.ncnn.override { glslang = old_glslang; };
 in rec {
-  inherit old_ncnn generate_stubs old_glslang filter_python_plugins callPythonPackage;
+  inherit generate_stubs filter_python_plugins callPythonPackage;
 }

@@ -80,7 +80,7 @@ in rec {
     readmpls     = prev.callPackage ./mesonC/readmpls.nix { };
     imwri        = prev.callPackage ./mesonC/imwri.nix { };
     vmaf         = prev.callPackage ./mesonC/vmaf.nix { };
-    rife         = prev.callPackage ./mesonC/rife.nix { ncnn = common.old_ncnn; };
+    rife         = prev.callPackage ./mesonC/rife.nix { };
 
     #tcanny is weird because it needs clangstdenv ???
     tcanny       = prev.callPackage ./other/tcanny.nix { };
@@ -155,6 +155,7 @@ in rec {
     #packages
     rekt    = callPythonPackage ./pypackages/rekt.nix { };
     acsuite = callPythonPackage ./plugins/acsuite { };
+
     vsgan   = callPythonPackage ./plugins/vsgan { };
 
     #python and binary plugin
@@ -189,7 +190,7 @@ in rec {
     #cmake
     dhce     = prev.callPackage ./plugins/dhce { };
     delogohd = prev.callPackage ./plugins/delogohd { };
-    w2xnvk   = prev.callPackage ./plugins/w2xnvk { ncnn = common.old_ncnn; glslang = common.old_glslang; };
+    w2xnvk   = prev.callPackage ./plugins/w2xnvk { };
 
     #Gnumakefile + diy ./configure
     vaguedenoiser = prev.callPackage ./plugins/vaguedenoiser { };
@@ -201,7 +202,7 @@ in rec {
     #weird configure/special
     ReduceFlicker = prev.callPackage ./plugins/ReduceFlicker { };
     znedi3        = prev.callPackage ./plugins/znedi3 { };
-    realsr        = prev.callPackage ./plugins/realsr { ncnn = common.old_ncnn; glslang = common.old_glslang; };
+    realsr        = prev.callPackage ./plugins/realsr { };
     bilateral     = prev.callPackage ./plugins/bilateral { }; # few oddities
 
     #not a plugin rather a library
@@ -214,7 +215,7 @@ in rec {
     lsmashsource_akarin = ((prev.callPackage ./plugins/lsmashsource { }).overrideAttrs ( prev: rec {
       nativeBuildInputs = prev.nativeBuildInputs ++ [ final.meson final.ninja ];
       src = final.fetchFromGitHub {
-        owner = "c";
+        owner = "AkarinVS";
         repo = "L-SMASH-Works";
         rev = "e6ea8d9dd569e54e215558520c5efd429de14c62";
         sha256 = "sha256-pO8H2pv8TBAmlIu0bzWy2V6JgjOc2NARyPK6sKi/SLE=";

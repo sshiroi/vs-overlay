@@ -1,16 +1,5 @@
 { lib, vapoursynthPlugins, mkVapoursynthPythonSetuptools, fetchFromGitHub, rich, toolz, pymediainfo, vapoursynth, pythonOlder, fetchPypi }:
-let
-  #6.0.1 only in latest unstable
-  #TODO: remove
-  pymediainfou = pymediainfo.overrideAttrs (old: rec {
-    version = "6.0.1";
-    src = fetchPypi {
-      pname = "pymediainfo";
-      version = "6.0.1";
-      sha256 = "sha256-luBLrA38tya+1wwxSxIZEhxLk0TGapj0Js4n1/mr/7A=";
-    };
-  });
-in
+
 mkVapoursynthPythonSetuptools rec {
   pname = "lvsfunc";
   version = "0.5.1";
@@ -28,7 +17,7 @@ mkVapoursynthPythonSetuptools rec {
   propagatedBuildInputs = [
     rich
     toolz
-    pymediainfou
+    pymediainfo
   ];
 
   vs_pythondeps = with vapoursynthPlugins; [
