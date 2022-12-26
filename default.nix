@@ -69,6 +69,7 @@ if fnd == False:
   wobbly       = prev.libsForQt5.callPackage ./tools/wobbly { };
   vspreview    = common.callPythonPackage ./tools/vspreview { python_call = common.callPythonPackage; };
   concatfs     = prev.callPackage ./tools/concatfs { }; #maybe useful for vob files
+  vasviewer    = prev.callPackage ./tools/vasviewer { };
 
 
 

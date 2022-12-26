@@ -1,4 +1,4 @@
-{ lib, vapoursynthPlugins, mkVapoursynthPythonSinglefileFunc, fetchFromGitHub }:
+{ lib, vapoursynthPlugins, mkVapoursynthPythonSinglefileFunc, fetchpatch, fetchFromGitHub }:
 
 mkVapoursynthPythonSinglefileFunc rec {
   pname = "Oyster";
@@ -11,6 +11,14 @@ mkVapoursynthPythonSinglefileFunc rec {
     rev = "a8e5749ba7a3c34bc7e568a02cf58d70753230b3";
     sha256 = "sha256-yLJ45xn7i8ED3Lse+bMHCB6oKc7l3fIJFM6kncmiuhE=";
   };
+
+
+  patches = [
+    (fetchpatch {
+      url = "https://github.com/IFeelBloated/Oyster/commit/1981dec88262df608fc4caf3b4d42b8a566af98b.patch";
+      sha256 = "sha256-uGYj8J3uo74yfHZUtxCfOrTp8wr+ntj5NgJpAi76rQs=";
+    })
+  ];
 
   vs_binarydeps = with vapoursynthPlugins; [
     nnedi3

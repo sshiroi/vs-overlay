@@ -11,6 +11,7 @@ in rec {
     arearesize      = prev.callPackage ./manual/arearesize.nix { };
     autocrop        = prev.callPackage ./manual/autocrop.nix { };
     continuityfixer = prev.callPackage ./manual/continuityfixer.nix { };
+    morpho          = prev.callPackage ./manual/morpho.nix { };
     dotkill         = prev.callPackage ./manual/dotkill.nix { }; # fixx
     planestatsmod   = prev.callPackage ./manual/planestatsmod.nix { }; # fixx
 
@@ -142,6 +143,7 @@ in rec {
     nnedi3_rpow2    = callPythonPackage ./funcs/nnedi3_rpow2.nix { };
     vsTAAmbk        = callPythonPackage ./funcs/vsTAAmbk {  };
     xvs             = callPythonPackage ./funcs/xvs.nix {  };
+    notvlc          = callPythonPackage ./funcs/notvlc.nix { };
 
     #type setuptools
     awsmfunc        = callPythonPackage ./funcs/awsmfunc.nix { };
@@ -168,6 +170,8 @@ in rec {
     #rust
     adaptivegrain = prev.callPackage ./iew/adaptivegrain.nix { };
     bdngsp        = prev.callPackage ./plugins/bdngsp { };
+    mpeg2stinx    = prev.callPackage ./plugins/mpeg2stinx { };
+    average       = prev.callPackage ./plugins/vs-average { };
 
     #waf
     f3kdb = prev.callPackage ./plugins/f3kdb { };

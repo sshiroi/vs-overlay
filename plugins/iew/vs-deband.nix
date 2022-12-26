@@ -25,7 +25,9 @@ mkVapoursynthPythonSetuptools rec {
 
     vs-denoise#missing in requirements
   ];
-  vs_binarydeps = [];
+  vs_binarydeps = with vapoursynthPlugins; [
+    morpho
+  ];
 
 
   meta = with lib; {
