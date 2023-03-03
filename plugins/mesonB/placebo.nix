@@ -1,4 +1,4 @@
-{ lib,  fetchFromGitHub, fetchpatch,  libplacebo,  vulkan-headers, vulkan-loader, mkVapoursynthMesonB }:
+{ lib,  fetchFromGitHub, libplacebo,  vulkan-headers, vulkan-loader, mkVapoursynthMesonB }:
 
 mkVapoursynthMesonB rec {
   pname = "vs-placebo";

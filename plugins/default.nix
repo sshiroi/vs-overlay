@@ -71,6 +71,7 @@ in rec {
     fftspectrum          = prev.callPackage ./mesonB/fftspectrum.nix { };
     deblockpp7           = prev.callPackage ./mesonB/deblockpp7.nix { };
     mvtools-sf           = prev.callPackage ./mesonB/mvtools-sf.nix { };# but vs.get_pkgconfig....
+    butteraugli          = prev.callPackage ./mesonB/butteraugli.nix { };
 
 
 
@@ -111,6 +112,8 @@ in rec {
     vs-exprtools    = callPythonPackage ./iew/vs-exprtools.nix { };
     vs-kernels      = callPythonPackage ./iew/vs-kernels.nix { };
     vs-parsedvd     = callPythonPackage ./iew/vs-parsedvd.nix { };
+    vs-pyplugin     = callPythonPackage ./iew/vs-pyplugin.nix { };
+    vs-masktools    = callPythonPackage ./iew/vs-masktools.nix { };
     vs-tools        = callPythonPackage ./iew/vs-tools.nix { };
     vsmask          = callPythonPackage ./iew/vsmask.nix { };
     vs-dehalo       = callPythonPackage ./iew/vs-dehalo.nix { };
@@ -146,6 +149,7 @@ in rec {
     xvs             = callPythonPackage ./funcs/xvs.nix {  };
     notvlc          = callPythonPackage ./funcs/notvlc.nix { };
     insaneAA        = callPythonPackage ./funcs/insaneAA.nix { };
+    BalanceBorders  = callPythonPackage ./funcs/BalanceBorders.nix { };
 
     #type setuptools
     awsmfunc        = callPythonPackage ./funcs/awsmfunc.nix { };
@@ -172,10 +176,10 @@ in rec {
     mvtools = prev.vapoursynth-mvtools;
 
     #rust
-    adaptivegrain = prev.callPackage ./iew/adaptivegrain.nix { };
-    bdngsp        = prev.callPackage ./plugins/bdngsp { };
-    mpeg2stinx    = prev.callPackage ./plugins/mpeg2stinx { };
-    average       = prev.callPackage ./plugins/vs-average { };
+    adaptivegrain = prev.callPackage ./rust/adaptivegrain.nix { };
+    bdngsp        = prev.callPackage ./rust/bdngsp.nix { };
+    mpeg2stinx    = prev.callPackage ./rust/mpeg2stinx { };
+    average       = prev.callPackage ./rust/average { };
 
     #waf
     f3kdb = prev.callPackage ./plugins/f3kdb { };

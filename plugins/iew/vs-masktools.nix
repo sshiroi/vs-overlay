@@ -1,32 +1,33 @@
 { lib, vapoursynthPlugins, mkVapoursynthPythonSetuptools, fetchFromGitHub, python3, vapoursynth }:
 
 mkVapoursynthPythonSetuptools rec {
-  pname = "vs-deinterlace";
-  version = "git-0.4.0";
-  importname = "vsdeinterlace";
+  pname = "vs-masktools";
+  version = "git-0.9.0";
+  importname = "vsmasktools";
 
   src = fetchFromGitHub {
     owner = "Irrational-Encoding-Wizardry";
     repo = pname;
-    rev = "0dd07dfa0093000538c6973df52844f21421ee63";
-    sha256 = "sha256-VLOezQvk7PYhZUYmj3y3WeQOJtVpiBjBE1GO0P/8SrA=";
+    rev = "6c3d2bce90738ead49a8f9f086b0fa842361f7e4";
+    sha256 = "sha256-bgOlZCjGMKevqjUNxTPWO699Hi16XaE4GAh6FRKq6Kg=";
   };
 
   vs_pythondeps = with vapoursynthPlugins;  [
     vs-tools
     vs-kernels
+    vs-exprtools
     vs-rgtools
-    vs-denoise
   ];
-  vs_binarydeps = with vapoursynthPlugins; [
-    planestatsmod
+
+  vs_binarydeps = [
+    
   ];
 
   remove_vapoursynth_dep_reqtxt = 60;
 
   meta = with lib; {
-    description = "VapourSynth deinterlacing and interlaced/telecined content helper functions";
-    homepage = "https://github.com/Irrational-Encoding-Wizardry/vs-deinterlace";
+    description = "vs-masktools aims to provide tools and functions to manage, create, and manipulate masks in VapourSynth.";
+    homepage = "https://github.com/Irrational-Encoding-Wizardry/vs-masktools";
     license = licenses.mit;
     maintainers = with maintainers; [ ];
     platforms = platforms.all;

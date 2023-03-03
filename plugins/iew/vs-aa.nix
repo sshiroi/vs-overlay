@@ -2,14 +2,14 @@
 
 mkVapoursynthPythonSetuptools rec {
   pname = "vs-aa";
-  version = "unstable-2022-11-26";
+  version = "git-1.6.0";
   importname = "vsaa";
 
   src = fetchFromGitHub {
     owner = "Irrational-Encoding-Wizardry";
     repo = pname;
-    rev = "fca442a0f348a0202d7eb45f666fd64ecbf6cf49";
-    sha256 = "sha256-YGNvwZcXnLM+5e34RIz092TQsM7Ch1Jr9HQekqb9eGM=";
+    rev = "34abd260a3c341a7669db5616508ef0f23340464";
+    sha256 = "sha256-RqL6sr2qP+sCI8OgajPpkdR/eiaB0JnEWbEuIZE9KZ0=";
   };
 
   vs_pythondeps = with vapoursynthPlugins; [
@@ -18,11 +18,12 @@ mkVapoursynthPythonSetuptools rec {
     vs-kernels
     vs-exprtools
     vs-rgtools
+    vs-masktools
   ];
 
   vs_binarydeps = [];
 
-  remove_vapoursynth_dep_reqtxt = 59;
+  remove_vapoursynth_dep_reqtxt = 60;
 
   meta = with lib; {
     description = "anti aliasing and scaling functions";

@@ -5,7 +5,8 @@
 , makeWrapper
 
 , psutil
-, pyqt5_with_qtmultimedia
+, pyqt6
+, pyqt6-sip
 , qdarkstyle
 , setuptools
 , requests
@@ -20,20 +21,20 @@
 let
   unwrapped = buildPythonPackage rec {
     pname = "vs-preview";
-    version = "0.3.9";
+    version = "0.4.2";
 
     src = fetchFromGitHub {
       owner = "Irrational-Encoding-Wizardry";
       repo = "vs-preview";
-      rev = "v${version}";
-      sha256 = "sha256-fRqsvs9nzksHllietZfmgIXoTAMzJFzoPFQ8p0EdVXQ=";
+      rev = "dc318de71706d6ba969da0c94ab893f189c1794a";
+      sha256 = "sha256-ClkHbiZlXnCV1p2yb5Qx04oITF6JsnKzFcMLCGzacFY=";
     };
 
     postPatch = ''
       substituteInPlace requirements.txt \
           --replace "VapourSynth>=60" ""
-      substituteInPlace requirements.txt \
-          --replace "PyQt5-Qt5>=5.15.7" ""
+      #substituteInPlace requirements.txt \
+      #    --replace "PyQt5-Qt5>=5.15.7" ""
     '';
 
     propagatedBuildInputs = [
@@ -41,10 +42,10 @@ let
       vapoursynthPlugins.vs-tools
       (python_call ./cueparse.nix {})
       (python_call ./pysubs2.nix {})
-      (python_call ./qt5_stubs.nix {})
       (python_call ./vs_engine.nix {})
       psutil
-      pyqt5_with_qtmultimedia
+      pyqt6
+      pyqt6-sip
       pyyaml
       qdarkstyle
       setuptools

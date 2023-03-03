@@ -64,6 +64,7 @@ if fnd == False:
 
   #tools
   getnative    = common.callPythonPackage ./tools/getnative { };
+  getfnative   = common.callPythonPackage ./tools/getFnative { };
   vspreview-rs = prev.callPackage ./tools/vspreview-rs { };
   d2vwitch     = prev.libsForQt5.callPackage ./tools/d2vwitch { };
   wobbly       = prev.libsForQt5.callPackage ./tools/wobbly { };

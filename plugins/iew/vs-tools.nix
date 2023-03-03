@@ -2,16 +2,14 @@
 
 mkVapoursynthPythonSetuptools rec {
   pname = "vs-tools";
-  #version = "1.6.7";
-  version = "unstable-2022-12-10";
+  version = "git-2.0.0";
   importname = "vstools";
 
   src = fetchFromGitHub {
     owner = "Irrational-Encoding-Wizardry";
     repo = pname;
-    #rev = "v${version}";
-    rev = "28a15b8e30a0844fdbac6d9173fe02339a8bb7d5";
-    sha256 = "sha256-tuEX7yFrk4qNnXjIPSn3JQv+FYNA0eg+6he8vVFb748=";
+    rev = "e4cd71386be82cca5905b1b8253c9d078af07ec4";
+    sha256 = "sha256-qB+w4dYpE8IoQ88FYdu7wXqVYGn+do9o5ApIN2Dja90=";
   };
 
   vs_pythondeps =  with vapoursynthPlugins; [ vsutil ];
@@ -19,7 +17,7 @@ mkVapoursynthPythonSetuptools rec {
 
   propagatedBuildInputs = [ rich ];
 
-  remove_vapoursynth_dep_reqtxt = 59;
+  remove_vapoursynth_dep_reqtxt = 60;
 
   postPatch = ''
     substituteInPlace requirements.txt \

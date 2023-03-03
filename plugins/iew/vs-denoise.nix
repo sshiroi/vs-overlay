@@ -2,16 +2,14 @@
 
 mkVapoursynthPythonSetuptools rec {
   pname = "vs-denoise";
-  #version = "1.2.0";
-  version = "unstable-2022-12-10";
+  version = "git-2.0.0";
   importname = "vsdenoise";
 
   src = fetchFromGitHub {
     owner = "Irrational-Encoding-Wizardry";
     repo = pname;
-    #rev = "v${version}";
-    rev = "344be7830e4b93285811bbd9c90baec2859bb551";
-    sha256 = "sha256-1nBaE5P56dAHpJT849HyZZH8i5BGrXI2uvmf/alZB0c=";
+    rev = "e50e7dff5b6137dd029615e9843a046ba9fb96b1";
+    sha256 = "sha256-kl86noAIQiR/2FqWsQX6V3J+EzTrHGy8+HsuE9+VSyQ=";
   };
 
   vs_pythondeps = with vapoursynthPlugins; [
@@ -25,7 +23,7 @@ mkVapoursynthPythonSetuptools rec {
 
   vs_binarydeps = [];
 
-  remove_vapoursynth_dep_reqtxt = 59;
+  remove_vapoursynth_dep_reqtxt = 60;
 
   meta = with lib; {
     description = "VapourSynth denoising, regression, and motion-compensation functions";

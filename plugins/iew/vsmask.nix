@@ -2,8 +2,7 @@
 
 mkVapoursynthPythonSetuptools rec {
   pname = "vsmask";
-  #version = "0.5.1";
-  version = "unstable-2022-12-13";
+  version = "git-2022-12-13";
   importname = "vsmask";
 
   src = fetchFromGitHub {

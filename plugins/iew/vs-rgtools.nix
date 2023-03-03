@@ -2,17 +2,14 @@
 
 mkVapoursynthPythonSetuptools rec {
   pname = "vs-rgtools";
-  #version = "1.2.0";
-  version = "1.3.2";
+  version = "git-1.4.0";
   importname = "vsrgtools";
 
   src = fetchFromGitHub {
     owner = "Irrational-Encoding-Wizardry";
     repo = pname;
-    rev = "7bc9eaf5f1699c69db27ad11757a5be3b60c053a";
-    sha256 = "sha256-NENE7+Eh9jU9y3Ql2S6/YE+Y956xC7px6loU5x3wiV4=";
-  #  rev = "v${version}";
-  #  sha256 = "sha256-tKOEKCg2/h4lgBVgb062IAapzzI40UwHOAJvTjxW2CM=";
+    rev = "574ed992db8b0a89630cfc3172b5f7f532f0c4f0";
+    sha256 = "sha256-Ufdol/pFRqXLaf6xRososfHizmqKQovsS30p9RSek24=";
   };
 
   propagatedBuildInputs = [ numpy pyfftw ];
@@ -20,6 +17,7 @@ mkVapoursynthPythonSetuptools rec {
   vs_pythondeps = with vapoursynthPlugins; [
     vs-exprtools
     vs-tools
+    vs-pyplugin
   ];
 
   vs_binarydeps = with vapoursynthPlugins; [

@@ -2,18 +2,17 @@
 
 mkVapoursynthPythonSetuptools rec {
   pname = "vs-deband";
-  #version = "0.6.1";
-  version = "unstable-2022-12-13";
+  version = "git-0.9.0+1";
   importname = "vsdeband";
 
   src = fetchFromGitHub {
     owner = "Irrational-Encoding-Wizardry";
     repo = pname;
-    rev = "fa219f25128d8e7bb2cec867272507a5464cda66";
-    sha256 = "sha256-B2ZAdh/8Ec8rRCENVjOi5X893swbjSCfKu8aQ7rcvbQ=";
+    rev = "ccdc6405d7144d4de651c9902618a68c3a7bee8c";
+    sha256 = "sha256-AprFX3+VlWJaqwKgfM9UbAcGlI3ci9dS2ogj0s8u6x4=";
   };
 
-  remove_vapoursynth_dep_reqtxt = 59;
+  remove_vapoursynth_dep_reqtxt = 60;
 
   vs_pythondeps = with vapoursynthPlugins; [
     vs-tools

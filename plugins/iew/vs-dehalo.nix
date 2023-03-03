@@ -2,15 +2,14 @@
 
 mkVapoursynthPythonSetuptools rec {
   pname = "vs-dehalo";
-  version = "1.2.0";
+  version = "git-1.5.0";
   importname = "vsdehalo";
 
   src = fetchFromGitHub {
     owner = "Irrational-Encoding-Wizardry";
     repo = pname;
-    #rev = "v${version}";
-    rev = "1415d481fbcf4e2d0fa1b3774984577b4cd0801d";
-    sha256 = "sha256-7eRneoY2+jIjzB7mo4bYpIyKlwhjA+ztjVWW8GgJhRg=";
+    rev = "12924441ad1cb247397cf2b68d1039567d77345a";
+    sha256 = "sha256-hYv0w0xgVb9lO+Qjy88MStNGZ2deVN7Ab2YBfPW4TXI=";
   };
 
   vs_pythondeps = with vapoursynthPlugins; [
