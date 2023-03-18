@@ -78,7 +78,7 @@ if fnd == False:
   #needs recompilation of mpv for every plugin combination
   mpv_vs = vap: (final.mpv-unwrapped.override {
     #pass through ffmpeg with vapoursynth enable so we can use stuff like the lavf vapoursynth input
-    ffmpeg = (prev.ffmpeg.overrideAttrs (old: rec {
+    ffmpeg_5 = (prev.ffmpeg_5.overrideAttrs (old: rec {
       configureFlags = old.configureFlags ++ [ "--enable-vapoursynth" ];
       buildInputs = old.buildInputs ++ [ final.vapoursynth ];
     }));

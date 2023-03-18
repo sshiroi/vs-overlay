@@ -26,7 +26,7 @@ buildPythonPackage rec {
     pytorch
   ];
 
-  checkInputs = [
+  nativeCheckInputs = [
     vapoursynth
   ];
 

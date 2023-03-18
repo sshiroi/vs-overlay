@@ -9,7 +9,7 @@
   doCheck ? true,
 
   checkPhase ? "",
-  checkInputs ? [],
+  nativeCheckInputs ? [],
 
   installPhase ? "",
   pythonImportsCheck ? [],
@@ -63,7 +63,7 @@ buildPythonPackage (args // {
   '' else "") + postPatch;
 
   #TODO: recursion
-  checkInputs = [ (vapoursynth.withPlugins2 (deepPlugins (all_prop))) ] ++ checkInputs;
+  nativeCheckInputs = [ (vapoursynth.withPlugins2 (deepPlugins (all_prop))) ] ++ nativeCheckInputs;
   checkPhase = if !doCheck then "" else ''
     PYTHONPATH=$out/${python.sitePackages}:$PYTHONPATH
   '' + checkPhase;

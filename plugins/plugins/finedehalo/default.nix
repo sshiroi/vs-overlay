@@ -23,7 +23,7 @@ buildPythonPackage rec {
     runHook postInstall
   '';
 
-  checkInputs = [ vapoursynth ];
+  nativeCheckInputs = [ vapoursynth ];
   checkPhase = ''
     runHook preCheck
     PYTHONPATH=$out/${python.sitePackages}:$PYTHONPATH

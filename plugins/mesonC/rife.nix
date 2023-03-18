@@ -16,6 +16,12 @@ mkVapoursynthMesonB rec {
     "-Duse_system_ncnn=true"
   ];
 
+
+  preConfigure = ''
+    substituteInPlace meson.build --replace "dependency('ncnn', method: 'cmake')" "[dependency('ncnn', method: 'cmake').partial_dependency(compile_args: false,includes:true,link_args:true,links:true,sources:true), declare_dependency(compile_args: '-I${ncnn}/include/ncnn' )]"
+  '';
+  #-I${vulkan-headers}/include
+
   modeb_replace = "vapoursynth_dep.get_variable(pkgconfig: 'libdir')";
   hovr_disable_lto = true;
 
