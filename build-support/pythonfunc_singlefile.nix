@@ -10,6 +10,7 @@
 
   checkPhase ? "",
   nativeCheckInputs ? [],
+  checkInputs ? [],
 
   installPhase ? "",
   pythonImportsCheck ? [],
@@ -62,8 +63,11 @@ buildPythonPackage (args // {
         --replace 'VapourSynth>=${toString remove_vapoursynth_dep_setupy}' ""
   '' else "") + postPatch;
 
+
+  nativeCheckInputs = nativeCheckInputs;
   #TODO: recursion
-  nativeCheckInputs = [ (vapoursynth.withPlugins2 (deepPlugins (all_prop))) ] ++ nativeCheckInputs;
+  checkInputs = [ (vapoursynth.withPlugins2 (deepPlugins (all_prop))) ] ++ checkInputs;
+
   checkPhase = if !doCheck then "" else ''
     PYTHONPATH=$out/${python.sitePackages}:$PYTHONPATH
   '' + checkPhase;

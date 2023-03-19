@@ -24,9 +24,12 @@ buildPythonPackage rec {
         --replace "VapourSynth" ""
   '';
 
+  checkInputs = [
+    vapoursynth
+  ];
+
   nativeCheckInputs = [
     ffmpeg # the test depdends on ffmpeg from PATH
-    vapoursynth
   ];
 
   checkPhase = ''

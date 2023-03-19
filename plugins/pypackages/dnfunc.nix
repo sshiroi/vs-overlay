@@ -76,7 +76,7 @@ buildPythonPackage rec {
     kagefunc
   ];
 
-  nativeCheckInputs = [
+  checkInputs = [
     vapoursynth
   ];
 
