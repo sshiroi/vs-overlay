@@ -2,14 +2,14 @@
 
 mkVapoursynthPythonSetuptools rec {
   pname = "vs-exprtools";
-  version = "git-1.4.0";
+  version = "git-1.4.5";
   importname = "vsexprtools";
 
   src = fetchFromGitHub {
     owner = "Irrational-Encoding-Wizardry";
     repo = pname;
-    rev = "23b824a50db187b500b0dcb37e69afa2ba64198a";
-    sha256 = "sha256-t/Iz6JlrL3onnp2NUnXXeN8uhW3RFFrnMtoTz5HK37E=";
+    rev = "b3fe144e09a101d64c3d2134ad9fbae7512655e6";
+    sha256 = "sha256-MctDsdQcXxNKOwoE5bOkWmhZhsFL3DpLmWxMl2y1RPs=";
   };
 
   vs_pythondeps = with vapoursynthPlugins; [

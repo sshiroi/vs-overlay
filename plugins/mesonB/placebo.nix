@@ -2,17 +2,18 @@
 
 mkVapoursynthMesonB rec {
   pname = "vs-placebo";
-  version = "1.4.2";
+  version = "1.4.4";
   namespace = "placebo";
 
   src = fetchFromGitHub {
     owner = "Lypheo";
     repo = pname;
     rev = version;
-    sha256 = "sha256-nerS1z/Ch/UqcmcY2gNL1Xl3hs1/etEAODj8pzrSuEE=";
+    sha256 = "sha256-1DTdllP+Y4s+t2PMnpcgeLjOxOyyV/yhFSxPP9/Gy9M=";
     fetchSubmodules = true;
   };
 
+  modeb_replace = "vapoursynth_dep.get_variable(pkgconfig: 'libdir')";
   buildInputs = [ libplacebo vulkan-headers vulkan-loader ];
 
   meta = with lib; {

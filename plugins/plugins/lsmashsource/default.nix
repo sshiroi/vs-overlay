@@ -1,4 +1,4 @@
-{ lib, stdenv, fetchFromGitHub, pkg-config, which, vapoursynth, ffmpeg, l-smash }:
+{ lib, stdenv, fetchFromGitHub, pkg-config, which, vapoursynth, ffmpeg_4, l-smash }:
 
 stdenv.mkDerivation {
   pname = "lsmashsource";
@@ -17,7 +17,7 @@ stdenv.mkDerivation {
   '';
 
   nativeBuildInputs = [ pkg-config which ];
-  buildInputs = [ vapoursynth ffmpeg l-smash ];
+  buildInputs = [ vapoursynth ffmpeg_4 l-smash ];
 
   doInstallCheck = true;
   installCheckPhase = vapoursynth.installCheckPhasePluginExistanceCheck vapoursynth "lsmas";

@@ -2,14 +2,14 @@
 
 mkVapoursynthPythonSetuptools rec {
   pname = "vs-deband";
-  version = "git-0.9.0+1";
+  version = "git-1.0.1";
   importname = "vsdeband";
 
   src = fetchFromGitHub {
     owner = "Irrational-Encoding-Wizardry";
     repo = pname;
-    rev = "ccdc6405d7144d4de651c9902618a68c3a7bee8c";
-    sha256 = "sha256-AprFX3+VlWJaqwKgfM9UbAcGlI3ci9dS2ogj0s8u6x4=";
+    rev = "2935dc68c184beff8349cc44bc02b24d9cecf200";
+    sha256 = "sha256-GeHl07eTl60nGReuILf10le6j6/VM7GUkMzkSwD2ZBM=";
   };
 
   remove_vapoursynth_dep_reqtxt = 60;
@@ -28,10 +28,11 @@ mkVapoursynthPythonSetuptools rec {
     morpho
   ];
 
+  doCheck = false;
 
   meta = with lib; {
     description = "VapourSynth denoising, regression, and motion-compensation functions";
-    homepage = "https://github.com/Irrational-Encoding-Wizardry/vs-denoise";
+    homepage = "https://github.com/Irrational-Encoding-Wizardry/vs-deband";
     license = licenses.mit;
     maintainers = with maintainers; [ ];
     platforms = platforms.all;

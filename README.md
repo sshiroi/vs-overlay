@@ -5,8 +5,7 @@ A collection of packages (mostly plugins) related to using VapourSynth with Nix.
 Fork of https://github.com/tadeokondrak/vs-overlay
 
 I made this for personal use and basically only fix/commit sth when I use vapoursynth and it breaks for me or I need a new plugin.
-But feel free to open issues when sth breaks (updated nixpkgs broke things often in the past) I will try to fix it as soon as possible.
-If there is more activity on upstream in the future I'll try to clean it up and pr.
+But feel free to open issues when sth breaks (updated nixpkgs broke things often in the past) I will try to fix it.
 
 
 # Notable stuff of this fork

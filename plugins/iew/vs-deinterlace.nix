@@ -8,8 +8,8 @@ mkVapoursynthPythonSetuptools rec {
   src = fetchFromGitHub {
     owner = "Irrational-Encoding-Wizardry";
     repo = pname;
-    rev = "0dd07dfa0093000538c6973df52844f21421ee63";
-    sha256 = "sha256-VLOezQvk7PYhZUYmj3y3WeQOJtVpiBjBE1GO0P/8SrA=";
+    rev = "5ccaf9f0e23362308b63e293534aeeda3a73b287";
+    sha256 = "sha256-9LE2iHhSATsWDTvx04WkDzItzuD0GkFjcFp8I4Wezdg=";
   };
 
   vs_pythondeps = with vapoursynthPlugins;  [

@@ -2,14 +2,14 @@
 
 mkVapoursynthPythonSetuptools rec {
   pname = "vs-aa";
-  version = "git-1.6.0";
+  version = "git-1.8.0";
   importname = "vsaa";
 
   src = fetchFromGitHub {
     owner = "Irrational-Encoding-Wizardry";
     repo = pname;
-    rev = "34abd260a3c341a7669db5616508ef0f23340464";
-    sha256 = "sha256-RqL6sr2qP+sCI8OgajPpkdR/eiaB0JnEWbEuIZE9KZ0=";
+    rev = "b29dabe4aac0c529877b1a4bbbd207cf8d70aeeb";
+    sha256 = "sha256-Vgs3RafFT41iRRpZOCzbFp1MkmeZQAyPUNXf9XcU40I=";
   };
 
   vs_pythondeps = with vapoursynthPlugins; [

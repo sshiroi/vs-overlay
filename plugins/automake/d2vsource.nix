@@ -1,4 +1,4 @@
-{ lib, fetchFromGitHub, mkVapoursynthAutomake, ffmpeg }:
+{ lib, fetchFromGitHub, mkVapoursynthAutomake, ffmpeg_4 }:
 
 mkVapoursynthAutomake rec {
   pname = "d2vsource";
@@ -13,7 +13,7 @@ mkVapoursynthAutomake rec {
     sha256 = "1ax20qs1hba70r07pdw3gs4gylwb2ca4iz9ycmd9i5rvxaxy4hmp";
   };
 
-  buildInputs = [ ffmpeg ];
+  buildInputs = [ ffmpeg_4 ];
 
   meta = with lib; {
     description = "D2V parser and decoder for VapourSynth";

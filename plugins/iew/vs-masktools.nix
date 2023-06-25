@@ -2,14 +2,14 @@
 
 mkVapoursynthPythonSetuptools rec {
   pname = "vs-masktools";
-  version = "git-0.9.0";
+  version = "git-1.1.1";
   importname = "vsmasktools";
 
   src = fetchFromGitHub {
     owner = "Irrational-Encoding-Wizardry";
     repo = pname;
-    rev = "6c3d2bce90738ead49a8f9f086b0fa842361f7e4";
-    sha256 = "sha256-bgOlZCjGMKevqjUNxTPWO699Hi16XaE4GAh6FRKq6Kg=";
+    rev = "6f85784f516934df6672ba0b7f08087f6d989bad";
+    sha256 = "sha256-5edyKzkKuNUfaBMy6/ct11xYQhbVOwye58jalShkLB4=";
   };
 
   vs_pythondeps = with vapoursynthPlugins;  [

@@ -17,24 +17,36 @@
 , vapoursynthPlugins
 , pyfftw
 , python_call
+, opencv4
+, matplotlib
 }:
 let
   unwrapped = buildPythonPackage rec {
     pname = "vs-preview";
-    version = "0.4.2";
+    version = "unstable";
 
     src = fetchFromGitHub {
       owner = "Irrational-Encoding-Wizardry";
       repo = "vs-preview";
-      rev = "dc318de71706d6ba969da0c94ab893f189c1794a";
-      sha256 = "sha256-ClkHbiZlXnCV1p2yb5Qx04oITF6JsnKzFcMLCGzacFY=";
+      rev = "163575d33761431c508fabb97bbb30bf75c52841";
+      sha256 = "sha256-rZakJ1OmMSEMrsFXKIpgA59kL30wdSzi8hKz8fH/PmI=";
+
     };
 
     postPatch = ''
       substituteInPlace requirements.txt \
           --replace "VapourSynth>=60" ""
-      #substituteInPlace requirements.txt \
-      #    --replace "PyQt5-Qt5>=5.15.7" ""
+      #too new
+      substituteInPlace requirements.txt \
+          --replace "requests>=2.31.0" "requests>=2.28.1"
+      substituteInPlace requirements.txt \
+          --replace "requests-toolbelt>=1.0.0" ""
+      substituteInPlace requirements.txt \
+          --replace "opencv-python>=4.7.0.72" ""
+      substituteInPlace requirements.txt \
+          --replace "matplotlib>=3.7.1" ""
+      substituteInPlace requirements.txt \
+          --replace "numpy>=1.24.3" ""
     '';
 
     propagatedBuildInputs = [
@@ -53,6 +65,8 @@ let
       requests-toolbelt
       numpy
       pyfftw
+      opencv4
+      matplotlib
     ];
 
     preIntall = ''

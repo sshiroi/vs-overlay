@@ -2,14 +2,14 @@
 
 mkVapoursynthPythonSetuptools rec {
   pname = "vs-kernels";
-  version = "git-2.3.0";
+  version = "git-2.4.1";
   importname = "vskernels";
 
   src = fetchFromGitHub {
     owner = "Irrational-Encoding-Wizardry";
     repo = pname;
-    rev = "e5dff581bf12c36829e1f2f88c02e03238b689ab";
-    sha256 = "sha256-QiDnupI+oEIt0m+lSDtJ3fRU0JUUt7HaY0slkhuNqmo=";
+    rev = "a467b96ad7be3c2d9f40f6b8cd7b8490ff7a422c";
+    sha256 = "sha256-oIVEw31MXQzNVvcKCNdgEzvN1Q9t+0r5y01yJHF7v/Y=";
   };
 
   vs_pythondeps = with vapoursynthPlugins; [

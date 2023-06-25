@@ -1,4 +1,4 @@
-{ lib, fetchFromGitHub, ffmpeg, libass, mkVapoursynthMesonB }:
+{ lib, fetchFromGitHub, ffmpeg_4, libass, mkVapoursynthMesonB }:
 
 mkVapoursynthMesonB rec {
   pname = "subtext";
@@ -12,7 +12,7 @@ mkVapoursynthMesonB rec {
     sha256 = "sha256-Tux8WFbUn4Bt1EL9r+f+Y/av9w9Y23gc79m1JcZWj50=";
   };
 
-  buildInputs = [ ffmpeg libass ];
+  buildInputs = [ ffmpeg_4 libass ];
 
   meta = with lib; {
     description = "Subtitle plugin for VapourSynth based on libass";

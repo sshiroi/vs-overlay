@@ -1,4 +1,4 @@
-{ lib, fetchFromGitHub, mkVapoursynthMesonB, ffmpeg, jansson, cmake }:
+{ lib, fetchFromGitHub, mkVapoursynthMesonB, ffmpeg_4, jansson, cmake }:
 let
  libp2p = fetchFromGitHub {
     owner = "sekrit-twc";
@@ -24,7 +24,7 @@ mkVapoursynthMesonB rec {
   '';
 
   nativeBuildInputs = [ cmake ];
-  buildInputs = [ ffmpeg jansson ];
+  buildInputs = [ ffmpeg_4 jansson ];
 
   meta = with lib; {
     description = "Cross-platform wrapper library around FFmpeg";

@@ -16,7 +16,7 @@ in rec {
     dotkill         = prev.callPackage ./manual/dotkill.nix { }; # fixx
     planestatsmod   = prev.callPackage ./manual/planestatsmod.nix { }; # fixx
 
-    #meson A
+    #meson A refers to plugins that would install normally where we need to override the install location
     tedgemask           = prev.callPackage ./mesonA/tedgemask.nix { };
     decross             = prev.callPackage ./mesonA/decross.nix { };
     asharp              = prev.callPackage ./mesonA/asharp.nix { };
@@ -42,7 +42,7 @@ in rec {
     fix-telecined-fades = prev.callPackage ./mesonA/fix-telecined-fades.nix { };
 
 
-    #meson b
+    #meson b refers to plugins that specify a install_dir we need to patch
     deblock              = prev.callPackage ./mesonB/deblock.nix { };
     miscfilters-obsolete = prev.callPackage ./mesonB/miscfilters-obsolete.nix { }; # but dep.get_pkgconfig....
     bm3d                 = prev.callPackage ./mesonB/bm3d.nix { };
@@ -76,6 +76,8 @@ in rec {
 
 
     #meson C (lto)
+    # there is one plugins that for some reason does not work with lto so I created a category for those
+    # but most of them seem to work fine with lto even enabled ??? 
     bwdif        = prev.callPackage ./mesonC/bwdif.nix { };
     ttempsmooth  = prev.callPackage ./mesonC/ttempsmooth.nix { };
     addgrain     = prev.callPackage ./mesonC/addgrain.nix { };
@@ -155,13 +157,11 @@ in rec {
     awsmfunc        = callPythonPackage ./funcs/awsmfunc.nix { };
     mvsfunc         = callPythonPackage ./funcs/mvsfunc.nix { };
     lvsfunc         = callPythonPackage ./funcs/lvsfunc.nix { };
-    vardefunc       = callPythonPackage ./funcs/vardefunc.nix { };
     zzfunc          = callPythonPackage ./funcs/zzfunc.nix { };
 
     #packages
     rekt    = callPythonPackage ./pypackages/rekt.nix { };
     dnfunc  = callPythonPackage ./pypackages/dnfunc.nix { };
-    acsuite = callPythonPackage ./plugins/acsuite { };
 
     vsgan   = callPythonPackage ./plugins/vsgan { };
 

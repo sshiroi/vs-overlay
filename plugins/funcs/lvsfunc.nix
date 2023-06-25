@@ -2,17 +2,17 @@
 
 mkVapoursynthPythonSetuptools rec {
   pname = "lvsfunc";
-  version = "0.5.1";
+  version = "unstable";
   importname = "lvsfunc";
 
   src = fetchFromGitHub {
     owner = "Irrational-Encoding-Wizardry";
     repo = pname;
-    rev = "v${version}";
-    sha256 = "sha256-tsqRyP5dXcm8qIiR0QCu7CQUs3OhiTK4C1TL02PH5fs=";
+    rev = "83be576606f934eff979705b497a0ddea74eabd2";
+    sha256 = "sha256-L3ixQAmDzFcbZSTUaXJ8hfMszgN77EaK5OK+no3L7PI=";
   };
 
-  remove_vapoursynth_dep_reqtxt = 59;
+  remove_vapoursynth_dep_reqtxt = 60;
 
   propagatedBuildInputs = [
     rich
