@@ -2,14 +2,14 @@
 
 mkVapoursynthPythonSetuptools rec {
   pname = "vs-rgtools";
-  version = "git-1.5.0";
+  version = "git-unstable";
   importname = "vsrgtools";
 
   src = fetchFromGitHub {
     owner = "Irrational-Encoding-Wizardry";
     repo = pname;
-    rev = "128cba8f4115b99f216a72c37410f5b1446cecaf";
-    sha256 = "sha256-O2hisvXXea3VpfMfSr3CmS93ec5pGLsxiwoPa6hlxCc=";
+    rev = "81da5f79c58d3802ba80ac49bb517f3529bba111";
+    sha256 = "z3T1w6xolGEri7fnfk8A8RR+UlX5OQz/sHrX7L54UhU=";
   };
 
   propagatedBuildInputs = [ numpy pyfftw ];
@@ -26,7 +26,6 @@ mkVapoursynthPythonSetuptools rec {
     akarin
     ctmf
   ];
-  remove_vapoursynth_dep_reqtxt = 60;
 
   meta = with lib; {
     description = "Wrapper for RGVS, RGSF, and various other functions";

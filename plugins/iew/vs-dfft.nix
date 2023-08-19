@@ -2,21 +2,20 @@
 
 mkVapoursynthPythonSetuptools rec {
   pname = "vs-dfft";
-  version = "0.1.0";
+  version = "git-unstable";
   importname = "vsdfft";
 
   src = fetchFromGitHub {
     owner = "Irrational-Encoding-Wizardry";
     repo = pname;
-    rev = "v${version}";
-    sha256 = "sha256-55QkAj2uUwTbSItOxcVDybO929566mqxJyKFXkGVwQw=";
+    rev = "1e17bc2e9d1884715c71cf56a972e4d0867cabff";
+    sha256 = "eFX33GzhqyfYN+6Dq8v98wygqx5C7MLHclJq0wV2gvY=";
   };
 
   vs_binarydeps = [];
   vs_pythondeps = [];
 
   propagatedBuildInputs = [ numpy pyfftw ];
-  remove_vapoursynth_dep_reqtxt = 59;
 
 
   meta = with lib; {

@@ -2,7 +2,7 @@
 
 mkVapoursynthPythonSetuptools rec {
   pname = "vs-deinterlace";
-  version = "git-0.4.0";
+  version = "git-unstable";
   importname = "vsdeinterlace";
 
   src = fetchFromGitHub {
@@ -21,8 +21,6 @@ mkVapoursynthPythonSetuptools rec {
   vs_binarydeps = with vapoursynthPlugins; [
     planestatsmod
   ];
-
-  remove_vapoursynth_dep_reqtxt = 60;
 
   meta = with lib; {
     description = "VapourSynth deinterlacing and interlaced/telecined content helper functions";

@@ -28,25 +28,13 @@ let
     src = fetchFromGitHub {
       owner = "Irrational-Encoding-Wizardry";
       repo = "vs-preview";
-      rev = "163575d33761431c508fabb97bbb30bf75c52841";
-      sha256 = "sha256-rZakJ1OmMSEMrsFXKIpgA59kL30wdSzi8hKz8fH/PmI=";
-
+      rev = "a2c05b2a2851df6e1bfb517f00d46d1090c86e08";
+      sha256 = "7Tf3MFVisT2QDNq6I4Pfts8AYrM2e+UGwUZUzNR3MBM=";
     };
 
     postPatch = ''
       substituteInPlace requirements.txt \
-          --replace "VapourSynth>=60" ""
-      #too new
-      substituteInPlace requirements.txt \
-          --replace "requests>=2.31.0" "requests>=2.28.1"
-      substituteInPlace requirements.txt \
-          --replace "requests-toolbelt>=1.0.0" ""
-      substituteInPlace requirements.txt \
-          --replace "opencv-python>=4.7.0.72" ""
-      substituteInPlace requirements.txt \
-          --replace "matplotlib>=3.7.1" ""
-      substituteInPlace requirements.txt \
-          --replace "numpy>=1.24.3" ""
+          --replace "VapourSynth>=63" ""
     '';
 
     propagatedBuildInputs = [

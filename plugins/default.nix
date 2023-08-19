@@ -89,6 +89,9 @@ in rec {
     #tcanny is weird because it needs clangstdenv ???
     tcanny       = prev.callPackage ./other/tcanny.nix { };
 
+    vsmlrt_vsncnn = prev.callPackage ./vsmlrt/vsncnn.nix { python_call = common.callPythonPackage; };
+    vsmlrt = prev.callPackage ./vsmlrt/default.nix {  };
+
     #automake
     cnr2           = prev.callPackage ./automake/cnr2.nix { };
     colorbars      = prev.callPackage ./automake/colorbars.nix { };

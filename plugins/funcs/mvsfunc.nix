@@ -12,8 +12,6 @@ mkVapoursynthPythonSetuptools rec {
     sha256 = "sha256-ftfL0/SsCxfSS/IDvg45XTWbJAhlSwCu5Po/pEVqQJc=";
   };
 
-  remove_vapoursynth_dep_reqtxt = 45;
-
   vs_binarydeps = with vapoursynthPlugins; [
     bm3d
     fmtconv

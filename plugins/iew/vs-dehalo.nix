@@ -2,14 +2,14 @@
 
 mkVapoursynthPythonSetuptools rec {
   pname = "vs-dehalo";
-  version = "git-1.7.1";
+  version = "git-unstable";
   importname = "vsdehalo";
 
   src = fetchFromGitHub {
     owner = "Irrational-Encoding-Wizardry";
     repo = pname;
-    rev = "4aecdb127a5327a86e220352718ec084b95a5097";
-    sha256 = "sha256-iL3vjotyiq48u2VkHI5I7Ess5dBqNOZr5p3szw/guNQ=";
+    rev = "197ed286fbe800e762ecf51d040d8c434c204384";
+    sha256 = "tJ0CyvCOKgynhg+M2kFE/eTN+X4c3ymnYu8jVq+m0PU=";
   };
 
   vs_pythondeps = with vapoursynthPlugins; [
@@ -26,8 +26,6 @@ mkVapoursynthPythonSetuptools rec {
 
   vs_binarydeps = [ ];
 
-  remove_vapoursynth_dep_reqtxt = 60;
-  
   doCheck = false;
 
   meta = with lib; {

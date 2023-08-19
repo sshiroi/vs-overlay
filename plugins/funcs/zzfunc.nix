@@ -11,7 +11,6 @@ mkVapoursynthPythonSetuptools rec {
     rev = "febe2665d9c7c1689398ef9200578a32992e2921";
     sha256 = "rXz99dDk6UW1+dCQibdW6PcP9muariQtWRHY1LI9SYc=";
   };
-  remove_vapoursynth_dep_reqtxt = "51";
 
   vs_binarydeps = with vapoursynthPlugins; [
     fmtconv

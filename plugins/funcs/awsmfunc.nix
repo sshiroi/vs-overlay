@@ -12,8 +12,6 @@ mkVapoursynthPythonSetuptools rec {
     sha256 = "sha256-XPDtcPIcA+40+8cGWOEp/6riv4aW8o5jF3C9iGSqDl8=";
   };
 
-  remove_vapoursynth_dep_setupy = 57;
-
   propagatedBuildInputs = [
     numpy
   ];

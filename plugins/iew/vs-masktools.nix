@@ -2,14 +2,14 @@
 
 mkVapoursynthPythonSetuptools rec {
   pname = "vs-masktools";
-  version = "git-1.1.1";
+  version = "git-unstable";
   importname = "vsmasktools";
 
   src = fetchFromGitHub {
     owner = "Irrational-Encoding-Wizardry";
     repo = pname;
-    rev = "6f85784f516934df6672ba0b7f08087f6d989bad";
-    sha256 = "sha256-5edyKzkKuNUfaBMy6/ct11xYQhbVOwye58jalShkLB4=";
+    rev = "6d84c00485d6c7b07ecb50d1b81f0edd33fd2f03";
+    sha256 = "xworzFZK9Zl5+llJMtMRrIwcTekgNnw78bqGWVVnSHc=";
   };
 
   vs_pythondeps = with vapoursynthPlugins;  [
@@ -22,8 +22,6 @@ mkVapoursynthPythonSetuptools rec {
   vs_binarydeps = [
     
   ];
-
-  remove_vapoursynth_dep_reqtxt = 60;
 
   meta = with lib; {
     description = "vs-masktools aims to provide tools and functions to manage, create, and manipulate masks in VapourSynth.";

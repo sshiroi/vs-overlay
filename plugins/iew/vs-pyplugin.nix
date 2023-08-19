@@ -15,8 +15,6 @@ mkVapoursynthPythonSetuptools rec {
   vs_pythondeps = with vapoursynthPlugins;  [ vs-tools ];
   vs_binarydeps = [];
 
-  remove_vapoursynth_dep_reqtxt = 60;
-
   meta = with lib; {
     description = "Package for simplifying writing VapourSynth plugins in python.";
     homepage = "https://github.com/Irrational-Encoding-Wizardry/vs-pyplugin";

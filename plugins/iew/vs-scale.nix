@@ -2,14 +2,14 @@
 
 mkVapoursynthPythonSetuptools rec {
   pname = "vs-scale";
-  version = "git-1.7.0";
+  version = "git-unstable";
   importname = "vsscale";
 
   src = fetchFromGitHub {
     owner = "Irrational-Encoding-Wizardry";
     repo = pname;
-    rev = "25a0f3567d345b8c0bbb708ef8614e5405d905c8";
-    sha256 = "sha256-herqyRVJshBx9K+Jie1kbJ2xCRY1FVUDaeZsnWnLmyk=";
+    rev = "44c539e3a0eac9c256f7cb01a4a5d235a0669dce";
+    sha256 = "XqSLDAQlv7EFwHysVhg9Ic4kaPxszCTsHYbXVV5qiBc=";
   };
 
   vs_pythondeps = with vapoursynthPlugins; [
@@ -22,8 +22,6 @@ mkVapoursynthPythonSetuptools rec {
     vsmask
   ];
   vs_binarydeps = [];
-
-  remove_vapoursynth_dep_reqtxt = 60;
 
   meta = with lib; {
     description = "Wrappers for scaling and descaling functions.";

@@ -20,10 +20,6 @@
   vs_binarydeps,
   importname,
 
-
-  remove_vapoursynth_dep_reqtxt ? 0,
-  remove_vapoursynth_dep_setupy ? 0,
-
   format,
 
   ...
@@ -53,15 +49,20 @@ buildPythonPackage (args // {
     runHook postInstall
   '' else installPhase;
 
-  postPatch =
-  (if remove_vapoursynth_dep_reqtxt != 0 then ''
-    substituteInPlace requirements.txt \
-        --replace "VapourSynth>=${toString remove_vapoursynth_dep_reqtxt}" ""
-  '' else "") +
-  (if remove_vapoursynth_dep_setupy != 0 then ''
-    substituteInPlace setup.py \
-        --replace 'VapourSynth>=${toString remove_vapoursynth_dep_setupy}' ""
-  '' else "") + postPatch;
+  postPatch = ''
+  if [ -f "requirements.txt" ]; then
+      substituteInPlace requirements.txt --replace "VapourSynth>=45" ""
+      substituteInPlace requirements.txt --replace "VapourSynth>=51" ""
+      substituteInPlace requirements.txt --replace "VapourSynth>=60" ""
+      substituteInPlace requirements.txt --replace "VapourSynth>=59" ""
+      substituteInPlace requirements.txt --replace "VapourSynth>=61" ""
+      substituteInPlace requirements.txt --replace "VapourSynth>=62" ""
+      substituteInPlace requirements.txt --replace "VapourSynth>=63" ""
+  fi
+  if [ -f "setup.py" ]; then
+      substituteInPlace setup.py --replace 'VapourSynth>=57' ""
+  fi
+  '' + postPatch;
 
 
   nativeCheckInputs = nativeCheckInputs;

@@ -2,22 +2,20 @@
 
 mkVapoursynthPythonSetuptools rec {
   pname = "vs-exprtools";
-  version = "git-1.4.5";
+  version = "git-unstable";
   importname = "vsexprtools";
 
   src = fetchFromGitHub {
     owner = "Irrational-Encoding-Wizardry";
     repo = pname;
-    rev = "b3fe144e09a101d64c3d2134ad9fbae7512655e6";
-    sha256 = "sha256-MctDsdQcXxNKOwoE5bOkWmhZhsFL3DpLmWxMl2y1RPs=";
+    rev = "8eeea60cb70dc180a8f68974df2843e6303ca61b";
+    sha256 = "CyEGVBQzbIcgnLPyR2MJOi/rso8bJpEKNpYcx3ua/BU=";
   };
 
   vs_pythondeps = with vapoursynthPlugins; [
     vs-tools
   ];
   vs_binarydeps = [ ];
-
-  remove_vapoursynth_dep_reqtxt = 60;
 
   meta = with lib; {
     description = "VapourSynth functions and helpers for writing RPN expressions.";

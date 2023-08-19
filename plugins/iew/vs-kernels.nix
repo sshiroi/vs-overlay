@@ -9,7 +9,7 @@ mkVapoursynthPythonSetuptools rec {
     owner = "Irrational-Encoding-Wizardry";
     repo = pname;
     rev = "a467b96ad7be3c2d9f40f6b8cd7b8490ff7a422c";
-    sha256 = "sha256-oIVEw31MXQzNVvcKCNdgEzvN1Q9t+0r5y01yJHF7v/Y=";
+    sha256 = "oIVEw31MXQzNVvcKCNdgEzvN1Q9t+0r5y01yJHF7v/Y=";
   };
 
   vs_pythondeps = with vapoursynthPlugins; [
@@ -20,8 +20,6 @@ mkVapoursynthPythonSetuptools rec {
     descale
     fmtconv
   ];
-
-  remove_vapoursynth_dep_reqtxt = 60;
 
   meta = with lib; {
     description = "A collection of wrappers pertaining to (de)scaling";

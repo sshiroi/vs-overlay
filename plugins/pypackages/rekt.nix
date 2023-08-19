@@ -15,8 +15,6 @@ mkVapoursynthPythonSetuptools rec {
   vs_pythondeps = [];
   vs_binarydeps = [];
 
-  remove_vapoursynth_dep_setupy = 57;
-
   propagatedBuildInputs = with vapoursynthPlugins; [
     vsutil
   ];

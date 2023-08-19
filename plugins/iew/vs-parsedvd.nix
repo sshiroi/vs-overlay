@@ -33,8 +33,6 @@ mkVapoursynthPythonSetuptools rec {
     ./parsedvd.patch
   ];
 
-  remove_vapoursynth_dep_reqtxt = 59;
-
   # Tests don't even work under arch
   doCheck = false;
 

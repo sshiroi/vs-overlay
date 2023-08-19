@@ -20,8 +20,6 @@ mkVapoursynthPythonSetuptools rec {
 
   propagatedBuildInputs = [ rich ];
 
-  remove_vapoursynth_dep_reqtxt = 59;
-
   postPatch = ''
     substituteInPlace requirements.txt \
         --replace "rich>=12.6.0" "rich>=12.4.1"

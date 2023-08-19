@@ -15,8 +15,6 @@ mkVapoursynthPythonSetuptools rec {
   vs_pythondeps = with vapoursynthPlugins;  [ vsutil ];
   vs_binarydeps = [];
 
-  remove_vapoursynth_dep_reqtxt = 60;
-
   meta = with lib; {
     description = "Tools and functions to manage, create, and manipulate masks in VapourSynth.";
     homepage = "https://github.com/Irrational-Encoding-Wizardry/vsmask";
