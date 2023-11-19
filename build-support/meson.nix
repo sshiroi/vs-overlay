@@ -34,6 +34,7 @@ stdenv.mkDerivation (args // {
 
   nativeBuildInputs = [ meson ninja pkg-config ]  ++ nativeBuildInputs;
   buildInputs = [ vapoursynth ]  ++ buildInputs;
+  #buildInputs = [ vapoursynth_headers ]  ++ buildInputs;
 
 
   postPatch = if mode == "B" then (''

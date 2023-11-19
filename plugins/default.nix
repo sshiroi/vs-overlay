@@ -66,7 +66,7 @@ in rec {
     subtext              = prev.callPackage ./mesonB/subtext.nix { };
     tdeintmod            = prev.callPackage ./mesonB/tdeintmod.nix { };
     vivtc                = prev.callPackage ./mesonB/vivtc.nix { };
-    vsrawsource          = prev.callPackage ./mesonB/vsrawsource.nix { };
+    #vsrawsource          = prev.callPackage ./mesonB/vsrawsource.nix { };
     dpid                 = prev.callPackage ./mesonB/dpid.nix { };
     fftspectrum          = prev.callPackage ./mesonB/fftspectrum.nix { };
     deblockpp7           = prev.callPackage ./mesonB/deblockpp7.nix { };
@@ -84,7 +84,7 @@ in rec {
     readmpls     = prev.callPackage ./mesonC/readmpls.nix { };
     imwri        = prev.callPackage ./mesonC/imwri.nix { };
     vmaf         = prev.callPackage ./mesonC/vmaf.nix { };
-    rife         = prev.callPackage ./mesonC/rife.nix { };
+    #rife         = prev.callPackage ./mesonC/rife.nix { };
 
     #tcanny is weird because it needs clangstdenv ???
     tcanny       = prev.callPackage ./other/tcanny.nix { };
@@ -120,11 +120,13 @@ in rec {
     vs-pyplugin     = callPythonPackage ./iew/vs-pyplugin.nix { };
     vs-masktools    = callPythonPackage ./iew/vs-masktools.nix { };
     vs-tools        = callPythonPackage ./iew/vs-tools.nix { };
+    stgpytools      = callPythonPackage ./iew/stgpytools.nix { };
     vsmask          = callPythonPackage ./iew/vsmask.nix { };
     vs-dehalo       = callPythonPackage ./iew/vs-dehalo.nix { };
     vs-denoise      = callPythonPackage ./iew/vs-denoise.nix { };
     vs-aa           = callPythonPackage ./iew/vs-aa.nix {  };
     vs-scale        = callPythonPackage ./iew/vs-scale.nix { };
+    vs-engine       = callPythonPackage ./iew/vs-engine.nix { };
     vsutil          = callPythonPackage ./iew/vsutil { };
     vs-dfft         = callPythonPackage ./iew/vs-dfft.nix { };
     vs-deinterlace  = callPythonPackage ./iew/vs-deinterlace.nix { };
@@ -164,7 +166,6 @@ in rec {
 
     #packages
     rekt    = callPythonPackage ./pypackages/rekt.nix { };
-    dnfunc  = callPythonPackage ./pypackages/dnfunc.nix { };
 
     vsgan   = callPythonPackage ./plugins/vsgan { };
 
@@ -181,7 +182,7 @@ in rec {
     #rust
     adaptivegrain = prev.callPackage ./rust/adaptivegrain.nix { };
     bdngsp        = prev.callPackage ./rust/bdngsp.nix { };
-    mpeg2stinx    = prev.callPackage ./rust/mpeg2stinx { };
+    #mpeg2stinx    = prev.callPackage ./rust/mpeg2stinx { };
     average       = prev.callPackage ./rust/average { };
 
     #waf
@@ -203,7 +204,7 @@ in rec {
     w2xnvk   = prev.callPackage ./plugins/w2xnvk { };
 
     #Gnumakefile + diy ./configure
-    vaguedenoiser = prev.callPackage ./plugins/vaguedenoiser { };
+    #vaguedenoiser = prev.callPackage ./plugins/vaguedenoiser { };
     IT            = prev.callPackage ./plugins/IT { };
     combmask      = prev.callPackage ./plugins/combmask { };
     lsmashsource  = prev.callPackage ./plugins/lsmashsource { };

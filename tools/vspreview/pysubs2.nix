@@ -2,15 +2,16 @@
 
 buildPythonPackage rec {
   pname = "pysubs2";
-  version = "1.4.2";
+  version = "1.6.1";
+  format = "pyproject";
 
   src = fetchFromGitHub {
     owner = "tkarabela";
     repo = "pysubs2";
-    rev = "1.4.2";
-    sha256 = "sha256-uhqj2TrO7bLML+SQXIf71f5GKGf7uHkxvoSn6mNu1Xc=";
+    rev = "f83b8180b8fede6320ac3bca1c9b6b98ef6b7bff";
+    sha256 = "sha256-0bW9aB6ERRQK3psqeU0Siyi/8drEGisAp8UtTfOKlp0=";
   };
-  buildInputs = [ pytest ];
+  nativeBuildInputs = [ pytest ];
 
   meta = with lib; {
     description = "pysubs2 is a Python library for editing subtitle files";

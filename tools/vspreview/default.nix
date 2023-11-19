@@ -17,6 +17,7 @@
 , vapoursynthPlugins
 , pyfftw
 , python_call
+, callPackage
 , opencv4
 , matplotlib
 }:
@@ -28,8 +29,8 @@ let
     src = fetchFromGitHub {
       owner = "Irrational-Encoding-Wizardry";
       repo = "vs-preview";
-      rev = "a2c05b2a2851df6e1bfb517f00d46d1090c86e08";
-      sha256 = "7Tf3MFVisT2QDNq6I4Pfts8AYrM2e+UGwUZUzNR3MBM=";
+      rev = "6d3415e4021d159c53be0ece6c1a407a7cfdc523";
+      sha256 = "sha256-4wcdVINpPYE5z/V6VhX9UWV7t4mTltdfNjCDT7fGhUY=";
     };
 
     postPatch = ''
@@ -41,8 +42,9 @@ let
       vapoursynth
       vapoursynthPlugins.vs-tools
       (python_call ./cueparse.nix {})
-      (python_call ./pysubs2.nix {})
-      (python_call ./vs_engine.nix {})
+      vapoursynthPlugins.vs-engine
+      #(callPackage ./pysubs2.nix {})
+     #(python_call ./vs_engine.nix {})
       psutil
       pyqt6
       pyqt6-sip

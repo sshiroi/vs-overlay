@@ -8,8 +8,8 @@ mkVapoursynthPythonSetuptools rec {
   src = fetchFromGitHub {
     owner = "OpusGang";
     repo = pname;
-    rev = "db889a53ecbdf7d7c592d8738d95b4901a80f851";
-    sha256 = "sha256-C9rawTInpeJtIREVDyInQmgm8OZfAq1lA/SyAu/M5bY=";
+    rev = "c9fc7553a1dbb1a3c50a6fa8774855d8719870e7";
+    sha256 = "sha256-XxfB0NeifCAWbSm4HIwTjeV5Gq++qtKXCeFaoqMVwtI=";
   };
 
   vs_pythondeps = [];

@@ -2,6 +2,15 @@ final: prev:
 let
   common = import ./common.nix final prev;
   filter_python_plugins = common.filter_python_plugins;
+
+#
+#  raw_vapoursynth_headers = prev.fetchFromGitHub {
+#    owner  = "vapoursynth";
+#    repo   = "vapoursynth";
+#    rev    = "R63";
+#    sha256 = "sha256-6ITmzz1xJN/UnzVl0aAO8VNs0Go8zGcswwGpJUwwLB8=";
+#  };
+
 in
 {
   #example
@@ -60,12 +69,27 @@ if fnd == False:
     passthru = (old.passthru) // (rec {  installCheckPhasePluginExistanceCheck = final.vapoursynthInstallCheckPhase; } );
   });
 
+
+
+#  vapoursynth_headers = prev.runCommand "myexample" {} ''
+#  mkdir -p $out/include
+#  mkdir -p $out/lib/pkgconfig
+#  cd $out
+#  ln -s ${raw_vapoursynth_headers}/include/*.h  $out/include/
+#  cd $out/lib/pkgconfig
+#  echo "prefix=$out" >> vapoursynth.pc
+#  echo "exec_prefix=''${prefix}" >> vapoursynth.pc
+#  echo "includedir=''${prefix}/include/vapoursynth" >> vapoursynth.pc
+#  echo "Cflags: -I''${includedir}" >> vapoursynth.pc
+#  '';
+
+
   vapoursynthPlugins = import ./plugins final prev;
 
   #tools
   getnative    = common.callPythonPackage ./tools/getnative { };
   getfnative   = common.callPythonPackage ./tools/getFnative { };
-  vspreview-rs = prev.callPackage ./tools/vspreview-rs { };
+  #vspreview-rs = prev.callPackage ./tools/vspreview-rs { };
   d2vwitch     = prev.libsForQt5.callPackage ./tools/d2vwitch { };
   wobbly       = prev.libsForQt5.callPackage ./tools/wobbly { };
   vspreview    = common.callPythonPackage ./tools/vspreview { python_call = common.callPythonPackage; };
@@ -78,7 +102,7 @@ if fnd == False:
   #needs recompilation of mpv for every plugin combination
   mpv_vs = vap: (final.mpv-unwrapped.override {
     #pass through ffmpeg with vapoursynth enable so we can use stuff like the lavf vapoursynth input
-    ffmpeg_5 = (prev.ffmpeg_5.overrideAttrs (old: rec {
+    ffmpeg = (prev.ffmpeg.overrideAttrs (old: rec {
       configureFlags = old.configureFlags ++ [ "--enable-vapoursynth" ];
       buildInputs = old.buildInputs ++ [ final.vapoursynth ];
     }));

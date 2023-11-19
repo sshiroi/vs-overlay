@@ -1,26 +1,22 @@
 { lib, vapoursynthPlugins, mkVapoursynthPythonSetuptools, fetchFromGitHub, rich }:
 
 mkVapoursynthPythonSetuptools rec {
-  pname = "vs-tools";
+  pname = "stgpytools";
   version = "git-unstable";
-  importname = "vstools";
+  importname = "stgpytools";
 
   src = fetchFromGitHub {
-    owner = "Irrational-Encoding-Wizardry";
+    owner = "Setsugennoao";
     repo = pname;
-    rev = "22e39df6b89fb07909c83e41c97d57e73f0c13d5";
-    sha256 = "sha256-/BslVqIUAB14h8HM5S0TEuZKG1Rymh9EVrAJ+pEqeCY=";
+    rev = "7abe43c0de02570ec4a6ee2190798aa78e07bb9b";
+    sha256 = "sha256-LITyt/akdExvldp/j3Y28QkturuXCZ5XaJm3v02m6F4=";
   };
 
-  vs_pythondeps =  with vapoursynthPlugins; [ vsutil stgpytools ];
+  vs_pythondeps =  [  ];
   vs_binarydeps = [];
 
-  propagatedBuildInputs = [ rich ];
+  propagatedBuildInputs = [ ];
 
-  postPatch = ''
-    substituteInPlace requirements.txt \
-        --replace "rich>=12.6.0" "rich>=12.4.1"
-  '';
 
 
   meta = with lib; {

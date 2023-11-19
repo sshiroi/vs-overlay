@@ -1,4 +1,4 @@
-{ lib, stdenv, fetchFromGitHub, wafHook, python3, vapoursynth }:
+{ lib, stdenv, fetchFromGitHub, wafHook, python39, vapoursynth }:
 
 stdenv.mkDerivation rec {
   pname = "flash3kyuu_deband";
@@ -13,7 +13,7 @@ stdenv.mkDerivation rec {
 
   wafConfigureFlags = [ "--libdir=${placeholder "out"}/lib/vapoursynth" ];
 
-  nativeBuildInputs = [ wafHook python3 ];
+  nativeBuildInputs = [ wafHook python39 ]; #holy shit whyy waf
   buildInputs = [ vapoursynth ];
 
   doInstallCheck = true;

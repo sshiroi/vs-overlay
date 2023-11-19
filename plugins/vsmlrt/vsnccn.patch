@@ -29,10 +29,17 @@ index ddf0d5e..96e646d 100644
  static std::vector<int> get_node_attr_ai(const onnx::NodeProto& node, const char* key) {
      std::vector<int> v;
 diff --git a/vsncnn/vs_ncnn.cpp b/vsncnn/vs_ncnn.cpp
-index 8b06821..c6ba680 100644
+index 8b06821..79bbee3 100644
 --- a/vsncnn/vs_ncnn.cpp
 +++ b/vsncnn/vs_ncnn.cpp
-@@ -15,8 +15,8 @@
+@@ -9,14 +9,15 @@
+ #include <string_view>
+ #include <variant>
+ #include <vector>
++#include <mutex>
+ 
+ #if not __cpp_lib_atomic_wait
+ #include <chrono>
  #include <thread>
  #endif
  
